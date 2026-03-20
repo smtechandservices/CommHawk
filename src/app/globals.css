@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --color-magenta: #C026D3;
+  --color-cyan: #22D3EE;
+  --color-neon: #0284c7;
+  --color-dark: #000000;
+  --color-muted: rgba(255, 255, 255, 0.4);
+}
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --neon: #0284c7;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Geist', 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom glow animation */
+@keyframes floatAnim {
+
+  0%,
+  100% {
+    transform: translateY(0) rotateY(0);
+  }
+
+  50% {
+    transform: translateY(-20px) rotateY(5deg);
+  }
+}
+
+.animate-float {
+  animation: floatAnim 8s ease-in-out infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-slow-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 40s linear infinite;
+}
+
+.animate-spin-slow-reverse {
+  animation: spin-slow-reverse 60s linear infinite;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
