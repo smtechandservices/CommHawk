@@ -16,10 +16,10 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Partners />
-      <ComparisonToggle />
       <Services />
       <Work />
       <GrowthCircles />
+      <ComparisonToggle />
       <Contact />
       <Footer />
     </main>

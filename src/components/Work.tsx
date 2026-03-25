@@ -5,7 +5,9 @@ const projects = [
     {
         id: 'befin',
         title: 'Befin',
-        description: 'Our company provides complete website development services. We help from the beginning stage like planning and designing the website to building it and launching it online.',
+        description:
+            'Our company provides complete website development services. We help from planning and design to building and launching.',
+        image: 'befin.png',
     },
     {
         id: 'commhawk',
@@ -14,55 +16,67 @@ const projects = [
     {
         id: 'designs',
         title: 'Designs',
-    }
+    },
 ];
 
 const Work = () => {
     return (
         <section className="py-[120px] px-[60px] bg-black" id="work">
             <div className="max-w-7xl mx-auto">
+
                 <div className="mb-[80px]">
-                    <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Portfolio</span>
-                    <h2 className="text-[3.5rem] font-bold leading-tight uppercase text-white">Impactful <span className="text-neon">Creations</span></h2>
+                    <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">
+                        Portfolio
+                    </span>
+                    <h2 className="text-[3.5rem] font-bold leading-tight uppercase text-white">
+                        Impactful <span className="text-neon">Creations</span>
+                    </h2>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+                    <div>
+                        <h3 className="text-4xl font-bold text-white mb-6">
+                            {projects[0].title}
+                        </h3>
+                        <p className="text-white/60 text-lg leading-relaxed mb-8">
+                            {projects[0].description}
+                        </p>
+
+                        <button className="px-6 py-3 bg-neon text-black font-semibold rounded-full hover:scale-105 transition">
+                            View Case Study →
+                        </button>
+                    </div>
+
                     <motion.div
-                        className="group relative aspect-[16/10] bg-white/5 rounded-[2rem] border border-white/10 overflow-hidden cursor-pointer"
-                        whileHover={{ y: -10 }}
+                        className="relative"
+                        whileHover={{ scale: 1.03 }}
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-neon/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="absolute bottom-10 left-10 z-10">
-                            <h3 className="text-2xl font-bold uppercase tracking-widest text-white mb-2">{projects[0].title}</h3>
-                            <p className="text-white/40 text-sm max-w-xs">{projects[0].description?.slice(0, 100)}...</p>
-                        </div>
-                        <div className="absolute top-10 right-10 text-white/20 group-hover:text-neon transition-colors">
-                            <span className="text-4xl">↗</span>
-                        </div>
+                        <img
+                            src={projects[0].image}
+                            alt="Befin"
+                            className="w-full h-auto object-contain mix-blend-lighten opacity-90"
+                        />
+
+                        <div className="absolute inset-0 bg-gradient-to-tr from-neon/10 to-transparent pointer-events-none" />
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        {projects.slice(1).map((project, idx) => (
-                            <motion.div
-                                key={project.id}
-                                className="group relative aspect-square bg-white/5 rounded-[2rem] border border-white/10 flex items-center justify-center cursor-pointer overflow-hidden"
-                                whileHover={{ scale: 1.02 }}
-                            >
-                                <div className="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                <span className="text-lg font-bold uppercase tracking-widest text-white/20 group-hover:text-white transition-all">
-                                    {project.title}
-                                </span>
-                            </motion.div>
-                        ))}
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    {projects.slice(1).map((project) => (
                         <motion.div
-                            className="aspect-square border border-neon/30 rounded-full flex items-center justify-center text-center cursor-pointer hover:bg-neon hover:text-black transition-all group"
+                            key={project.id}
+                            className="aspect-square bg-white/5 rounded-[2rem] border border-white/10 flex items-center justify-center cursor-pointer"
+                            whileHover={{ scale: 1.05 }}
                         >
-                            <span className="text-[0.7rem] uppercase tracking-[0.2em] font-bold">
-                                View Full <br /> Archive ↗
+                            <span className="text-lg font-bold uppercase tracking-widest text-white/40 hover:text-white transition">
+                                {project.title}
                             </span>
                         </motion.div>
-                    </div>
+                    ))}
                 </div>
+
             </div>
         </section>
     );
