@@ -58,13 +58,13 @@ const Hero = () => {
                     animate={{ opacity: 1, scale: 1, rotate: 0 }}
                     transition={{ duration: 1, delay: 0.4 }}
                 >
-                    <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(189,253,1,0.1)]">
+                    <div className="relative z-10 ">
                         <Image
-                            src="/hero-workstation.jpeg"
+                            src="/hero-workstation.png"
                             alt="Tech Environment"
                             width={800}
                             height={600}
-                            className="w-full h-auto object-cover grayscale brightness-75 hover:grayscale-0 transition-all duration-700"
+                            priority
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                     </div>
