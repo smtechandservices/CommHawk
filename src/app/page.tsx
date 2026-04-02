@@ -4,7 +4,6 @@ import Partners from '@/components/Partners';
 import Services from '@/components/Services';
 import Work from '@/components/Work';
 import Contact from '@/components/Contact';
-import Footer from '@/components/Footer';
 import BackgroundEffects from '@/components/BackgroundEffects';
 import ComparisonToggle from '@/components/ComparisonToggle';
 import GrowthCircles from '@/components/GrowthCircles';
@@ -21,7 +20,6 @@ export default function Home() {
       <Work />
       <GrowthCircles />
       <Contact />
-      <Footer />
     </main>
   );
 }
