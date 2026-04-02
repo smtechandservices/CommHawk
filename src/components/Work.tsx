@@ -19,9 +19,9 @@ const projects = [
 
 const Work = () => {
     return (
-        <section className="py-[120px] px-[60px] bg-black" id="work">
-            <div className="max-w-7xl mx-auto">
-                <div className="mb-[80px]">
+        <section className="pt-[120px] px-[60px] bg-black" id="work">
+            <div className="mx-auto">
+                <div className="mb-12">
                     <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Portfolio</span>
                     <h2 className="text-[3.5rem] font-bold leading-tight uppercase text-white">Impactful <span className="text-neon">Creations</span></h2>
                 </div>

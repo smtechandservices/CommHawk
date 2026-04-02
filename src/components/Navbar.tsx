@@ -22,7 +22,7 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6 }}
     >
-      <div className="flex justify-between items-center px-[60px] max-w-7xl mx-auto">
+      <div className="flex justify-between items-center px-[60px] mx-auto">
         <div className="text-xl font-bold tracking-[0.2em] text-white">
           <Link href="/">COMMHAWK</Link>
         </div>

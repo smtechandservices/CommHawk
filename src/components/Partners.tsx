@@ -1,5 +1,5 @@
 const partners = [
-    'redis', 'Octopus Deploy', 'accenture', 'Raspberry Pi', 'brave', 'DRATA', 'unicef', 'Canada', 'DECATHLON', 'Raycast', 'AMETEK'
+    'redis', 'Octopus Deploy', 'accenture', 'Raspberry Pi', 'brave', 'DRATA', 'unicef', 'Befin', 'DECATHLON', 'Raycast', 'AMETEK'
 ];
 
 const Partners = () => {

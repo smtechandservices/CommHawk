@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   title: "CommHawk | Future-Driven Tech Solutions",
   description: "Helping businesses transform their ideas into seamless digital solutions with modern tech and scalability.",
   icons: {
-    icon: "/commhawk logo final.png",
+    icon: "/logo-trans.png",
   },
 };
 

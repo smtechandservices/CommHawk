@@ -140,7 +140,7 @@ const GrowthCircles = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                     >
                         <Image
-                            src="/commhawk logo final.png"
+                            src="/logo-trans.png"
                             alt="CommHawk Logo"
                             fill
                             className="object-contain brightness-200"

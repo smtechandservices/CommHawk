@@ -1,5 +1,6 @@
 'use client';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useAnimationFrame } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
 
 const serviceCategories = [
     {
@@ -156,51 +157,127 @@ const serviceCategories = [
 ];
 
 const Services = () => {
+    const containerRef = useRef<HTMLDivElement>(null);
+    const x = useMotionValue(0);
+    const [itemWidth, setItemWidth] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
+    
+    // Duplicate items for the infinite feel
+    const extendedCategories = [...serviceCategories, ...serviceCategories, ...serviceCategories];
+    
+    useEffect(() => {
+        if (containerRef.current) {
+            // Width of one full set of items (including gaps)
+            const gap = 32; // 8 * 4 (gap-8)
+            const cardWidth = 350;
+            const fullSetWidth = (cardWidth + gap) * serviceCategories.length;
+            setItemWidth(fullSetWidth);
+            
+            // Start in the middle set
+            x.set(-fullSetWidth);
+        }
+    }, [x]);
+
+    const handleDrag = () => {
+        const currentX = x.get();
+        if (currentX <= -itemWidth * 2) {
+            x.set(currentX + itemWidth);
+        } else if (currentX >= 0) {
+            x.set(currentX - itemWidth);
+        }
+    };
+
+    // Auto-scroll logic
+    useAnimationFrame((time, delta) => {
+        if (!isHovered && !isDragging && itemWidth > 0) {
+            // Move slowly (e.g., 0.5px per frame)
+            const slowSpeed = 0.5; // (0.5 * 60 = 30px per second)
+            const currentX = x.get();
+            const nextX = currentX - slowSpeed;
+            
+            // Handle wrap-around
+            if (nextX <= -itemWidth * 2) {
+                x.set(nextX + itemWidth);
+            } else {
+                x.set(nextX);
+            }
+        }
+    });
+
     return (
-        <section className="py-[120px] px-[60px] bg-black" id="services">
-            <div className="max-w-7xl mx-auto">
+        <section className="pt-[120px] bg-black overflow-hidden" id="services">
+            <div className="px-[60px]">
                 <motion.div
-                    className="mb-[100px]"
+                    className="mb-12"
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
                     <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Capabilities</span>
-                    <h2 className="text-[3.5rem] font-bold leading-tight max-w-[600px] uppercase text-white">
-                        Full-Stack <span className="text-neon">Solutions</span> for Modern Enterprise
+                    <h2 className="text-[3.5rem] font-bold leading-tight uppercase text-white">
+                        Full-Stack <span className="text-neon">Solutions</span> <br /> for Modern Enterprise
                     </h2>
                 </motion.div>
+            </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
-                    {serviceCategories.map((category, index) => (
+            <div 
+                className="relative group"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+            >
+                {/* Visual context for dragging */}
+                <div className="absolute top-[-40px] right-[60px] flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span className="text-[0.6rem] text-white/40 uppercase tracking-widest">[ DRAG TO EXPLORE ]</span>
+                </div>
+
+                <motion.div
+                    ref={containerRef}
+                    drag="x"
+                    style={{ x, width: 'max-content' }}
+                    onDragStart={() => setIsDragging(true)}
+                    onDragEnd={() => setIsDragging(false)}
+                    onDrag={handleDrag}
+                    dragElastic={0}
+                    className="px-6 flex gap-12 px-[60px] cursor-grab active:cursor-grabbing select-none"
+                >
+                    {extendedCategories.map((category, index) => (
                         <motion.div
-                            key={category.title}
-                            className="flex flex-col"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.05, duration: 0.6 }}
+                            key={`${category.title}-${index}`}
+                            className="flex flex-col shrink-0 p-8 rounded-3xl border border-white/5 bg-[#080808] hover:border-neon/30 transition-all duration-500 group/card"
+                            whileHover={{ y: -5 }}
                         >
                             <div className="flex items-center gap-4 mb-8">
                                 <span className="text-[0.6rem] font-mono text-neon border border-neon/30 px-2 py-1 rounded">
-                                    {(index + 1).toString().padStart(2, '0')}
+                                    {((index % serviceCategories.length) + 1).toString().padStart(2, '0')}
                                 </span>
-                                <h3 className="text-lg font-bold uppercase tracking-widest text-white">{category.title}</h3>
+                                <h3 className="text-lg font-bold uppercase tracking-widest text-white group-hover/card:text-neon transition-colors">
+                                    {category.title}
+                                </h3>
                             </div>
-                            <ul className="space-y-3">
+                            <ul className="space-y-4">
                                 {category.items.map((item, itemIndex) => (
                                     <li
                                         key={itemIndex}
-                                        className="text-sm text-white/40 border-l border-white/10 pl-4 hover:border-neon hover:text-white transition-all cursor-default"
+                                        className="text-sm text-white/30 border-l border-white/10 pl-4 hover:border-neon hover:text-white transition-all cursor-default leading-relaxed"
                                     >
                                         {item}
                                     </li>
                                 ))}
                             </ul>
+                            
+                            {/* Decorative bottom element */}
+                            <div className="mt-auto pt-8 flex justify-end opacity-0 group-hover/card:opacity-100 transition-opacity">
+                                <div className="w-12 h-px bg-gradient-to-r from-transparent to-neon" />
+                            </div>
                         </motion.div>
                     ))}
-                </div>
+                </motion.div>
+                
+                {/* Horizontal Fade Overlays */}
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-[120px] bg-gradient-to-r from-black to-transparent z-10" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-[120px] bg-gradient-to-l from-black to-transparent z-10" />
             </div>
         </section>
     );

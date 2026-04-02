@@ -5,8 +5,8 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
     return (
-        <section className="min-h-screen flex flex-col items-center justify-center relative pt-[120px] pb-[80px] overflow-hidden px-[30px]">
-            <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16 z-10">
+        <section className="min-h-screen flex flex-col items-center justify-center relative pt-[120px] pb-[40px] overflow-hidden px-[30px]">
+            <div className="px-2 md:px-6 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16 z-10">
                 <div className="text-left">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -58,13 +58,13 @@ const Hero = () => {
                     animate={{ opacity: 1, scale: 1, rotate: 0 }}
                     transition={{ duration: 1, delay: 0.4 }}
                 >
-                    <div className="relative z-10 rounded-[2.5rem] overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(189,253,1,0.1)]">
+                    <div className="relative z-10 rounded-[2.5rem] overflow-hidden">
                         <Image
                             src="/hero-workstation.jpeg"
                             alt="Tech Environment"
                             width={800}
                             height={600}
-                            className="w-full h-auto object-cover grayscale brightness-75 hover:grayscale-0 transition-all duration-700"
+                            className="w-full h-auto object-cover transition-all duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                     </div>
