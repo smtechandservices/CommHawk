@@ -1,67 +1,101 @@
 'use client';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 
 const projects = [
     {
         id: 'befin',
         title: 'Befin',
-        description: 'Our company provides complete website development services. We help from the beginning stage like planning and designing the website to building it and launching it online.',
+        subtitle: 'E-Commerce Platform',
+        description: 'Complete e-commerce ecosystem from planning and design to production launch.',
+        image: '/befin.png',
+        link: 'https://app.thebefin.com/'
     },
     {
-        id: 'commhawk',
-        title: 'CommHawk',
+        id: 'maytri-erp',
+        title: 'Maytri ERP',
+        subtitle: 'Enterprise Solutions',
+        description: 'Industrial-grade ERP system for comprehensive resource planning and management.',
+        image: '/erp.png',
+        link: 'https://maytri.netlify.app/'
     },
     {
-        id: 'designs',
-        title: 'Designs',
+        id: 'tripnroll',
+        title: 'TripnRoll',
+        subtitle: 'Ticketing Platform',
+        description: 'Next-generation travel and ticketing platform for seamless experience.',
+        image: '/tripnroll.png',
+        link: 'https://tripnrolltravel.com/'
     }
 ];
 
 const Work = () => {
     return (
-        <section className="pt-[80px] px-[60px] bg-black" id="work">
-            <div className="mx-auto">
-                <div className="mb-12">
+        <section className="pt-[80px] px-6 md:px-[60px] bg-black" id="work">
+            <div className="mx-auto max-w-7xl">
+                <div className="mb-12 md:mb-16">
                     <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Portfolio</span>
-                    <h2 className="text-[3.5rem] font-bold leading-tight uppercase text-white">Impactful <span className="text-neon">Creations</span></h2>
+                    <h2 className="text-4xl md:text-[3.5rem] font-bold leading-tight uppercase text-white">Impactful <span className="text-neon">Creations</span></h2>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
-                    <motion.div
-                        className="group relative aspect-[16/10] bg-white/5 rounded-[2rem] border border-white/10 overflow-hidden cursor-pointer"
-                        whileHover={{ y: -10 }}
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-br from-neon/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="absolute bottom-10 left-10 z-10">
-                            <h3 className="text-2xl font-bold uppercase tracking-widest text-white mb-2">{projects[0].title}</h3>
-                            <p className="text-white/70 text-sm max-w-xs">{projects[0].description?.slice(0, 100)}...</p>
-                        </div>
-                        <div className="absolute top-10 right-10 text-white/50 group-hover:text-neon transition-colors">
-                            <span className="text-4xl">↗</span>
-                        </div>
-                    </motion.div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                        {projects.slice(1).map((project, idx) => (
-                            <motion.div
-                                key={project.id}
-                                className="group relative aspect-square bg-white/5 rounded-[2rem] border border-white/10 flex items-center justify-center cursor-pointer overflow-hidden"
-                                whileHover={{ scale: 1.02 }}
-                            >
-                                <div className="absolute inset-0 bg-neon/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                                <span className="text-lg font-bold uppercase tracking-widest text-white/50 group-hover:text-white transition-all">
-                                    {project.title}
-                                </span>
-                            </motion.div>
-                        ))}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-12">
+                    {projects.map((project, idx) => (
                         <motion.div
-                            className="aspect-square border border-neon/30 rounded-full flex items-center justify-center text-center cursor-pointer hover:bg-neon hover:text-black transition-all group"
+                            key={project.id}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6, delay: idx * 0.1 }}
+                            className="group"
                         >
-                            <span className="text-[0.7rem] uppercase tracking-[0.2em] font-bold">
-                                View Full <br /> Archive ↗
-                            </span>
+                            <Link href={project.link} target="_blank" className="block relative">
+                                <div className="aspect-[4/3] bg-white/5 rounded-[2rem] border border-white/10 overflow-hidden relative group-hover:border-neon/30 transition-all duration-500">
+                                    <Image
+                                        src={project.image}
+                                        alt={project.title}
+                                        fill
+                                        className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
+
+                                    <div className="absolute top-6 right-6 text-white opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-500">
+                                        <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-black/40 backdrop-blur-md">
+                                            <span className="text-xl">↗</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="mt-6 space-y-2">
+                                    <div className="flex justify-between items-start">
+                                        <div>
+                                            <h3 className="text-xl font-bold uppercase tracking-widest text-white group-hover:text-neon transition-colors">
+                                                {project.title}
+                                            </h3>
+                                            <span className="text-[0.6rem] text-neon uppercase tracking-[0.2em] font-medium">
+                                                {project.subtitle}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <p className="text-white/70 text-sm leading-relaxed line-clamp-2">
+                                        {project.description}
+                                    </p>
+                                </div>
+                            </Link>
                         </motion.div>
-                    </div>
+                    ))}
+                </div>
+
+                <div className="flex justify-center pt-8">
+                    <motion.div
+                        className="px-10 py-4 border border-neon/30 rounded-full flex items-center justify-center text-center cursor-pointer hover:bg-neon hover:text-black transition-all group"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                    >
+                        <span className="text-[0.7rem] uppercase tracking-[0.2em] font-bold">
+                            View Full Project Archive ↗
+                        </span>
+                    </motion.div>
                 </div>
             </div>
         </section>
