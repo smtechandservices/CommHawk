@@ -39,7 +39,7 @@ const Contact = () => {
     return (
         <section className="pt-10 pb-6 px-6 lg:px-[60px] bg-black border-t border-white/5" id="connect">
             <Script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" strategy="afterInteractive" />
-            <div className="max-w-7xl mx-auto">
+            <div className="w-full mx-auto">
                 <div className="mb-6">
                     <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Connect</span>
                     <h2 className="text-[3.5rem] font-bold leading-[1.1] uppercase text-white">
@@ -121,7 +121,7 @@ const Contact = () => {
                                     onChange={(e) => setName(e.target.value)}
                                     required
                                     placeholder="Jane Doe"
-                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/10"
+                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/40"
                                 />
                             </div>
                             <div className="flex flex-col gap-1.5">
@@ -133,7 +133,7 @@ const Contact = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
                                     placeholder="jane@company.com"
-                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/10"
+                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/40"
                                 />
                             </div>
                             <div className="flex flex-col gap-1.5">
@@ -144,7 +144,7 @@ const Contact = () => {
                                     value={company}
                                     onChange={(e) => setCompany(e.target.value)}
                                     placeholder="Your Company"
-                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/10"
+                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/40"
                                 />
                             </div>
                             <div className="flex flex-col gap-1.5">

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
     return (
-        <section className="min-h-screen flex flex-col items-center justify-center relative pt-[120px] pb-[40px] overflow-hidden px-[30px]">
+        <section className="min-h-[85vh] flex flex-col items-center justify-center relative pt-[120px] pb-[20px] overflow-hidden px-[30px]">
             <div className="px-2 md:px-6 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16 z-10">
                 <div className="text-left">
                     <motion.div
@@ -75,7 +75,7 @@ const Hero = () => {
             </div>
 
             <motion.div
-                className="mt-20 opacity-20 hidden md:block"
+                className="mt-12 opacity-20 hidden md:block"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.2 }}
                 transition={{ delay: 1, duration: 1 }}

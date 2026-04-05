@@ -33,7 +33,7 @@ const projects = [
 const Work = () => {
     return (
         <section className="pt-[80px] px-6 md:px-[60px] bg-black" id="work">
-            <div className="mx-auto max-w-7xl">
+            <div className="mx-auto w-full">
                 <div className="mb-12 md:mb-16">
                     <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Portfolio</span>
                     <h2 className="text-4xl md:text-[3.5rem] font-bold leading-tight uppercase text-white">Impactful <span className="text-neon">Creations</span></h2>

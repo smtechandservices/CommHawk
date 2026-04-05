@@ -135,7 +135,7 @@ const GrowthCircles = () => {
                 {/* Logo Center */}
                 <div className="relative z-30 text-center">
                     <motion.div
-                        className="relative w-48 h-48 mx-auto"
+                        className="relative w-48 h-48 mx-auto shadow-[0_0_120px_rgba(0,243,255,0.2)] rounded-full flex items-center justify-center bg-black/20"
                         initial={{ opacity: 0, scale: 0.8 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                     >
