@@ -27,7 +27,7 @@ const Hero = () => {
                     </motion.h1>
 
                     <motion.p
-                        className="text-lg leading-relaxed text-white/60 mb-12 font-normal max-w-xl"
+                        className="text-lg leading-relaxed text-white/80 mb-12 font-normal max-w-xl"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.8 }}

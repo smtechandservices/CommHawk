@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+import Image from 'next/image';
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
@@ -23,15 +25,25 @@ const Navbar = () => {
       transition={{ duration: 0.6 }}
     >
       <div className="flex justify-between items-center px-[60px] mx-auto">
-        <div className="text-xl font-bold tracking-[0.2em] text-white">
-          <Link href="/">COMMHAWK</Link>
-        </div>
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110">
+            <Image
+              src="/logo-trans.png"
+              alt="CommHawk Logo"
+              fill
+              className="object-contain brightness-150"
+            />
+          </div>
+          <span className="text-xl font-bold tracking-[0.2em] text-white">
+            COMMHAWK
+          </span>
+        </Link>
         <ul className="flex gap-12">
           {['Services', 'Work', 'Connect'].map((item) => (
             <li key={item}>
               <Link
                 href={`/#${item.toLowerCase()}`}
-                className="text-[0.8rem] uppercase tracking-widest font-medium text-white/60 hover:text-neon transition-colors"
+                className="text-[0.8rem] uppercase tracking-widest font-medium text-white/80 hover:text-neon transition-colors"
               >
                 {item}
               </Link>

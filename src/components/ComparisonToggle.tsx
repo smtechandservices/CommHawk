@@ -22,10 +22,10 @@ const ComparisonToggle = () => {
     ];
 
     return (
-        <section className="px-[60px] bg-black relative overflow-hidden min-h-[700px] flex items-center justify-center">
+        <section className="px-[60px] bg-black relative overflow-hidden min-h-[600px] flex items-center justify-center">
             <div className="mx-auto relative z-10 w-full">
-                <div className="text-center mt-20">
-                    <motion.p 
+                <div className="text-center mt-10">
+                    <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -33,14 +33,14 @@ const ComparisonToggle = () => {
                     >
                         The Engineering Evolution
                     </motion.p>
-                    <motion.h2 
+                    <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
                         className="text-4xl md:text-5xl font-bold text-white tracking-tight"
                     >
-                        CommHawk <span className="text-white/40 font-light italic">Synapse</span>
+                        CommHawk <span className="text-white/70 font-light italic">Synapse</span>
                     </motion.h2>
                 </div>
 
@@ -62,7 +62,7 @@ const ComparisonToggle = () => {
                                     className="object-contain brightness-150"
                                 />
                             </div>
-                            
+
                             {/* Inner pulse */}
                             <motion.div
                                 className="absolute inset-0 rounded-[2.5rem] border border-neon/50"
@@ -86,7 +86,7 @@ const ComparisonToggle = () => {
                                 </feMerge>
                             </filter>
                         </defs>
-                        
+
                         <g filter="url(#synapseGlow)">
                             {/* Connective Synapse Path: Left To Right Through Center */}
                             {paths.map((path, idx) => (
@@ -106,8 +106,8 @@ const ComparisonToggle = () => {
                                     <motion.circle
                                         cx={path.side === 'left' ? 350 : 650}
                                         cy={idx % 2 === 0 ? 110 + (idx * 20) : 275}
-                                        r="2" 
-                                        fill="var(--neon)" 
+                                        r="2"
+                                        fill="var(--neon)"
                                         initial={{ scale: 0, opacity: 0 }}
                                         whileInView={{ scale: 1, opacity: 0.6 }}
                                         viewport={{ once: true }}

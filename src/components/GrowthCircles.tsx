@@ -13,8 +13,8 @@ const GrowthCircles = () => {
     ];
 
     return (
-        <section className="py-[150px] bg-black flex flex-col items-center justify-center overflow-hidden min-h-[900px] relative">
-            <div className="mb-20 text-center relative z-20">
+        <section className="py-[80px] bg-black flex flex-col items-center justify-center overflow-hidden min-h-[700px] relative">
+            <div className="mb-10 text-center relative z-20">
                 <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Engineering Hub</span>
                 <h2 className="text-[3rem] font-bold uppercase text-white tracking-tighter">Unified <span className="text-neon">Technical</span> Core</h2>
             </div>
@@ -143,7 +143,7 @@ const GrowthCircles = () => {
                             src="/logo-trans.png"
                             alt="CommHawk Logo"
                             fill
-                            className="object-contain brightness-200"
+                            className="object-contain brightness-150"
                         />
                     </motion.div>
                 </div>

@@ -162,10 +162,10 @@ const Services = () => {
     const [itemWidth, setItemWidth] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
-    
+
     // Duplicate items for the infinite feel
     const extendedCategories = [...serviceCategories, ...serviceCategories, ...serviceCategories];
-    
+
     useEffect(() => {
         if (containerRef.current) {
             // Width of one full set of items (including gaps)
@@ -173,7 +173,7 @@ const Services = () => {
             const cardWidth = 350;
             const fullSetWidth = (cardWidth + gap) * serviceCategories.length;
             setItemWidth(fullSetWidth);
-            
+
             // Start in the middle set
             x.set(-fullSetWidth);
         }
@@ -195,7 +195,7 @@ const Services = () => {
             const slowSpeed = 0.5; // (0.5 * 60 = 30px per second)
             const currentX = x.get();
             const nextX = currentX - slowSpeed;
-            
+
             // Handle wrap-around
             if (nextX <= -itemWidth * 2) {
                 x.set(nextX + itemWidth);
@@ -206,7 +206,7 @@ const Services = () => {
     });
 
     return (
-        <section className="pt-[120px] bg-black overflow-hidden" id="services">
+        <section className="pt-[80px] bg-black overflow-hidden" id="services">
             <div className="px-[60px]">
                 <motion.div
                     className="mb-12"
@@ -222,14 +222,14 @@ const Services = () => {
                 </motion.div>
             </div>
 
-            <div 
+            <div
                 className="relative group"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
                 {/* Visual context for dragging */}
                 <div className="absolute top-[-40px] right-[60px] flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span className="text-[0.6rem] text-white/40 uppercase tracking-widest">[ DRAG TO EXPLORE ]</span>
+                    <span className="text-[0.6rem] text-white/70 uppercase tracking-widest">[ DRAG TO EXPLORE ]</span>
                 </div>
 
                 <motion.div
@@ -260,13 +260,13 @@ const Services = () => {
                                 {category.items.map((item, itemIndex) => (
                                     <li
                                         key={itemIndex}
-                                        className="text-sm text-white/30 border-l border-white/10 pl-4 hover:border-neon hover:text-white transition-all cursor-default leading-relaxed"
+                                        className="text-sm text-white/60 border-l border-white/10 pl-4 hover:border-neon hover:text-white transition-all cursor-default leading-relaxed"
                                     >
                                         {item}
                                     </li>
                                 ))}
                             </ul>
-                            
+
                             {/* Decorative bottom element */}
                             <div className="mt-auto pt-8 flex justify-end opacity-0 group-hover/card:opacity-100 transition-opacity">
                                 <div className="w-12 h-px bg-gradient-to-r from-transparent to-neon" />
@@ -274,7 +274,7 @@ const Services = () => {
                         </motion.div>
                     ))}
                 </motion.div>
-                
+
                 {/* Horizontal Fade Overlays */}
                 <div className="pointer-events-none absolute inset-y-0 left-0 w-[120px] bg-gradient-to-r from-black to-transparent z-10" />
                 <div className="pointer-events-none absolute inset-y-0 right-0 w-[120px] bg-gradient-to-l from-black to-transparent z-10" />

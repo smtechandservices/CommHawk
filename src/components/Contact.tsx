@@ -113,7 +113,7 @@ const Contact = () => {
 
                         <div className="space-y-3">
                             <div className="flex flex-col gap-1.5">
-                                <label htmlFor="name" className="text-white/30 text-[0.6rem] uppercase tracking-widest font-bold">Your Name *</label>
+                                <label htmlFor="name" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Your Name *</label>
                                 <input
                                     type="text"
                                     id="name"
@@ -125,7 +125,7 @@ const Contact = () => {
                                 />
                             </div>
                             <div className="flex flex-col gap-1.5">
-                                <label htmlFor="email" className="text-white/30 text-[0.6rem] uppercase tracking-widest font-bold">Email Address *</label>
+                                <label htmlFor="email" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Email Address *</label>
                                 <input
                                     type="email"
                                     id="email"
@@ -137,7 +137,7 @@ const Contact = () => {
                                 />
                             </div>
                             <div className="flex flex-col gap-1.5">
-                                <label htmlFor="company" className="text-white/30 text-[0.6rem] uppercase tracking-widest font-bold">Company (Optional)</label>
+                                <label htmlFor="company" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Company (Optional)</label>
                                 <input
                                     type="text"
                                     id="company"
@@ -148,7 +148,7 @@ const Contact = () => {
                                 />
                             </div>
                             <div className="flex flex-col gap-1.5">
-                                <label htmlFor="message" className="text-white/30 text-[0.6rem] uppercase tracking-widest font-bold">Project Details *</label>
+                                <label htmlFor="message" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Project Details *</label>
                                 <textarea
                                     id="message"
                                     value={message}
@@ -188,13 +188,13 @@ const Contact = () => {
                             {/* Brand & Description */}
                             <div>
                                 <h3 className="text-xl font-bold tracking-[0.2em] mb-2 text-white">COMMHAWK</h3>
-                                <p className="text-white/40 text-sm leading-relaxed mb-4">
+                                <p className="text-white/70 text-sm leading-relaxed mb-4">
                                     Leading the digital transformation with precision-engineered solutions.
                                     Built for scale, designed for excellence.
                                 </p>
                                 <div className="flex flex-wrap gap-4">
                                     {['LinkedIn', 'Instagram', 'X'].map((social) => (
-                                        <a key={social} href="#" className="px-6 py-3 border border-white/10 rounded-full text-[0.7rem] uppercase tracking-widest text-white/60 hover:border-neon hover:text-neon transition-all">
+                                        <a key={social} href="#" className="px-6 py-3 border border-white/10 rounded-full text-[0.7rem] uppercase tracking-widest text-white/80 hover:border-neon hover:text-neon transition-all">
                                             {social}
                                         </a>
                                     ))}
@@ -204,29 +204,29 @@ const Contact = () => {
                             {/* Links Grid */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
-                                    <h4 className="text-[0.6rem] uppercase tracking-widest text-white/30 mb-2.5">Navigation</h4>
+                                    <h4 className="text-[0.6rem] uppercase tracking-widest text-white/50 mb-2.5">Navigation</h4>
                                     <ul className="space-y-3">
                                         {['Services', 'Work', 'Connect'].map(item => (
                                             <li key={item}>
-                                                <a href={`#${item.toLowerCase()}`} className="text-sm text-white/60 hover:text-neon transition-colors">{item}</a>
+                                                <a href={`#${item.toLowerCase()}`} className="text-sm text-white/80 hover:text-neon transition-colors">{item}</a>
                                             </li>
                                         ))}
                                     </ul>
                                 </div>
                                 <div>
-                                    <h4 className="text-[0.6rem] uppercase tracking-widest text-white/30 mb-2.5">Expertise</h4>
+                                    <h4 className="text-[0.6rem] uppercase tracking-widest text-white/50 mb-2.5">Expertise</h4>
                                     <ul className="space-y-3">
-                                        <li className="text-sm text-white/60">Web & Mobile</li>
-                                        <li className="text-sm text-white/60">AI & Analytics</li>
-                                        <li className="text-sm text-white/60">Cloud & DevOps</li>
+                                        <li className="text-sm text-white/80">Web & Mobile</li>
+                                        <li className="text-sm text-white/80">AI & Analytics</li>
+                                        <li className="text-sm text-white/80">Cloud & DevOps</li>
                                     </ul>
                                 </div>
                             </div>
 
                             {/* Contact Info */}
                             <div>
-                                <h4 className="text-[0.6rem] uppercase tracking-widest text-white/30 mb-6">Contact</h4>
-                                <p className="text-white/60 text-sm leading-relaxed">
+                                <h4 className="text-[0.6rem] uppercase tracking-widest text-white/50 mb-6">Contact</h4>
+                                <p className="text-white/80 text-sm leading-relaxed">
                                     info@commhawk.in <br />
                                     Technology Hub, India
                                 </p>
@@ -237,12 +237,12 @@ const Contact = () => {
 
                 {/* Footer Bottom Bar */}
                 <div className="flex flex-col md:flex-row justify-between items-center pt-4 border-t border-white/5 mt-8 gap-3">
-                    <p className="text-white/20 text-[0.7rem] uppercase tracking-widest">
+                    <p className="text-white/50 text-[0.7rem] uppercase tracking-widest">
                         &copy; {new Date().getFullYear()} COMMHAWK SOLUTIONS.
                     </p>
                     <div className="flex gap-8">
-                        <a href="#" className="text-[0.7rem] uppercase tracking-widest text-white/20 hover:text-white transition-colors">Privacy</a>
-                        <a href="#" className="text-[0.7rem] uppercase tracking-widest text-white/20 hover:text-white transition-colors">Terms</a>
+                        <a href="#" className="text-[0.7rem] uppercase tracking-widest text-white/50 hover:text-white transition-colors">Privacy</a>
+                        <a href="#" className="text-[0.7rem] uppercase tracking-widest text-white/50 hover:text-white transition-colors">Terms</a>
                     </div>
                 </div>
             </div>
