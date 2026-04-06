@@ -40,10 +40,10 @@ const Contact = () => {
         <section className="pt-10 pb-6 px-6 lg:px-[60px] bg-black border-t border-white/5" id="connect">
             <Script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" strategy="afterInteractive" />
             <div className="w-full mx-auto">
-                <div className="mb-6">
-                    <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Connect</span>
-                    <h2 className="text-[3.5rem] font-bold leading-[1.1] uppercase text-white">
-                        Let&apos;s Build the <br />
+                <div className="mb-8 md:mb-10">
+                    <span className="text-neon text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Connect</span>
+                    <h2 className="text-3xl sm:text-4xl md:text-[3.5rem] font-bold leading-[1.2] md:leading-[1.1] uppercase text-white">
+                        Let&apos;s Build the <br className="hidden md:block" />
                         <span className="text-neon">Future</span> Together
                     </h2>
                 </div>
@@ -154,18 +154,18 @@ const Contact = () => {
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
                                     required
-                                    rows={2}
+                                    rows={3}
                                     placeholder="Tell us about your goals..."
-                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/10 resize-none overflow-hidden"
+                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/10 resize-none"
                                 ></textarea>
                             </div>
                         </div>
 
-                        <div className="mt-5 flex flex-col sm:flex-row gap-3">
+                        <div className="mt-8 flex flex-col sm:flex-row gap-4">
                             <motion.button
                                 type="submit"
                                 disabled={!isFormValid || isSubmitting}
-                                className="px-8 py-3.5 bg-white text-black font-bold uppercase tracking-widest text-[0.8rem] rounded-full hover:bg-neon hover:text-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-center"
+                                className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-[0.75rem] md:text-[0.8rem] rounded-full hover:bg-neon hover:text-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-center"
                                 whileTap={{ scale: 0.95 }}
                             >
                                 {isSubmitting ? "Sending..." : "Send Message ↗"}

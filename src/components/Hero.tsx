@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const Hero = () => {
     return (
-        <section className="min-h-[85vh] flex flex-col items-center justify-center relative pt-[120px] pb-[20px] overflow-hidden px-[30px]">
+        <section className="min-h-[85vh] flex flex-col items-center justify-center relative pt-[100px] md:pt-[120px] pb-[40px] md:pb-[20px] overflow-hidden px-6 md:px-[30px]">
             <div className="px-2 md:px-6 w-full grid grid-cols-1 lg:grid-cols-2 items-center gap-16 z-10">
                 <div className="text-left">
                     <motion.div
@@ -18,7 +18,7 @@ const Hero = () => {
                     </motion.div>
 
                     <motion.h1
-                        className="text-[5.5rem] font-bold tracking-tight leading-[1] mb-8 uppercase max-xl:text-[4.5rem] max-md:text-[3.5rem] text-white"
+                        className="text-[3rem] sm:text-[4rem] md:text-[4.5rem] lg:text-[5.5rem] font-bold tracking-tight leading-[1.1] md:leading-[1] mb-8 uppercase text-white"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.1 }}
@@ -38,14 +38,14 @@ const Hero = () => {
                     </motion.p>
 
                     <motion.div
-                        className="flex gap-6"
+                        className="flex flex-col sm:flex-row gap-4 sm:gap-6"
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3, duration: 0.8 }}
                     >
                         <Link
                             href="#connect"
-                            className="px-10 py-4 bg-neon text-black font-bold uppercase tracking-widest text-[0.8rem] rounded-full hover:bg-white transition-colors duration-300"
+                            className="px-8 md:px-10 py-4 bg-neon text-black font-bold uppercase tracking-widest text-[0.7rem] md:text-[0.8rem] rounded-full hover:bg-white transition-colors duration-300 text-center"
                         >
                             Start Your Project
                         </Link>

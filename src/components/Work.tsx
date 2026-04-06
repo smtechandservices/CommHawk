@@ -32,11 +32,11 @@ const projects = [
 
 const Work = () => {
     return (
-        <section className="pt-[80px] px-6 md:px-[60px] bg-black" id="work">
+        <section className="pt-[60px] md:pt-[80px] px-6 md:px-[60px] bg-black" id="work">
             <div className="mx-auto w-full">
-                <div className="mb-12 md:mb-16">
-                    <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Portfolio</span>
-                    <h2 className="text-4xl md:text-[3.5rem] font-bold leading-tight uppercase text-white">Impactful <span className="text-neon">Creations</span></h2>
+                <div className="mb-10 md:mb-16">
+                    <span className="text-neon text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Portfolio</span>
+                    <h2 className="text-3xl md:text-[3.5rem] font-bold leading-tight uppercase text-white">Impactful <span className="text-neon">Creations</span></h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-12">
@@ -59,9 +59,9 @@ const Work = () => {
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />
 
-                                    <div className="absolute top-6 right-6 text-white opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-500">
-                                        <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-black/40 backdrop-blur-md">
-                                            <span className="text-xl">↗</span>
+                                    <div className="absolute top-4 md:top-6 right-4 md:right-6 text-white opacity-0 group-hover:opacity-100 transform translate-x-4 group-hover:translate-x-0 transition-all duration-500">
+                                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full border border-white/20 flex items-center justify-center bg-black/40 backdrop-blur-md">
+                                            <span className="text-lg md:text-xl">↗</span>
                                         </div>
                                     </div>
                                 </div>

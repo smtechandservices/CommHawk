@@ -169,8 +169,8 @@ const Services = () => {
     useEffect(() => {
         if (containerRef.current) {
             // Width of one full set of items (including gaps)
-            const gap = 32; // 8 * 4 (gap-8)
-            const cardWidth = 350;
+            const gap = window.innerWidth < 768 ? 24 : 32;
+            const cardWidth = window.innerWidth < 768 ? 280 : 350;
             const fullSetWidth = (cardWidth + gap) * serviceCategories.length;
             setItemWidth(fullSetWidth);
 
@@ -206,8 +206,8 @@ const Services = () => {
     });
 
     return (
-        <section className="pt-[80px] bg-black overflow-hidden" id="services">
-            <div className="px-[60px]">
+        <section className="pt-[60px] md:pt-[80px] bg-black overflow-hidden" id="services">
+            <div className="px-6 md:px-[60px]">
                 <motion.div
                     className="mb-12"
                     initial={{ opacity: 0, y: 30 }}
@@ -215,9 +215,9 @@ const Services = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Capabilities</span>
-                    <h2 className="text-[3.5rem] font-bold leading-tight uppercase text-white">
-                        Full-Stack <span className="text-neon">Solutions</span> <br /> for Modern Enterprise
+                    <span className="text-neon text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Capabilities</span>
+                    <h2 className="text-3xl md:text-[3.5rem] font-bold leading-tight uppercase text-white">
+                        Full-Stack <span className="text-neon">Solutions</span> <br className="hidden md:block" /> for Modern Enterprise
                     </h2>
                 </motion.div>
             </div>
@@ -228,8 +228,8 @@ const Services = () => {
                 onMouseLeave={() => setIsHovered(false)}
             >
                 {/* Visual context for dragging */}
-                <div className="absolute top-[-40px] right-[60px] flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span className="text-[0.6rem] text-white/70 uppercase tracking-widest">[ DRAG TO EXPLORE ]</span>
+                <div className="absolute top-[-30px] md:top-[-40px] right-6 md:right-[60px] flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <span className="text-[0.5rem] md:text-[0.6rem] text-white/70 uppercase tracking-widest">[ DRAG TO EXPLORE ]</span>
                 </div>
 
                 <motion.div
@@ -239,13 +239,13 @@ const Services = () => {
                     onDragStart={() => setIsDragging(true)}
                     onDragEnd={() => setIsDragging(false)}
                     onDrag={handleDrag}
-                    dragElastic={0}
-                    className="px-6 flex gap-12 px-[60px] cursor-grab active:cursor-grabbing select-none"
+                    dragElastic={0.1}
+                    className="flex gap-6 md:gap-12 px-6 md:px-[60px] cursor-grab active:cursor-grabbing select-none"
                 >
                     {extendedCategories.map((category, index) => (
                         <motion.div
                             key={`${category.title}-${index}`}
-                            className="flex flex-col shrink-0 p-8 rounded-3xl border border-white/5 bg-[#080808] hover:border-neon/30 transition-all duration-500 group/card"
+                            className="flex flex-col shrink-0 w-[280px] md:w-[350px] p-6 md:p-8 rounded-2xl md:rounded-3xl border border-white/5 bg-[#080808] hover:border-neon/30 transition-all duration-500 group/card"
                             whileHover={{ y: -5 }}
                         >
                             <div className="flex items-center gap-4 mb-8">
