@@ -7,6 +7,7 @@ import Contact from '@/components/Contact';
 import BackgroundEffects from '@/components/BackgroundEffects';
 import ComparisonToggle from '@/components/ComparisonToggle';
 import GrowthCircles from '@/components/GrowthCircles';
+import RecognisedBy from '@/components/RecognisedBy';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <ComparisonToggle />
       <Services />
       <Work />
+      <RecognisedBy />
       <GrowthCircles />
       <Contact />
     </main>
