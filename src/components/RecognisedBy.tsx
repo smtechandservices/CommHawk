@@ -2,9 +2,9 @@ import Image from 'next/image';
 
 const recognition = [
     { name: 'DPIIT', logo: '/dpiit.png' },
-    { name: 'Odisha', logo: '/odisha.webp' },
+    { name: 'Bihar', logo: '/bihar2.webp' },
     { name: 'Startup India', logo: '/StartupIndia.png' },
-    { name: 'Startup Odisha', logo: '/startupodisha.png' }
+    { name: 'Startup Bihar', logo: '/bihar.webp' }
 ];
 
 const RecognisedBy = () => {
