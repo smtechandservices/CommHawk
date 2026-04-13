@@ -41,7 +41,7 @@ const Navbar = () => {
           </span>
         </Link>
         <ul className="hidden md:flex gap-12">
-          {['Services', 'Work', 'Connect'].map((item) => (
+          {['Services', 'Work', 'About', 'Connect'].map((item) => (
             <li key={item}>
               <Link
                 href={`/#${item.toLowerCase()}`}
@@ -72,7 +72,7 @@ const Navbar = () => {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed inset-0 bg-black/95 backdrop-blur-2xl z-[1050] flex flex-col items-center justify-center gap-10 md:hidden"
             >
-              {['Services', 'Work', 'Connect'].map((item) => (
+              {['Services', 'Work', 'About Us', 'Connect'].map((item) => (
                 <motion.div
                   key={item}
                   initial={{ opacity: 0, y: 20 }}
