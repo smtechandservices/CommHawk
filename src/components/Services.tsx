@@ -16,13 +16,14 @@ const serviceCategories = [
     {
         title: 'Web Development',
         items: [
-            'Frontend Development – HTML, CSS, JavaScript, React, Vue, Angular',
-            'Backend Development – Node.js, Python, PHP, Java, .NET',
-            'Full-Stack Development – End-to-end web application development',
             'CMS Development – WordPress, Webflow, Contentful, Strapi',
             'E-Commerce Development – Shopify, WooCommerce, Magento',
             'Web Portals – Customer/vendor/employee portals',
-            'Progressive Web Apps (PWA) – App-like web experiences'
+            'ERP Systems – Enterprise Resource Planning solutions',
+            'CRM Systems – Customer Relationship Management platforms',
+            'SaaS Product Development – Cloud-based software products',
+            'API Development & Integration – REST, GraphQL, SOAP APIs',
+            'Legacy System Modernization – Upgrading outdated systems'
         ]
     },
     {
@@ -31,18 +32,8 @@ const serviceCategories = [
             'iOS Development – Native Swift/Objective-C apps',
             'Android Development – Native Kotlin/Java apps',
             'Cross-Platform Apps – Flutter, React Native, Xamarin',
-            'Wearable & IoT Apps – Apple Watch, Android Wear'
-        ]
-    },
-    {
-        title: 'Software Development',
-        items: [
-            'Custom Software Development – Tailor-made business applications',
-            'ERP Systems – Enterprise Resource Planning solutions',
-            'CRM Systems – Customer Relationship Management platforms',
-            'SaaS Product Development – Cloud-based software products',
-            'API Development & Integration – REST, GraphQL, SOAP APIs',
-            'Legacy System Modernization – Upgrading outdated systems'
+            'Wearable & IoT Apps – Apple Watch, Android Wear',
+            'Progressive Web Apps (PWA) – App-like web experiences'
         ]
     },
     {

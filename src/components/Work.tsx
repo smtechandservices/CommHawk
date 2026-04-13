@@ -10,7 +10,7 @@ const projects = [
         subtitle: 'E-Commerce Platform',
         description: 'Complete e-commerce ecosystem from planning and design to production launch.',
         image: '/befin.png',
-        link: 'https://app.thebefin.com/'
+        link: 'https://thebefin.com/'
     },
     {
         id: 'maytri-erp',
@@ -55,6 +55,7 @@ const Work = () => {
                                         src={project.image}
                                         alt={project.title}
                                         fill
+                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                         className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity" />

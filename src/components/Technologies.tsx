@@ -1,19 +1,19 @@
-const partners = [
-    'redis', 'Octopus Deploy', 'accenture', 'Raspberry Pi', 'brave', 'DRATA', 'unicef', 'Befin', 'DECATHLON', 'Raycast', 'AMETEK'
+const technologies = [
+    'Python', 'NextJS','ReactJS', 'TypeScript', 'Tailwind CSS', 'NodeJS', 'Django', 'PostgreSQL', 'Redis', 'Docker', 'GraphQL', 'AWS', 'Gunicorn', 'Nginx'
 ];
 
-const Partners = () => {
+const Technologies = () => {
     return (
         <div className="bg-black py-6 border-t border-b border-white/5 overflow-hidden">
             <div className="flex gap-12 md:gap-[100px] items-center whitespace-nowrap animate-scroll w-max">
-                {partners.map((partner, index) => (
+                {technologies.map((tech, index) => (
                     <div key={index} className="text-white opacity-50 font-bold text-[0.8rem] uppercase tracking-[0.2em] hover:opacity-100 hover:text-neon transition-all duration-500 cursor-default">
-                        {partner}
+                        {tech}
                     </div>
                 ))}
-                {partners.map((partner, index) => (
+                {technologies.map((tech, index) => (
                     <div key={`dup-${index}`} className="text-white opacity-50 font-bold text-[0.8rem] uppercase tracking-[0.2em] hover:opacity-100 hover:text-neon transition-all duration-500 cursor-default">
-                        {partner}
+                        {tech}
                     </div>
                 ))}
             </div>
@@ -21,4 +21,4 @@ const Partners = () => {
     );
 };
 
-export default Partners;
+export default Technologies;

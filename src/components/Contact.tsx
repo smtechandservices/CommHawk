@@ -193,13 +193,25 @@ const Contact = () => {
                                     Built for scale, designed for excellence.
                                 </p>
                                 <div className="flex flex-wrap gap-4">
-                                    {['LinkedIn', 'Instagram', 'X'].map((social) => (
-                                        <a key={social} href="#" className="px-6 py-3 border border-white/10 rounded-full text-[0.7rem] uppercase tracking-widest text-white/80 hover:border-neon hover:text-neon transition-all">
-                                            {social}
-                                        </a>
-                                    ))}
+                                    <a
+                                        href="https://www.linkedin.com/company/commhawk/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-6 py-3 border border-white/10 rounded-full text-[0.7rem] uppercase tracking-widest text-white/80 hover:border-neon hover:text-neon transition-all"
+                                    >
+                                        LinkedIn
+                                    </a>
+                                    {/* <a
+                                        href="https://www.instagram.com/commhawk/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="px-6 py-3 border border-white/10 rounded-full text-[0.7rem] uppercase tracking-widest text-white/80 hover:border-neon hover:text-neon transition-all"
+                                    >
+                                        Instagram
+                                    </a> */}
                                 </div>
                             </div>
+                       
 
                             {/* Links Grid */}
                             <div className="grid grid-cols-2 gap-4">

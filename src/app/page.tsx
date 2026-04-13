@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Partners from '@/components/Partners';
+import Technologies from '@/components/Technologies';
 import Services from '@/components/Services';
 import Work from '@/components/Work';
 import Contact from '@/components/Contact';
@@ -15,7 +15,7 @@ export default function Home() {
       <BackgroundEffects />
       <Navbar />
       <Hero />
-      <Partners />
+      <Technologies />
       <ComparisonToggle />
       <Services />
       <Work />
