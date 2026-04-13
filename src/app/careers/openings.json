@@ -1,0 +1,30 @@
+[
+  {
+    "id": "devops-cloud",
+    "title": "DevOps & Cloud Engineer",
+    "department": "Infrastructure",
+    "location": "Remote",
+    "type": "Full-time",
+    "tags": [
+      "Kubernetes",
+      "Terraform",
+      "CI/CD",
+      "AWS"
+    ],
+    "description": "Own and evolve the infrastructure that powers CommHawk's client deployments. From Kubernetes clusters to automated CI/CD pipelines, you will ensure reliability, security, and blazing performance at scale.",
+    "responsibilities": [
+      "Design and manage cloud-native infrastructure on AWS / GCP",
+      "Automate deployments with CI/CD pipelines (GitHub Actions, ArgoCD)",
+      "Implement infrastructure-as-code using Terraform",
+      "Monitor system health and drive SRE best practices",
+      "Collaborate with engineering on security hardening and cost optimisation"
+    ],
+    "requirements": [
+      "3+ years in a DevOps / SRE / Platform Engineering role",
+      "Hands-on Kubernetes and container orchestration experience",
+      "Proficiency with Terraform or Pulumi",
+      "Strong Linux and networking fundamentals",
+      "Experience with observability tooling (Grafana, Prometheus, Datadog)"
+    ]
+  }
+]

@@ -18,7 +18,7 @@ export default function AboutUs() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-stretch">
             {/* Mission Card */}
             <div className="flex flex-col justify-center">
-              <div className="group border border-white/10 bg-gradient-to-br from-black via-[#111] to-neutral-900/80 rounded-2xl px-7 py-10 shadow-lg hover:border-neon/50 transition-all duration-500 cursor-default relative">
+              <div className="group border border-white/10 bg-gradient-to-br from-black via-[#111] to-neutral-900/80 rounded-2xl px-7 py-10 shadow-lg hover:border-neon/50 transition-all duration-500 cursor-default relative text-left">
                 <h3 className="text-neon text-lg md:text-xl font-bold uppercase tracking-widest mb-3">
                   Mission
                 </h3>
@@ -36,19 +36,13 @@ export default function AboutUs() {
             </div>
             {/* About Card (Center) */}
             <div className="flex flex-col h-full">
-              <div className="group border border-white/10 bg-gradient-to-br from-neutral-950/90 via-black/80 to-neutral-800/80 rounded-3xl px-8 py-14 md:py-16 shadow-xl hover:border-neon transition-all duration-500 text-center flex flex-col justify-center h-full">
-                <span className="text-neon text-xs uppercase tracking-[0.3em] block mb-3 font-semibold">
+              <div className="group border border-white/10 bg-gradient-to-br from-neutral-950/90 via-black/80 to-neutral-800/80 rounded-3xl px-7 py-10 shadow-xl hover:border-neon transition-all duration-500 text-left flex flex-col justify-center h-full">
+                <h3 className="text-neon text-lg md:text-xl font-bold uppercase tracking-widest mb-3">
                   Who We Are
-                </span>
-                <p className="text-white text-base md:text-lg font-medium">
-                  We are a collective of <br /> strategists, designers, and engineers.
-                </p>
-                <span className="text-white/70 font-normal my-2">
-                  Building robust, meaningful digital products
-                </span>
-                <p className="text-white/60 text-sm md:text-base leading-relaxed">
+                </h3>
+                <p className="text-white/80 text-sm md:text-base leading-relaxed">
+                  We are a collective of passionate strategists, designers, and engineers.<br /><br />
                   Collaboration, purpose, and trust are at the heart of every project engagement.
-                  <br />
                   From entrepreneurial startups to global enterprises, we are shaping the future together.
                 </p>
               </div>
@@ -60,7 +54,7 @@ export default function AboutUs() {
                 className="mx-auto mb-7 w-24 h-[5px] rounded-full bg-gradient-to-r from-transparent via-neon to-transparent opacity-90 blur-[2px]"
                 aria-hidden
               />
-              <div className="group border border-white/10 bg-gradient-to-br from-black via-[#181c24] to-black rounded-2xl px-7 py-10 shadow-lg hover:border-neon/50 transition-all duration-500 cursor-default">
+              <div className="group border border-white/10 bg-gradient-to-br from-black via-[#181c24] to-black rounded-2xl px-7 py-10 shadow-lg hover:border-neon/50 transition-all duration-500 cursor-default text-left">
                 <h3 className="text-neon text-lg md:text-xl font-bold uppercase tracking-widest mb-3">
                   Vision
                 </h3>

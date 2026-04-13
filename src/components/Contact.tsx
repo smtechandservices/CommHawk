@@ -223,6 +223,14 @@ const Contact = () => {
                                                 <a href={`#${item.toLowerCase()}`} className="text-sm text-white/80 hover:text-neon transition-colors">{item}</a>
                                             </li>
                                         ))}
+                                        <li>
+                                            <a
+                                                href="/careers"
+                                                className="text-sm text-white/80 hover:text-neon transition-colors"
+                                            >
+                                                Careers
+                                            </a>
+                                        </li>
                                     </ul>
                                 </div>
                                 <div>

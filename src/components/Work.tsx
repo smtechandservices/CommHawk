@@ -6,10 +6,10 @@ import Link from 'next/link';
 const projects = [
     {
         id: 'befin',
-        title: 'Befin',
-        subtitle: 'E-Commerce Platform',
-        description: 'Complete e-commerce ecosystem from planning and design to production launch.',
-        image: '/befin.png',
+        title: 'BeFin',
+        subtitle: 'Financial Literacy',
+        description: 'Gamified platform helping every generation grow smarter with money and achieve financial independence.',
+        image: '/befin.webp',
         link: 'https://thebefin.com/'
     },
     {
@@ -22,7 +22,7 @@ const projects = [
     },
     {
         id: 'tripnroll',
-        title: 'TripnRoll',
+        title: 'Trip N Roll Travel',
         subtitle: 'Ticketing Platform',
         description: 'Next-generation travel and ticketing platform for seamless experience.',
         image: '/tripnroll.png',
@@ -70,7 +70,7 @@ const Work = () => {
                                 <div className="mt-6 space-y-2">
                                     <div className="flex justify-between items-start">
                                         <div>
-                                            <h3 className="text-xl font-bold uppercase tracking-widest text-white group-hover:text-neon transition-colors">
+                                            <h3 className="text-xl font-bold tracking-widest text-white group-hover:text-neon transition-colors">
                                                 {project.title}
                                             </h3>
                                             <span className="text-[0.6rem] text-neon uppercase tracking-[0.2em] font-medium">
