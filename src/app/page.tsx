@@ -9,6 +9,7 @@ import ComparisonToggle from '@/components/ComparisonToggle';
 import AboutUs from '@/components/AboutUs';
 import GrowthCircles from '@/components/GrowthCircles';
 import RecognisedBy from '@/components/RecognisedBy';
+import ScrollToTop from '@/components/ScrollToTop';
 
 
 export default function Home() {
@@ -25,6 +26,7 @@ export default function Home() {
       <GrowthCircles />
       <AboutUs />
       <Contact />
+      <ScrollToTop />
     </main>
   );
 }

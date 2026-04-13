@@ -8,10 +8,10 @@ export default function AboutUs() {
         </div>
         <div className="relative z-10 mx-auto px-6 flex flex-col gap-8">
           {/* Header */}
-          <div className="text-center mb-3">
+          <div className="text-center md:text-left mb-3">
             <span className="text-neon text-xs uppercase tracking-[0.3em] block mb-2">About Us</span>
-            <h2 className="text-3xl md:text-[2.6rem] font-bold uppercase text-white tracking-tight">
-              Our Mission, Vision & Story
+            <h2 className="text-xl md:text-[2.6rem] font-bold uppercase text-white tracking-tight ">
+              Our Mission <span className="text-blue-500">Vision</span> & Story
             </h2>
           </div>
           {/* Card layout */}

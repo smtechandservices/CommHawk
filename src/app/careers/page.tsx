@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import BackgroundEffects from '@/components/BackgroundEffects';
+import ScrollToTop from '@/components/ScrollToTop';
 import { ChevronDown, MapPin, Clock, ArrowRight, Zap, Users, Globe, Rocket, Code2, ShieldCheck } from 'lucide-react';
 import openingsData from './openings.json';
 
@@ -408,6 +409,7 @@ export default function CareersPage() {
           © {new Date().getFullYear()} CommHawk. All rights reserved.
         </p>
       </footer>
+      <ScrollToTop />
     </main>
   );
 }
