@@ -197,7 +197,7 @@ const Services = () => {
     });
 
     return (
-        <section className="pt-[60px] md:pt-[80px] bg-black overflow-hidden" id="services">
+        <section className="pt-[10px] bg-black overflow-hidden" id="services">
             <div className="px-6 md:px-[60px]">
                 <motion.div
                     className="mb-12"

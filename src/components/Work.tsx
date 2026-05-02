@@ -32,7 +32,7 @@ const projects = [
 
 const Work = () => {
     return (
-        <section className="pt-[60px] md:pt-[80px] px-6 md:px-[60px] bg-black" id="work">
+        <section className="pt-[40px] px-6 md:px-[60px] bg-black" id="work">
             <div className="mx-auto w-full">
                 <div className="mb-10 md:mb-16">
                     <span className="text-neon text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Portfolio</span>

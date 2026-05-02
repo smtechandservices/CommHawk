@@ -1,6 +1,6 @@
 export default function AboutUs() {
     return (
-      <section className="relative bg-black border-t border-b border-white/10 py-20 md:py-32 overflow-hidden" id="about">
+      <section className="relative bg-black border-b border-white/10 pb-12 overflow-hidden" id="about">
         <div className="absolute inset-0 pointer-events-none select-none" aria-hidden>
           {/* Subtle neon background glow */}
           <div className="absolute top-1/2 left-[15%] w-[500px] h-[250px] blur-3xl opacity-20 bg-neon/70 rounded-full -translate-y-1/2" />

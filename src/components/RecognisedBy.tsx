@@ -11,7 +11,7 @@ const RecognisedBy = () => {
     const imageSizes = "(max-width: 768px) 256px, 288px";
 
     return (
-        <section className="bg-black py-16 border-t border-b border-white/5 overflow-hidden">
+        <section className="bg-black py-12 border-b border-white/5 overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 mb-10 text-center">
                 <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Official Endorsements</span>
                 <h2 className="text-[2.5rem] md:text-[3rem] font-bold uppercase text-white tracking-tighter">Recognised <span className="text-neon">By</span></h2>
