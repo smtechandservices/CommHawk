@@ -2,7 +2,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Technologies from '@/components/Technologies';
 import Services from '@/components/Services';
-import Work from '@/components/Work';
+import Businesses from '@/components/Businesses';
 import Contact from '@/components/Contact';
 import BackgroundEffects from '@/components/BackgroundEffects';
 import ComparisonToggle from '@/components/ComparisonToggle';
@@ -21,7 +21,7 @@ export default function Home() {
       <Technologies />
       <ComparisonToggle />
       <Services />
-      <Work />
+      <Businesses />
       <RecognisedBy />
       <GrowthCircles />
       <AboutUs />
