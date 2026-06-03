@@ -1,12 +1,16 @@
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import Partners from '@/components/Partners';
+import Technologies from '@/components/Technologies';
 import Services from '@/components/Services';
-import Work from '@/components/Work';
+import Businesses from '@/components/Businesses';
 import Contact from '@/components/Contact';
 import BackgroundEffects from '@/components/BackgroundEffects';
 import ComparisonToggle from '@/components/ComparisonToggle';
+import AboutUs from '@/components/AboutUs';
 import GrowthCircles from '@/components/GrowthCircles';
+import RecognisedBy from '@/components/RecognisedBy';
+import ScrollToTop from '@/components/ScrollToTop';
+
 
 export default function Home() {
   return (
@@ -14,12 +18,15 @@ export default function Home() {
       <BackgroundEffects />
       <Navbar />
       <Hero />
-      <Partners />
+      <Technologies />
       <ComparisonToggle />
       <Services />
-      <Work />
+      <Businesses />
+      <RecognisedBy />
       <GrowthCircles />
+      <AboutUs />
       <Contact />
+      <ScrollToTop />
     </main>
   );
 }
