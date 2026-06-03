@@ -8,7 +8,7 @@ import { Calendar } from 'lucide-react';
 const GOOGLE_CALENDAR_LINK =
     "https://calendar.google.com/calendar/u/0/r/eventedit?text=Schedule+with+CommHawk&details=Looking+forward+to+connecting.+Feel+free+to+add+project+details+in+the+meeting+invite!&dates=";
 
-const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "a1b45022-6077-4901-b0ab-7512b2d92072";
+const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "0c01895f-02d2-457c-a610-c55815b5cc71";
 
 type SwalType = {
     fire: (options: {
