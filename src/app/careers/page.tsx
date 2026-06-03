@@ -196,7 +196,7 @@ export default function CareersPage() {
                 Send us your CV we&apos;d love to keep in touch.
               </p>
               <a
-                href="mailto:info@commhawk.in"
+                href="mailto:commhawktechnologies@gmail.com"
                 className="mt-8 inline-flex items-center gap-2 px-7 py-3 border border-neon/40 text-neon font-bold uppercase tracking-widest text-[0.7rem] rounded-full hover:bg-neon hover:text-black transition-all duration-300"
               >
                 Get in Touch <ArrowRight size={13} />
@@ -359,7 +359,7 @@ export default function CareersPage() {
                               ))}
                             </ul>
                             <a
-                              href={`mailto:info@commhawk.in?subject=Application: ${job.title}`}
+                              href={`mailto:commhawktechnologies@gmail.com?subject=Application: ${job.title}`}
                               className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 bg-neon text-black font-bold uppercase tracking-widest text-[0.65rem] sm:text-[0.7rem] rounded-full hover:bg-white transition-colors duration-300"
                             >
                               Apply Now <ArrowRight size={13} />

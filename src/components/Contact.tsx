@@ -247,7 +247,7 @@ const Contact = () => {
                             <div>
                                 <h4 className="text-[0.6rem] uppercase tracking-widest text-white/50 mb-6">Contact</h4>
                                 <p className="text-white/80 text-sm leading-relaxed">
-                                    info@commhawk.in <br />
+                                    commhawktechnologies@gmail.com <br />
                                     Technology Hub, India
                                 </p>
                             </div>
