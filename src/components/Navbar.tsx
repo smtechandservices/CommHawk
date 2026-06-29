@@ -37,13 +37,19 @@ const Navbar = () => {
           </span>
         </Link>
         <ul className="hidden md:flex gap-12">
-          {['Services', 'Businesses', 'About', 'Connect'].map((item) => (
-            <li key={item}>
+          {[
+            { name: 'Services', href: '/#services' },
+            { name: 'Businesses', href: '/#businesses' },
+            { name: 'About', href: '/#about' },
+            { name: 'Blog', href: '/blog' },
+            { name: 'Connect', href: '/#connect' }
+          ].map((item) => (
+            <li key={item.name}>
               <Link
-                href={`/#${item.toLowerCase()}`}
+                href={item.href}
                 className="text-[0.8rem] uppercase tracking-widest font-medium text-white/80 hover:text-neon transition-colors"
               >
-                {item}
+                {item.name}
               </Link>
             </li>
           ))}
@@ -68,19 +74,25 @@ const Navbar = () => {
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               className="fixed inset-0 bg-black/95 backdrop-blur-2xl z-[1050] flex flex-col items-center justify-center gap-10 md:hidden"
             >
-              {['Services', 'Businesses', 'About Us', 'Connect'].map((item) => (
+              {[
+                { name: 'Services', href: '/#services' },
+                { name: 'Businesses', href: '/#businesses' },
+                { name: 'About Us', href: '/#about' },
+                { name: 'Blog', href: '/blog' },
+                { name: 'Connect', href: '/#connect' }
+              ].map((item) => (
                 <motion.div
-                  key={item}
+                  key={item.name}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
                 >
                   <Link
-                    href={`/#${item.toLowerCase()}`}
+                    href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-2xl uppercase tracking-[0.3em] font-bold text-white hover:text-neon transition-colors"
                   >
-                    {item}
+                    {item.name}
                   </Link>
                 </motion.div>
               ))}

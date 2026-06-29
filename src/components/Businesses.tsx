@@ -50,13 +50,13 @@ const projects = [
     },
 
     {
-        id: 'kamlee',
-        title: 'Kamlee',
+        id: 'kaamlee',
+        title: 'Kaamlee',
         subtitle: 'White Label Solution',
-        category: 'White Labels',
+        category: 'IT Projects',
         description:
             'Custom white-label digital solution built for businesses looking to launch and scale under their own brand.',
-        image: '/kamlee.png',
+        image: '/kaamlee.png',
         link: '#',
     },
 ];

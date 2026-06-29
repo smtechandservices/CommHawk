@@ -218,9 +218,14 @@ const Contact = () => {
                                 <div>
                                     <h4 className="text-[0.6rem] uppercase tracking-widest text-white/50 mb-2.5">Navigation</h4>
                                     <ul className="space-y-3">
-                                        {['Services', 'Work', 'Connect'].map(item => (
-                                            <li key={item}>
-                                                <a href={`#${item.toLowerCase()}`} className="text-sm text-white/80 hover:text-neon transition-colors">{item}</a>
+                                        {[
+                                            { name: 'Services', href: '/#services' },
+                                            { name: 'Work', href: '/#work' },
+                                            { name: 'Blog', href: '/blog' },
+                                            { name: 'Connect', href: '/#connect' }
+                                        ].map(item => (
+                                            <li key={item.name}>
+                                                <a href={item.href} className="text-sm text-white/80 hover:text-neon transition-colors">{item.name}</a>
                                             </li>
                                         ))}
                                         <li>
