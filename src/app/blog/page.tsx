@@ -25,7 +25,7 @@ export default function BlogPage() {
 
   useEffect(() => {
     setMounted(true);
-    const storedBlogs = localStorage.getItem('commhawk_blogs_v2');
+    const storedBlogs = localStorage.getItem('commhawk_blogs');
     if (storedBlogs) {
       try {
         setBlogs(JSON.parse(storedBlogs));
@@ -34,7 +34,6 @@ export default function BlogPage() {
       }
     } else {
       setBlogs(defaultBlogs);
-      localStorage.setItem('commhawk_blogs_v2', JSON.stringify(defaultBlogs));
     }
   }, []);
 
