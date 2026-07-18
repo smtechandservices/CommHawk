@@ -20,19 +20,18 @@ export default function SingleBlogPage() {
 
   useEffect(() => {
     setMounted(true);
-    const storedBlogs = localStorage.getItem('commhawk_blogs');
-    if (storedBlogs && id) {
-      try {
-        const blogs: BlogPost[] = JSON.parse(storedBlogs);
-        const foundBlog = blogs.find((b) => b.id.toString() === id);
-        if (foundBlog) {
-          setBlog(foundBlog);
-        }
-      } catch (e) {
-        console.error("Failed to parse blogs", e);
-      }
+    if (!id) {
+      setLoading(false);
+      return;
     }
-    setLoading(false);
+    fetch(`/api/blogs/${id}`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Blog not found');
+        return res.json();
+      })
+      .then((data) => setBlog(data))
+      .catch(() => setBlog(null))
+      .finally(() => setLoading(false));
   }, [id]);
 
   if (!mounted) return null;

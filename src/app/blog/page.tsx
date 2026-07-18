@@ -8,16 +8,12 @@ import Contact from '@/components/Contact';
 import Link from 'next/link';
 
 export interface BlogPost {
-  id: number;
+  id: string;
   title: string;
   imageLink: string;
   content: string;
   date: string;
 }
-
-const defaultBlogs: BlogPost[] = [
-
-];
 
 export default function BlogPage() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
@@ -25,16 +21,10 @@ export default function BlogPage() {
 
   useEffect(() => {
     setMounted(true);
-    const storedBlogs = localStorage.getItem('commhawk_blogs');
-    if (storedBlogs) {
-      try {
-        setBlogs(JSON.parse(storedBlogs));
-      } catch (e) {
-        setBlogs(defaultBlogs);
-      }
-    } else {
-      setBlogs(defaultBlogs);
-    }
+    fetch('/api/blogs')
+      .then((res) => res.json())
+      .then((data) => setBlogs(Array.isArray(data) ? data : []))
+      .catch(() => setBlogs([]));
   }, []);
 
   if (!mounted) return null; // Prevent hydration errors

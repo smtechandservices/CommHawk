@@ -9,57 +9,55 @@ import { BlogPost } from '../blog/page';
 export default function AddBlogPage() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [mounted, setMounted] = useState(false);
-  const [isEditing, setIsEditing] = useState<number | null>(null);
+  const [isEditing, setIsEditing] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
   const [title, setTitle] = useState('');
   const [imageLink, setImageLink] = useState('');
   const [content, setContent] = useState('');
 
-  useEffect(() => {
-    setMounted(true);
-    const storedBlogs = localStorage.getItem('commhawk_blogs');
-    if (storedBlogs) {
-      try {
-        setBlogs(JSON.parse(storedBlogs));
-      } catch (e) {
-        setBlogs([]);
-      }
-    }
-  }, []);
-
-  const saveToStorage = (updatedBlogs: BlogPost[]) => {
-    setBlogs(updatedBlogs);
-    localStorage.setItem('commhawk_blogs', JSON.stringify(updatedBlogs));
+  const loadBlogs = () => {
+    fetch('/api/blogs')
+      .then((res) => res.json())
+      .then((data) => setBlogs(Array.isArray(data) ? data : []))
+      .catch(() => setBlogs([]));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    setMounted(true);
+    loadBlogs();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !imageLink || !content) return;
 
-    if (isEditing !== null) {
-      // Update existing
-      const updatedBlogs = blogs.map(b => 
-        b.id === isEditing 
-          ? { ...b, title, imageLink, content } 
-          : b
-      );
-      saveToStorage(updatedBlogs);
-      setIsEditing(null);
-    } else {
-      // Add new
-      const newBlog: BlogPost = {
-        id: Date.now(),
-        title,
-        imageLink,
-        content,
-        date: new Date().toLocaleDateString(),
-      };
-      saveToStorage([newBlog, ...blogs]);
-    }
+    setSubmitting(true);
+    setError('');
 
-    setTitle('');
-    setImageLink('');
-    setContent('');
+    try {
+      const res = await fetch(
+        isEditing !== null ? `/api/blogs/${isEditing}` : '/api/blogs',
+        {
+          method: isEditing !== null ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, imageLink, content }),
+        }
+      );
+
+      if (!res.ok) throw new Error('Request failed');
+
+      loadBlogs();
+      setIsEditing(null);
+      setTitle('');
+      setImageLink('');
+      setContent('');
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleEdit = (blog: BlogPost) => {
@@ -70,10 +68,14 @@ export default function AddBlogPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleDelete = (id: number) => {
-    if (confirm("Are you sure you want to delete this blog post?")) {
-      const updatedBlogs = blogs.filter(b => b.id !== id);
-      saveToStorage(updatedBlogs);
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this blog post?")) return;
+    try {
+      const res = await fetch(`/api/blogs/${id}`, { method: 'DELETE' });
+      if (!res.ok) throw new Error('Request failed');
+      loadBlogs();
+    } catch (err) {
+      setError('Failed to delete the blog post. Please try again.');
     }
   };
 
@@ -141,12 +143,16 @@ export default function AddBlogPage() {
                 required
               />
             </div>
+            {error && (
+              <p className="text-red-400 text-sm">{error}</p>
+            )}
             <div className="flex gap-4 pt-4">
               <button
                 type="submit"
-                className="px-8 py-3 bg-white text-black font-bold uppercase tracking-widest text-[0.8rem] rounded-full hover:bg-neon hover:text-black transition-colors duration-300"
+                disabled={submitting}
+                className="px-8 py-3 bg-white text-black font-bold uppercase tracking-widest text-[0.8rem] rounded-full hover:bg-neon hover:text-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isEditing ? 'Save Changes' : 'Publish Blog'}
+                {submitting ? 'Saving...' : isEditing ? 'Save Changes' : 'Publish Blog'}
               </button>
               {isEditing && (
                 <button
