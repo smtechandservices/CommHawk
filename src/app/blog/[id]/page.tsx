@@ -1,40 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import BackgroundEffects from '@/components/BackgroundEffects';
 import ScrollToTop from '@/components/ScrollToTop';
 import Contact from '@/components/Contact';
-import { BlogPost } from '../page';
+import { BlogPost } from '@/lib/blogs';
+import blogsData from '@/data/blogs.json';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 export default function SingleBlogPage() {
   const { id } = useParams();
   const router = useRouter();
-  
-  const [blog, setBlog] = useState<BlogPost | null>(null);
-  const [mounted, setMounted] = useState(false);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    setMounted(true);
-    if (!id) {
-      setLoading(false);
-      return;
-    }
-    fetch(`/api/blogs/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error('Blog not found');
-        return res.json();
-      })
-      .then((data) => setBlog(data))
-      .catch(() => setBlog(null))
-      .finally(() => setLoading(false));
-  }, [id]);
-
-  if (!mounted) return null;
+  const blog = (blogsData as BlogPost[]).find((b) => b.id === id) ?? null;
 
   return (
     <main className="min-h-screen relative text-white bg-black">
@@ -50,9 +31,7 @@ export default function SingleBlogPage() {
           Back to Blogs
         </Link>
 
-        {loading ? (
-          <div className="text-center text-white/50 py-20">Loading...</div>
-        ) : !blog ? (
+        {!blog ? (
           <div className="text-center text-white/50 py-20 border border-white/5 rounded-2xl bg-white/5 backdrop-blur-sm">
             <p className="mb-4">Blog post not found.</p>
             <button 

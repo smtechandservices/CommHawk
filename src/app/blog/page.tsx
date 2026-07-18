@@ -1,33 +1,16 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Navbar from '@/components/Navbar';
 import BackgroundEffects from '@/components/BackgroundEffects';
 import ScrollToTop from '@/components/ScrollToTop';
 import Contact from '@/components/Contact';
 import Link from 'next/link';
-
-export interface BlogPost {
-  id: string;
-  title: string;
-  imageLink: string;
-  content: string;
-  date: string;
-}
+import { BlogPost } from '@/lib/blogs';
+import blogsData from '@/data/blogs.json';
 
 export default function BlogPage() {
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    fetch('/api/blogs')
-      .then((res) => res.json())
-      .then((data) => setBlogs(Array.isArray(data) ? data : []))
-      .catch(() => setBlogs([]));
-  }, []);
-
-  if (!mounted) return null; // Prevent hydration errors
+  const blogs = blogsData as BlogPost[];
 
   return (
     <main className="min-h-screen relative text-white bg-black">

@@ -1,64 +1,42 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import BackgroundEffects from '@/components/BackgroundEffects';
 import ScrollToTop from '@/components/ScrollToTop';
-import { BlogPost } from '../blog/page';
+import { BlogPost } from '@/lib/blogs';
+import blogsData from '@/data/blogs.json';
 
 export default function AddBlogPage() {
-  const [blogs, setBlogs] = useState<BlogPost[]>([]);
-  const [mounted, setMounted] = useState(false);
+  const [blogs, setBlogs] = useState<BlogPost[]>(blogsData as BlogPost[]);
   const [isEditing, setIsEditing] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState('');
+  const [copied, setCopied] = useState(false);
 
   const [title, setTitle] = useState('');
   const [imageLink, setImageLink] = useState('');
   const [content, setContent] = useState('');
   const [imageError, setImageError] = useState('');
 
-  const loadBlogs = () => {
-    fetch('/api/blogs')
-      .then((res) => res.json())
-      .then((data) => setBlogs(Array.isArray(data) ? data : []))
-      .catch(() => setBlogs([]));
-  };
-
-  useEffect(() => {
-    setMounted(true);
-    loadBlogs();
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!title || !imageLink || !content) return;
 
-    setSubmitting(true);
-    setError('');
-
-    try {
-      const res = await fetch(
-        isEditing !== null ? `/api/blogs/${isEditing}` : '/api/blogs',
-        {
-          method: isEditing !== null ? 'PUT' : 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ title, imageLink, content }),
-        }
+    if (isEditing !== null) {
+      setBlogs((prev) =>
+        prev.map((b) => (b.id === isEditing ? { ...b, title, imageLink, content } : b))
       );
-
-      if (!res.ok) throw new Error('Request failed');
-
-      loadBlogs();
-      setIsEditing(null);
-      setTitle('');
-      setImageLink('');
-      setContent('');
-    } catch (err) {
-      setError('Something went wrong. Please try again.');
-    } finally {
-      setSubmitting(false);
+    } else {
+      const newBlog: BlogPost = {
+        id: crypto.randomUUID(),
+        title,
+        imageLink,
+        content,
+        date: new Date().toLocaleDateString(),
+      };
+      setBlogs((prev) => [newBlog, ...prev]);
     }
+
+    handleCancel();
   };
 
   const handleEdit = (blog: BlogPost) => {
@@ -69,15 +47,9 @@ export default function AddBlogPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = (id: string) => {
     if (!confirm("Are you sure you want to delete this blog post?")) return;
-    try {
-      const res = await fetch(`/api/blogs/${id}`, { method: 'DELETE' });
-      if (!res.ok) throw new Error('Request failed');
-      loadBlogs();
-    } catch (err) {
-      setError('Failed to delete the blog post. Please try again.');
-    }
+    setBlogs((prev) => prev.filter((b) => b.id !== id));
   };
 
   const handleCancel = () => {
@@ -103,19 +75,30 @@ export default function AddBlogPage() {
     reader.readAsDataURL(file);
   };
 
-  if (!mounted) return null;
+  const exportJson = JSON.stringify(blogs, null, 2);
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(exportJson);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <main className="min-h-screen relative text-white bg-black">
       <BackgroundEffects />
       <Navbar />
-      
+
       <div className="pt-32 pb-20 px-6 lg:px-[60px] max-w-4xl mx-auto relative z-10">
         <div className="mb-12">
           <span className="text-neon text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Secret Admin</span>
           <h1 className="text-3xl md:text-5xl font-bold uppercase text-white tracking-wider">
             Manage <span className="text-neon">Blogs</span>
           </h1>
+          <p className="text-white/50 text-sm mt-4">
+            Changes here only exist in this browser tab. When you&apos;re done, copy the JSON below into
+            <code className="text-neon mx-1">src/data/blogs.json</code>
+            and commit it to publish.
+          </p>
         </div>
 
         {/* Form */}
@@ -178,16 +161,12 @@ export default function AddBlogPage() {
                 required
               />
             </div>
-            {error && (
-              <p className="text-red-400 text-sm">{error}</p>
-            )}
             <div className="flex gap-4 pt-4">
               <button
                 type="submit"
-                disabled={submitting}
-                className="px-8 py-3 bg-white text-black font-bold uppercase tracking-widest text-[0.8rem] rounded-full hover:bg-neon hover:text-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-8 py-3 bg-white text-black font-bold uppercase tracking-widest text-[0.8rem] rounded-full hover:bg-neon hover:text-black transition-colors duration-300"
               >
-                {submitting ? 'Saving...' : isEditing ? 'Save Changes' : 'Publish Blog'}
+                {isEditing ? 'Save Changes' : 'Add Blog'}
               </button>
               {isEditing && (
                 <button
@@ -203,7 +182,7 @@ export default function AddBlogPage() {
         </div>
 
         {/* Existing Blogs List */}
-        <div>
+        <div className="mb-16">
           <h2 className="text-xl font-bold mb-6 text-white uppercase tracking-widest border-b border-white/10 pb-4">
             Existing Posts
           </h2>
@@ -222,13 +201,13 @@ export default function AddBlogPage() {
                     </div>
                   </div>
                   <div className="flex gap-3 mt-4 md:mt-0">
-                    <button 
+                    <button
                       onClick={() => handleEdit(blog)}
                       className="px-4 py-2 border border-white/10 text-white/80 text-xs uppercase tracking-widest rounded-full hover:border-neon hover:text-neon transition-colors"
                     >
                       Edit
                     </button>
-                    <button 
+                    <button
                       onClick={() => handleDelete(blog.id)}
                       className="px-4 py-2 border border-red-500/30 text-red-400 text-xs uppercase tracking-widest rounded-full hover:bg-red-500 hover:text-white transition-colors"
                     >
@@ -240,8 +219,29 @@ export default function AddBlogPage() {
             </div>
           )}
         </div>
+
+        {/* Export */}
+        <div>
+          <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+            <h2 className="text-xl font-bold text-white uppercase tracking-widest">
+              Publish (blogs.json)
+            </h2>
+            <button
+              onClick={handleCopy}
+              className="px-4 py-2 border border-white/10 text-white/80 text-xs uppercase tracking-widest rounded-full hover:border-neon hover:text-neon transition-colors"
+            >
+              {copied ? 'Copied!' : 'Copy JSON'}
+            </button>
+          </div>
+          <textarea
+            readOnly
+            value={exportJson}
+            rows={12}
+            className="w-full bg-white/[0.02] border border-white/10 p-4 rounded-lg outline-none text-white/70 text-xs font-mono resize-none"
+          />
+        </div>
       </div>
-      
+
       <ScrollToTop />
     </main>
   );
