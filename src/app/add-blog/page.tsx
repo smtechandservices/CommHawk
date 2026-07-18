@@ -16,6 +16,7 @@ export default function AddBlogPage() {
   const [title, setTitle] = useState('');
   const [imageLink, setImageLink] = useState('');
   const [content, setContent] = useState('');
+  const [imageError, setImageError] = useState('');
 
   const loadBlogs = () => {
     fetch('/api/blogs')
@@ -84,6 +85,22 @@ export default function AddBlogPage() {
     setTitle('');
     setImageLink('');
     setContent('');
+    setImageError('');
+  };
+
+  const handleImageFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      setImageError('Please choose an image file.');
+      return;
+    }
+
+    setImageError('');
+    const reader = new FileReader();
+    reader.onload = () => setImageLink(reader.result as string);
+    reader.readAsDataURL(file);
   };
 
   if (!mounted) return null;
@@ -120,16 +137,34 @@ export default function AddBlogPage() {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <label htmlFor="imageLink" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Image Link (URL) *</label>
+              <label htmlFor="imageLink" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Image *</label>
               <input
                 id="imageLink"
-                type="url"
-                value={imageLink}
+                type="text"
+                value={imageLink.startsWith('data:') ? '' : imageLink}
                 onChange={(e) => setImageLink(e.target.value)}
                 className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/20"
-                placeholder="https://example.com/image.jpg"
-                required
+                placeholder="Paste an image URL, or upload a file below"
               />
+              <div className="flex items-center gap-4 mt-2">
+                <label
+                  htmlFor="imageFile"
+                  className="cursor-pointer px-4 py-2 border border-white/10 text-white/80 text-xs uppercase tracking-widest rounded-full hover:border-neon hover:text-neon transition-colors"
+                >
+                  Upload Image
+                </label>
+                <input
+                  id="imageFile"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageFile}
+                  className="hidden"
+                />
+                {imageLink.startsWith('data:') && (
+                  <span className="text-white/50 text-xs">Image selected</span>
+                )}
+              </div>
+              {imageError && <p className="text-red-400 text-sm">{imageError}</p>}
             </div>
             <div className="flex flex-col gap-1.5">
               <label htmlFor="content" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Content *</label>
