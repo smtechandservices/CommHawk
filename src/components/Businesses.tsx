@@ -52,16 +52,16 @@ const projects = [
     {
         id: 'kaamlee',
         title: 'Kaamlee',
-        subtitle: 'White Label Solution',
+        subtitle: 'Digital Solution',
         category: 'IT Projects',
         description:
-            'Custom white-label digital solution built for businesses looking to launch and scale under their own brand.',
+            'Custom digital solution built for businesses looking to launch and scale.',
         image: '/kaamlee.png',
         link: '#',
     },
 ];
 
-const categories = ['Fintech', 'IT Projects', 'White Labels'];
+const categories = ['Fintech', 'IT Projects'];
 
 const Businesses = () => {
     return (
