@@ -61,6 +61,7 @@ const SynapseVisualization = ({ nodes, paths, viewBox, filterId, isVertical }: {
                             src="/logo-trans.png"
                             alt="CommHawk Logo"
                             fill
+                            sizes="(min-width: 768px) 112px, 80px"
                             className="object-contain brightness-150"
                         />
                     </div>

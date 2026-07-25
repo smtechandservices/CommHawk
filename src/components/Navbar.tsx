@@ -29,6 +29,7 @@ const Navbar = () => {
               src="/logo-trans.png"
               alt="CommHawk Logo"
               fill
+              sizes="(min-width: 768px) 40px, 32px"
               className="object-contain brightness-150"
             />
           </div>

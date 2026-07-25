@@ -148,6 +148,7 @@ const HubVisualization = ({ services, isMobile }: { services: any[], isMobile: b
                         src="/logo-trans.png"
                         alt="CommHawk Logo"
                         fill
+                        sizes="(min-width: 768px) 192px, 96px"
                         className="object-contain brightness-150"
                     />
                 </motion.div>
