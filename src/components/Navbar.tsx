@@ -32,7 +32,8 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   return (
-    <nav className="sticky top-0 z-[1000] w-full border-b border-line bg-canvas/85 backdrop-blur-md">
+    <>
+    <nav className={`sticky top-0 z-[1000] w-full border-b border-line backdrop-blur-md ${mobileMenuOpen ? 'bg-canvas' : 'bg-canvas/85'}`}>
       <div className="relative mx-auto flex h-[72px] max-w-[1324px] items-center justify-between px-5 md:h-[80px] md:px-5">
         <Link href="/" aria-label="CommHawk Technologies Pvt. Ltd. home" className="flex items-center gap-2.5">
           <div className="relative h-8 w-8">
@@ -81,7 +82,9 @@ const Navbar = () => {
         )}
       </div>
 
-      {/* Mobile Menu Overlay */}
+    </nav>
+
+      {/* Mobile Menu Overlay — kept outside <nav>, whose backdrop-filter would otherwise trap `position: fixed` inside the 72px bar */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -89,25 +92,25 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[72px] bottom-0 z-[1050] flex flex-col border-t border-line bg-canvas px-5 md:hidden"
+            className="fixed inset-x-0 top-[72px] bottom-0 z-[1050] flex flex-col overflow-y-auto bg-canvas px-5 pb-10 md:hidden"
           >
             {links.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="border-b border-line py-5 font-display text-2xl tracking-[-0.02em] text-ink"
+                className="shrink-0 border-b border-line py-5 font-display text-2xl tracking-[-0.02em] text-ink"
               >
                 {item.name}
               </Link>
             ))}
-            <Link href="/#connect" onClick={() => setMobileMenuOpen(false)} className="btn-primary mt-8 w-full">
+            <Link href="/#connect" onClick={() => setMobileMenuOpen(false)} className="btn-primary mt-8 w-full shrink-0">
               Start a Project
             </Link>
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 };
 

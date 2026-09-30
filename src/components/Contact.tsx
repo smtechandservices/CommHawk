@@ -66,7 +66,7 @@ const Contact = () => {
 
                         <div className="mt-12 space-y-3 border-t border-line pt-8 text-[0.95rem] text-body">
                             <p className="flex items-center gap-3"><Mail size={16} className="text-subtle" /> commhawktechnologies@gmail.com</p>
-                            <p className="flex items-center gap-3"><MapPin size={16} className="text-subtle" /> Technology Hub, India</p>
+                            <p className="flex items-center gap-3"><MapPin size={16} className="text-subtle" /> Patna, Bihar 800020, India</p>
                         </div>
                     </div>
                 </div>
