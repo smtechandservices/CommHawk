@@ -2,66 +2,81 @@
 
 import React from 'react';
 import Navbar from '@/components/Navbar';
-import BackgroundEffects from '@/components/BackgroundEffects';
 import ScrollToTop from '@/components/ScrollToTop';
 import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
 import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import { Section, Eyebrow, Heading, FadeIn } from '@/components/ui/Frame';
 import { BlogPost } from '@/lib/blogs';
 import blogsData from '@/data/blogs.json';
+
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800';
 
 export default function BlogPage() {
   const blogs = blogsData as BlogPost[];
 
   return (
-    <main className="min-h-screen relative text-white bg-black">
-      <BackgroundEffects />
+    <main className="min-h-screen">
       <Navbar />
 
-      <div className="pt-32 pb-20 px-6 lg:px-[60px] max-w-7xl mx-auto relative z-10 min-h-[70vh]">
-        <div className="flex justify-between items-center mb-12">
+      <Section innerClassName="px-5 pb-14 pt-20 md:px-8 md:pb-16 md:pt-28">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:items-end">
           <div>
-            <span className="text-neon text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Insights</span>
-            <h1 className="text-3xl md:text-5xl font-bold uppercase text-white tracking-wider">
-              Our <span className="text-neon">Blog</span>
-            </h1>
+            <Eyebrow className="mb-4">Insights</Eyebrow>
+            <Heading as="h1" title="Our blog" muted="& latest articles" />
           </div>
-
+          <p className="max-w-[420px] text-[1.05rem] leading-relaxed text-body md:justify-self-end">
+            Guides and perspectives on building websites, apps, and digital products for growing businesses.
+          </p>
         </div>
+      </Section>
 
+      <Section innerClassName="px-5 py-12 md:px-8 md:py-16">
         {blogs.length === 0 ? (
-          <div className="text-center text-white/50 py-20 border border-white/5 rounded-2xl bg-white/5 backdrop-blur-sm">
+          <div className="border border-line bg-surface py-20 text-center text-body">
             <p>No blog posts available yet.</p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogs.map((blog) => (
-              <Link href={`/blog/${blog.id}`} key={blog.id} className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden hover:border-neon/50 transition-colors group flex flex-col">
-                <div className="h-56 overflow-hidden relative border-b border-white/10">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={blog.imageLink}
-                    alt={blog.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800'; // Fallback image
-                    }}
-                  />
-                </div>
-                <div className="p-6 flex-grow flex flex-col">
-                  <div className="text-[0.7rem] uppercase tracking-widest text-neon mb-3">{blog.date}</div>
-                  <h3 className="text-xl font-bold mb-3 text-white line-clamp-2 leading-snug">{blog.title}</h3>
-                  <p className="text-white/60 line-clamp-3 text-sm leading-relaxed mb-4 flex-grow">
-                    {blog.content}
-                  </p>
-                </div>
-              </Link>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {blogs.map((blog, i) => (
+              <FadeIn key={blog.id} delay={(i % 3) * 0.08}>
+                <Link
+                  href={`/blog/${blog.id}`}
+                  className="group flex h-full flex-col border border-line bg-surface transition-colors duration-300 hover:border-[#CCCCCC]"
+                >
+                  <div className="relative m-2 h-52 overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={blog.imageLink}
+                      alt={blog.title}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+                      }}
+                    />
+                  </div>
+                  <div className="flex flex-grow flex-col p-6">
+                    <div className="mb-3 flex items-center justify-between text-sm text-subtle">
+                      <span>{blog.date}</span>
+                      <ArrowUpRight size={16} className="text-ink transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </div>
+                    <h3 className="mb-3 line-clamp-2 font-display text-[1.25rem] font-medium capitalize leading-snug tracking-[-0.02em] text-ink">
+                      {blog.title.toLowerCase()}
+                    </h3>
+                    <p className="line-clamp-3 flex-grow text-[0.95rem] leading-relaxed text-body">
+                      {blog.content}
+                    </p>
+                  </div>
+                </Link>
+              </FadeIn>
             ))}
           </div>
         )}
-      </div>
+      </Section>
 
       <Contact />
+      <Footer />
       <ScrollToTop />
     </main>
   );

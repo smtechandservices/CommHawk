@@ -3,10 +3,9 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Script from 'next/script';
-import { Calendar } from 'lucide-react';
-
-const GOOGLE_CALENDAR_LINK =
-    "https://calendar.google.com/calendar/u/0/r/eventedit?text=Schedule+with+CommHawk&details=Looking+forward+to+connecting.+Feel+free+to+add+project+details+in+the+meeting+invite!&dates=";
+import { Calendar, Mail, MapPin } from 'lucide-react';
+import { Section, Eyebrow, Heading } from '@/components/ui/Frame';
+import { GOOGLE_CALENDAR_LINK } from '@/lib/constants';
 
 const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || " ";
 
@@ -25,6 +24,10 @@ declare global {
     }
 }
 
+const inputClass =
+    "w-full border border-line bg-canvas px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors placeholder:text-subtle focus:border-ink focus:bg-surface";
+const labelClass = "mb-2 block text-sm text-body";
+
 const Contact = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -37,20 +40,40 @@ const Contact = () => {
     }, [name, email, message]);
 
     return (
-        <section className="pt-10 pb-6 px-6 lg:px-[60px] bg-black border-t border-white/5" id="connect">
+        <Section id="connect">
             <Script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" strategy="afterInteractive" />
-            <div className="w-full mx-auto">
-                <div className="mb-8 md:mb-10">
-                    <span className="text-neon text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Connect</span>
-                    <h2 className="text-3xl sm:text-4xl md:text-[3.5rem] font-bold leading-[1.2] md:leading-[1.1] uppercase text-white">
-                        Let&apos;s Build the <br className="hidden md:block" />
-                        <span className="text-neon">Future</span> Together
-                    </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+                <div className="relative px-5 pb-12 pt-20 md:px-8 lg:border-r lg:border-line lg:py-28">
+                    <div className="bg-grid pointer-events-none absolute inset-x-0 top-0 h-24 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+                    <div className="relative">
+                        <Eyebrow className="mb-4">Connect</Eyebrow>
+                        <Heading title="Let's build the future" muted="together" />
+                        <p className="mt-6 max-w-[440px] text-[1.05rem] leading-relaxed text-body">
+                            Tell us about your product, timeline, and goals. We&apos;ll get back to you
+                            with next steps, or book a call directly.
+                        </p>
+
+                        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                            <a href={GOOGLE_CALENDAR_LINK} target="_blank" rel="noopener noreferrer" className="btn-primary">
+                                <Calendar size={15} />
+                                Schedule a Call
+                            </a>
+                            <a href="mailto:commhawktechnologies@gmail.com" className="btn-secondary">
+                                <Mail size={15} />
+                                Email Us
+                            </a>
+                        </div>
+
+                        <div className="mt-12 space-y-3 border-t border-line pt-8 text-[0.95rem] text-body">
+                            <p className="flex items-center gap-3"><Mail size={16} className="text-subtle" /> commhawktechnologies@gmail.com</p>
+                            <p className="flex items-center gap-3"><MapPin size={16} className="text-subtle" /> Technology Hub, India</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+                <div className="border-t border-line px-5 py-12 md:px-8 lg:border-t-0 lg:py-28">
                     <form
-                        className="w-full lg:col-span-7"
+                        className="border border-line bg-surface p-6 md:p-8"
                         onSubmit={async (e) => {
                             e.preventDefault();
 
@@ -65,7 +88,7 @@ const Contact = () => {
                                 formData.append("company", company);
                                 formData.append("message", message);
                                 formData.append("subject", `New Contact Form Submission from ${name}`);
-                                formData.append("from_name", "CommHawk Contact Form");
+                                formData.append("from_name", "CommHawk Technologies Pvt. Ltd. Contact Form");
                                 formData.append("botcheck", "");
 
                                 const response = await fetch("https://api.web3forms.com/submit", {
@@ -111,9 +134,9 @@ const Contact = () => {
                         <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
                         <input type="hidden" name="botcheck" value="" />
 
-                        <div className="space-y-3">
-                            <div className="flex flex-col gap-1.5">
-                                <label htmlFor="name" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Your Name *</label>
+                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+                            <div>
+                                <label htmlFor="name" className={labelClass}>Your name *</label>
                                 <input
                                     type="text"
                                     id="name"
@@ -121,11 +144,11 @@ const Contact = () => {
                                     onChange={(e) => setName(e.target.value)}
                                     required
                                     placeholder="Jane Doe"
-                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/40"
+                                    className={inputClass}
                                 />
                             </div>
-                            <div className="flex flex-col gap-1.5">
-                                <label htmlFor="email" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Email Address *</label>
+                            <div>
+                                <label htmlFor="email" className={labelClass}>Email address *</label>
                                 <input
                                     type="email"
                                     id="email"
@@ -133,145 +156,46 @@ const Contact = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
                                     placeholder="jane@company.com"
-                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/40"
+                                    className={inputClass}
                                 />
                             </div>
-                            <div className="flex flex-col gap-1.5">
-                                <label htmlFor="company" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Company (Optional)</label>
+                            <div className="sm:col-span-2">
+                                <label htmlFor="company" className={labelClass}>Company (optional)</label>
                                 <input
                                     type="text"
                                     id="company"
                                     value={company}
                                     onChange={(e) => setCompany(e.target.value)}
                                     placeholder="Your Company"
-                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/40"
+                                    className={inputClass}
                                 />
                             </div>
-                            <div className="flex flex-col gap-1.5">
-                                <label htmlFor="message" className="text-white/60 text-[0.6rem] uppercase tracking-widest font-bold">Project Details *</label>
+                            <div className="sm:col-span-2">
+                                <label htmlFor="message" className={labelClass}>Project details *</label>
                                 <textarea
                                     id="message"
                                     value={message}
                                     onChange={(e) => setMessage(e.target.value)}
                                     required
-                                    rows={3}
+                                    rows={5}
                                     placeholder="Tell us about your goals..."
-                                    className="bg-transparent border-b border-white/10 py-2.5 outline-none focus:border-neon transition-colors text-white text-lg font-light placeholder:text-white/10 resize-none"
+                                    className={`${inputClass} resize-none`}
                                 ></textarea>
                             </div>
                         </div>
 
-                        <div className="mt-8 flex flex-col sm:flex-row gap-4">
-                            <motion.button
-                                type="submit"
-                                disabled={!isFormValid || isSubmitting}
-                                className="w-full sm:w-auto px-8 py-4 bg-white text-black font-bold uppercase tracking-widest text-[0.75rem] md:text-[0.8rem] rounded-full hover:bg-neon hover:text-black transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-center"
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                {isSubmitting ? "Sending..." : "Send Message ↗"}
-                            </motion.button>
-
-                            <a
-                                href={GOOGLE_CALENDAR_LINK}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-8 py-3.5 border border-white/20 text-white font-bold uppercase tracking-widest text-[0.8rem] rounded-full hover:border-neon hover:text-neon transition-colors duration-300 flex items-center justify-center gap-3"
-                            >
-                                <Calendar size={18} strokeWidth={2.2} />
-                                Schedule a Call
-                            </a>
-                        </div>
+                        <motion.button
+                            type="submit"
+                            disabled={!isFormValid || isSubmitting}
+                            className="btn-primary mt-6 w-full"
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            {isSubmitting ? "Sending..." : "Send Message"}
+                        </motion.button>
                     </form>
-
-                    <div className="w-full lg:col-span-5 flex flex-col justify-between h-full pt-12 lg:pt-0">
-                        <div className="space-y-5">
-                            {/* Brand & Description */}
-                            <div>
-                                <h3 className="text-xl font-bold tracking-[0.2em] mb-2 text-white">COMMHAWK</h3>
-                                <p className="text-white/70 text-sm leading-relaxed mb-4">
-                                    Leading the digital transformation with precision-engineered solutions.
-                                    Built for scale, designed for excellence.
-                                </p>
-                                <div className="flex flex-wrap gap-4">
-                                    <a
-                                        href="https://www.linkedin.com/company/commhawk/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="px-6 py-3 border border-white/10 rounded-full text-[0.7rem] uppercase tracking-widest text-white/80 hover:border-neon hover:text-neon transition-all"
-                                    >
-                                        LinkedIn
-                                    </a>
-                                    {/* <a
-                                        href="https://www.instagram.com/commhawk/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="px-6 py-3 border border-white/10 rounded-full text-[0.7rem] uppercase tracking-widest text-white/80 hover:border-neon hover:text-neon transition-all"
-                                    >
-                                        Instagram
-                                    </a> */}
-                                </div>
-                            </div>
-                       
-
-                            {/* Links Grid */}
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <h4 className="text-[0.6rem] uppercase tracking-widest text-white/50 mb-2.5">Navigation</h4>
-                                    <ul className="space-y-3">
-                                        {[
-                                            { name: 'Services', href: '/#services' },
-                                            { name: 'Work', href: '/#work' },
-                                            { name: 'Blog', href: '/blog' },
-                                            { name: 'Connect', href: '/#connect' }
-                                        ].map(item => (
-                                            <li key={item.name}>
-                                                <a href={item.href} className="text-sm text-white/80 hover:text-neon transition-colors">{item.name}</a>
-                                            </li>
-                                        ))}
-                                        <li>
-                                            <a
-                                                href="/careers"
-                                                className="text-sm text-white/80 hover:text-neon transition-colors"
-                                            >
-                                                Careers
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 className="text-[0.6rem] uppercase tracking-widest text-white/50 mb-2.5">Expertise</h4>
-                                    <ul className="space-y-3">
-                                        <li className="text-sm text-white/80">Web & Mobile</li>
-                                        <li className="text-sm text-white/80">AI & Analytics</li>
-                                        <li className="text-sm text-white/80">Cloud & DevOps</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            {/* Contact Info */}
-                            <div>
-                                <h4 className="text-[0.6rem] uppercase tracking-widest text-white/50 mb-6">Contact</h4>
-                                <p className="text-white/80 text-sm leading-relaxed">
-                                    commhawktechnologies@gmail.com <br />
-                                    Technology Hub, India
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Footer Bottom Bar */}
-                <div className="flex flex-col md:flex-row justify-between items-center pt-4 border-t border-white/5 mt-8 gap-3">
-                    <p className="text-white/50 text-[0.7rem] uppercase tracking-widest">
-                        &copy; {new Date().getFullYear()} COMMHAWK SOLUTIONS.
-                    </p>
-                    <div className="flex gap-8">
-                        <a href="#" className="text-[0.7rem] uppercase tracking-widest text-white/50 hover:text-white transition-colors">Privacy</a>
-                        <a href="#" className="text-[0.7rem] uppercase tracking-widest text-white/50 hover:text-white transition-colors">Terms</a>
-                    </div>
                 </div>
             </div>
-        </section>
+        </Section>
     );
 };
 

@@ -3,11 +3,27 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
-
 import Image from 'next/image';
+import { Crosshair } from '@/components/ui/Frame';
+
+const links = [
+  { name: 'Services', href: '/#services' },
+  { name: 'Work', href: '/#businesses' },
+  { name: 'About', href: '/#about' },
+  { name: 'Blog', href: '/blog' },
+  { name: 'Careers', href: '/careers' },
+];
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -16,101 +32,82 @@ const Navbar = () => {
   }, [mobileMenuOpen]);
 
   return (
-    <motion.nav
-      className="absolute top-0 left-0 w-full z-[1000] py-6 bg-transparent"
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="flex justify-between items-center px-6 md:px-[60px] mx-auto">
-        <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative w-8 h-8 md:w-10 md:h-10 transition-transform duration-300 group-hover:scale-110">
+    <nav className="sticky top-0 z-[1000] w-full border-b border-line bg-canvas/85 backdrop-blur-md">
+      <div className="relative mx-auto flex h-[72px] max-w-[1324px] items-center justify-between px-5 md:h-[80px] md:px-5">
+        <Link href="/" aria-label="CommHawk Technologies Pvt. Ltd. home" className="flex items-center gap-2.5">
+          <div className="relative h-8 w-8">
             <Image
-              src="/logo-trans.png"
-              alt="CommHawk Logo"
+              src="/logo-mark.png"
+              alt="CommHawk Technologies Pvt. Ltd. logo"
               fill
-              sizes="(min-width: 768px) 40px, 32px"
-              className="object-contain brightness-150"
+              sizes="32px"
+              className="object-contain"
             />
           </div>
-          <span className="text-xl font-bold tracking-[0.2em] text-white">
-            COMMHAWK
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-[1.25rem] font-semibold tracking-[-0.03em] text-ink">CommHawk</span>
+            <span className="mt-1 text-[0.68rem] tracking-[0.02em] text-body">Technologies Pvt. Ltd.</span>
           </span>
         </Link>
-        <ul className="hidden md:flex gap-12">
-          {[
-            { name: 'Services', href: '/#services' },
-            { name: 'Businesses', href: '/#businesses' },
-            { name: 'About', href: '/#about' },
-            { name: 'Blog', href: '/blog' },
-            { name: 'Connect', href: '/#connect' }
-          ].map((item) => (
+
+        <ul className="hidden items-center gap-7 md:flex">
+          {links.map((item) => (
             <li key={item.name}>
-              <Link
-                href={item.href}
-                className="text-[0.8rem] uppercase tracking-widest font-medium text-white/80 hover:text-neon transition-colors"
-              >
+              <Link href={item.href} className="text-[0.9rem] text-body transition-colors hover:text-ink">
                 {item.name}
               </Link>
             </li>
           ))}
         </ul>
 
+        <Link href="/#connect" className="btn-primary hidden md:inline-flex">
+          Start a Project
+        </Link>
+
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden text-white p-2 z-[1100]"
+          className="z-[1100] p-2 text-ink md:hidden"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label="Toggle Menu"
         >
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {/* Mobile Menu Overlay */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed inset-0 bg-black/95 backdrop-blur-2xl z-[1050] flex flex-col items-center justify-center gap-10 md:hidden"
-            >
-              {[
-                { name: 'Services', href: '/#services' },
-                { name: 'Businesses', href: '/#businesses' },
-                { name: 'About Us', href: '/#about' },
-                { name: 'Blog', href: '/blog' },
-                { name: 'Connect', href: '/#connect' }
-              ].map((item) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-2xl uppercase tracking-[0.3em] font-bold text-white hover:text-neon transition-colors"
-                  >
-                    {item.name}
-                  </Link>
-                </motion.div>
-              ))}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.3 }}
-                className="mt-10"
-              >
-                <div className="w-12 h-[1px] bg-neon/50 mx-auto mb-6" />
-                <p className="text-[0.6rem] text-white/40 tracking-[0.4em] uppercase">CommHawk Solutions</p>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {!scrolled && (
+          <>
+            <Crosshair className="-bottom-[7px] -left-[7px] hidden xl:block" />
+            <Crosshair className="-bottom-[7px] -right-[7px] hidden xl:block" />
+          </>
+        )}
       </div>
-    </motion.nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-x-0 top-[72px] bottom-0 z-[1050] flex flex-col border-t border-line bg-canvas px-5 md:hidden"
+          >
+            {links.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="border-b border-line py-5 font-display text-2xl tracking-[-0.02em] text-ink"
+              >
+                {item.name}
+              </Link>
+            ))}
+            <Link href="/#connect" onClick={() => setMobileMenuOpen(false)} className="btn-primary mt-8 w-full">
+              Start a Project
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 

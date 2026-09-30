@@ -8,39 +8,24 @@ const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.scrollY > 500) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
+    const toggleVisibility = () => setIsVisible(window.scrollY > 500);
 
     window.addEventListener('scroll', toggleVisibility);
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
   return (
     <AnimatePresence>
       {isVisible && (
         <motion.button
-          initial={{ opacity: 0, scale: 0.8, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.8, y: 20 }}
-          whileHover={{ scale: 1.1, backgroundColor: 'rgba(0, 255, 255, 0.1)' }}
-          whileTap={{ scale: 0.9 }}
-          onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-[999] p-4 rounded-full bg-black/40 backdrop-blur-md border border-neon/30 text-neon shadow-[0_0_20px_rgba(0,255,255,0.1)] group transition-all duration-300"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 12 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="group fixed bottom-6 right-6 z-[999] flex h-11 w-11 items-center justify-center border border-line bg-surface text-ink shadow-[0_10px_30px_-12px_rgba(26,26,26,0.3)] transition-colors hover:border-ink"
           aria-label="Scroll to top"
         >
-          <ArrowUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform duration-300" strokeWidth={2.5} />
+          <ArrowUp className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5" strokeWidth={2} />
         </motion.button>
       )}
     </AnimatePresence>

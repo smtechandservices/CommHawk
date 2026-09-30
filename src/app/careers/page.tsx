@@ -3,9 +3,12 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
-import BackgroundEffects from '@/components/BackgroundEffects';
 import ScrollToTop from '@/components/ScrollToTop';
-import { ChevronDown, MapPin, Clock, ArrowRight, Zap, Users, Globe, Rocket, Code2, ShieldCheck } from 'lucide-react';
+import Footer from '@/components/Footer';
+import { Section, Eyebrow, Heading, FadeIn } from '@/components/ui/Frame';
+import GeometricShapes from '@/components/ui/GeometricShapes';
+import { CONTACT_EMAIL } from '@/lib/constants';
+import { Plus, Minus, MapPin, Clock, ArrowRight, Zap, Users, Globe, Rocket, Code2, ShieldCheck } from 'lucide-react';
 import openingsData from './openings.json';
 
 const openings = openingsData;
@@ -62,353 +65,259 @@ export default function CareersPage() {
     return deptMatch && typeMatch;
   });
 
+  const clearFilters = () => { setDeptFilter('All'); setTypeFilter('All'); setExpandedId(null); };
+
+  const chip = (active: boolean) =>
+    `px-3 py-1.5 text-[0.8rem] border transition-colors duration-200 ${
+      active ? 'bg-ink text-white border-ink' : 'bg-surface border-line text-body hover:border-[#CCCCCC] hover:text-ink'
+    }`;
+
   return (
-    <main className="min-h-screen bg-black text-white overflow-x-hidden">
-      <BackgroundEffects />
+    <main className="min-h-screen">
       <Navbar />
 
       {/* ── Hero ─────────────────────────────────────────────── */}
-      <section className="relative pt-[110px] sm:pt-[130px] md:pt-[150px] pb-16 md:pb-24 px-5 sm:px-8 md:px-[60px] flex flex-col items-center text-center">
-        {/* Ambient glow */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] sm:w-[500px] md:w-[700px] h-[300px] md:h-[400px] bg-neon/10 blur-[120px] rounded-full pointer-events-none" />
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 border border-neon/30 rounded-full bg-neon/5 text-neon text-[0.65rem] sm:text-[0.7rem] tracking-[0.2em] uppercase mb-6 sm:mb-8"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse" />
-          We&apos;re Hiring
-        </motion.div>
-
-        <motion.h1
-          className="text-[2.4rem] sm:text-[3.5rem] md:text-[5rem] lg:text-[5.5rem] font-bold tracking-tight leading-[1.05] uppercase text-white mb-5 md:mb-6"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-        >
-          Build the <span className="text-neon">Future</span>
-          <br />
-          With Us
-        </motion.h1>
-
-        <motion.p
-          className="text-base sm:text-lg md:text-xl text-white/60 max-w-xl md:max-w-2xl leading-relaxed mb-8 md:mb-10 px-1"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25, duration: 0.7 }}
-        >
-          CommHawk is an elite team of engineers, designers, and strategists
-          building digital products that define the next generation of technology.
-          If you obsess over craft and love solving hard problems you belong here.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.7 }}
-        >
-          <a
-            href="#openings"
-            className="px-8 sm:px-10 py-3.5 sm:py-4 bg-neon text-black font-bold uppercase tracking-widest text-[0.7rem] sm:text-[0.75rem] rounded-full hover:bg-white transition-colors duration-300 inline-flex items-center gap-2"
+      <Section innerClassName="overflow-hidden">
+        <div className="bg-diamond pointer-events-none absolute inset-x-0 bottom-0 h-1/2 [mask-image:linear-gradient(to_top,black,transparent)]" />
+        <div className="relative flex flex-col items-center px-5 pb-20 pt-16 text-center md:pb-24 md:pt-24">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-8 inline-flex items-center gap-2 border border-line bg-surface px-3 py-1.5 text-sm text-body"
           >
-            See Open Roles <ArrowRight size={14} />
-          </a>
-        </motion.div>
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#16A34A]" />
+            We&apos;re hiring
+          </motion.div>
 
-        {/* Stats strip */}
-        <motion.div
-          className="mt-14 md:mt-20 grid grid-cols-3 gap-4 sm:gap-8 w-full max-w-xs sm:max-w-lg md:max-w-3xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.7 }}
-        >
+          <Heading as="h1" size="xl" align="center" title="Build the future" muted="with us" />
+
+          <motion.p
+            className="mt-6 max-w-[640px] text-[1.05rem] leading-relaxed text-body"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.7 }}
+          >
+            CommHawk Technologies Pvt. Ltd. is an elite team of engineers, designers, and strategists
+            building digital products that define the next generation of technology.
+            If you obsess over craft and love solving hard problems you belong here.
+          </motion.p>
+
+          <motion.div
+            className="mt-10"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.45, duration: 0.7 }}
+          >
+            <a href="#openings" className="btn-primary">
+              See Open Roles <ArrowRight size={14} />
+            </a>
+          </motion.div>
+        </div>
+      </Section>
+
+      {/* ── Stats strip ─────────────────────────────────────────── */}
+      <Section>
+        <div className="grid grid-cols-3 gap-px bg-line">
           {[
-            { value: '✓', label: 'Remote Friendly' },
-            { value: openings.length > 0 ? openings.length : 'Soon', label: openings.length > 0 ? 'Open Positions' : 'Hiring Soon' },
-            { value: '∞', label: 'Growth Ceiling' },
+            { value: '✓', label: 'Remote friendly' },
+            { value: openings.length > 0 ? openings.length : 'Soon', label: openings.length > 0 ? 'Open positions' : 'Hiring soon' },
+            { value: '∞', label: 'Growth ceiling' },
           ].map((stat) => (
-            <div key={stat.label} className="flex flex-col items-center">
-              <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-neon mb-1">{stat.value}</span>
-              <span className="text-[0.55rem] sm:text-[0.65rem] md:text-[0.7rem] uppercase tracking-widest text-white/50 text-center">{stat.label}</span>
+            <div key={stat.label} className="flex flex-col items-center bg-canvas px-3 py-10 md:py-12">
+              <span className="font-display text-[2rem] font-medium tracking-[-0.04em] text-ink md:text-[3rem]">{stat.value}</span>
+              <span className="mt-1 text-center text-xs text-body md:text-sm">{stat.label}</span>
             </div>
           ))}
-        </motion.div>
-      </section>
+        </div>
+      </Section>
 
       {/* ── Values ─────────────────────────────────────────────── */}
-      <section className="relative border-t border-white/10 py-16 md:py-24 px-5 sm:px-8 md:px-[60px]">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute bottom-0 right-[20%] w-[400px] h-[200px] bg-neon/10 blur-[100px] rounded-full" />
-        </div>
-        <div className="mx-auto">
-          <div className="text-center mb-10 md:mb-16">
-            <span className="text-neon text-xs uppercase tracking-[0.3em] block mb-3">Culture</span>
-            <h2 className="text-2xl sm:text-3xl md:text-[2.8rem] font-bold uppercase tracking-tight text-white">
-              How We Work
-            </h2>
+      <Section>
+        <div className="grid grid-cols-1 gap-6 px-5 pb-14 pt-20 md:grid-cols-2 md:items-end md:px-8 md:pb-16 md:pt-28">
+          <div>
+            <Eyebrow className="mb-4">Culture</Eyebrow>
+            <Heading title="How we" muted="work" />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-            {values.map((v, i) => (
-              <motion.div
-                key={v.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08, duration: 0.6 }}
-                className="group border border-white/10 bg-gradient-to-br from-black via-[#0a0a0a] to-neutral-900/60 rounded-2xl p-5 md:p-7 hover:border-neon/40 transition-all duration-500"
-              >
-                <div className="w-10 h-10 rounded-xl bg-neon/10 flex items-center justify-center mb-4 md:mb-5 group-hover:bg-neon/20 transition-colors duration-300">
-                  <v.icon size={20} className="text-neon" />
-                </div>
-                <h3 className="text-white font-bold text-sm md:text-base uppercase tracking-wider mb-2 md:mb-3">{v.title}</h3>
-                <p className="text-white/60 text-sm leading-relaxed">{v.description}</p>
-              </motion.div>
-            ))}
-          </div>
+          <p className="max-w-[420px] text-[1.05rem] leading-relaxed text-body md:justify-self-end">
+            The principles that shape how we build, collaborate, and grow together.
+          </p>
         </div>
-      </section>
+        <div className="grid grid-cols-1 gap-px border-t border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+          {values.map((v, i) => (
+            <FadeIn key={v.title} delay={(i % 3) * 0.08} className="bg-canvas px-5 py-10 md:px-8">
+              <div className="mb-6 flex h-10 w-10 items-center justify-center border border-line bg-surface">
+                <v.icon size={18} className="text-ink" strokeWidth={1.6} />
+              </div>
+              <h3 className="mb-3 font-display text-[1.25rem] font-medium tracking-[-0.02em] text-ink">{v.title}</h3>
+              <p className="text-[0.95rem] leading-relaxed text-body">{v.description}</p>
+            </FadeIn>
+          ))}
+        </div>
+      </Section>
 
       {/* ── Open Roles ─────────────────────────────────────────── */}
-      <section id="openings" className="border-t border-white/10 py-16 md:py-24 px-5 sm:px-8 md:px-[60px]">
-        <div className="mx-auto">
-          <div className="text-center mb-8 md:mb-10">
-            <span className="text-neon text-xs uppercase tracking-[0.3em] block mb-3">Opportunities</span>
-            <h2 className="text-2xl sm:text-3xl md:text-[2.8rem] font-bold uppercase tracking-tight text-white">
-              Open Positions
-            </h2>
+      <Section id="openings" innerClassName="px-5 py-20 md:px-8 md:py-28">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1fr_1.6fr]">
+          <div>
+            <Eyebrow className="mb-4">Opportunities</Eyebrow>
+            <Heading title="Open" muted="positions" />
+            <p className="mt-6 max-w-[360px] text-[1.05rem] leading-relaxed text-body">
+              Find a role that fits and apply directly by email.
+            </p>
+
+            {openings.length > 0 && (
+              <div className="mt-10 space-y-4">
+                <div className="flex flex-wrap gap-2">
+                  {allDepartments.map((dept) => (
+                    <button key={dept} onClick={() => { setDeptFilter(dept); setExpandedId(null); }} className={chip(deptFilter === dept)}>
+                      {dept}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {allTypes.map((type) => (
+                    <button key={type} onClick={() => { setTypeFilter(type); setExpandedId(null); }} className={chip(typeFilter === type)}>
+                      {type}
+                    </button>
+                  ))}
+                </div>
+                {(deptFilter !== 'All' || typeFilter !== 'All') && (
+                  <button onClick={clearFilters} className="text-sm text-subtle transition-colors hover:text-ink">
+                    Clear filters ×
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
-          {openings.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col items-center justify-center py-16 md:py-20 border border-white/10 rounded-2xl bg-gradient-to-br from-black via-[#0a0a0a] to-neutral-900/60 text-center px-6"
-            >
-              <div className="w-14 h-14 rounded-full border border-neon/30 bg-neon/5 flex items-center justify-center mb-6">
-                <span className="w-3 h-3 rounded-full bg-neon animate-pulse" />
+          <div>
+            {openings.length === 0 ? (
+              <div className="flex flex-col items-center border border-line bg-surface px-6 py-16 text-center">
+                <h3 className="mb-3 font-display text-[1.5rem] font-medium tracking-[-0.02em] text-ink">Hiring soon</h3>
+                <p className="max-w-sm text-[0.95rem] leading-relaxed text-body">
+                  We don&apos;t have any open roles right now, but we&apos;re always growing.
+                  Send us your CV we&apos;d love to keep in touch.
+                </p>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="btn-secondary mt-8">
+                  Get in Touch <ArrowRight size={13} />
+                </a>
               </div>
-              <h3 className="text-white font-bold text-lg md:text-xl uppercase tracking-widest mb-3">Hiring Soon</h3>
-              <p className="text-white/50 text-sm max-w-sm leading-relaxed">
-                We don&apos;t have any open roles right now, but we&apos;re always growing.
-                Send us your CV we&apos;d love to keep in touch.
-              </p>
-              <a
-                href="mailto:commhawktechnologies@gmail.com"
-                className="mt-8 inline-flex items-center gap-2 px-7 py-3 border border-neon/40 text-neon font-bold uppercase tracking-widest text-[0.7rem] rounded-full hover:bg-neon hover:text-black transition-all duration-300"
-              >
-                Get in Touch <ArrowRight size={13} />
-              </a>
-            </motion.div>
-          ) : (
-          <>
-            {/* ── Filters ── */}
-            <div className="flex flex-col gap-3 mb-6 md:mb-8">
-              {/* Department + Type filters row */}
-              <div className="flex flex-wrap gap-2">
-                {allDepartments.map((dept) => (
-                  <button
-                    key={dept}
-                    onClick={() => { setDeptFilter(dept); setExpandedId(null); }}
-                    className={`px-3 sm:px-4 py-1.5 rounded-full text-[0.6rem] sm:text-[0.65rem] uppercase tracking-widest font-semibold border transition-all duration-200 ${
-                      deptFilter === dept
-                        ? 'bg-neon text-black border-neon'
-                        : 'border-white/15 text-white/50 hover:border-neon/40 hover:text-neon'
-                    }`}
-                  >
-                    {dept}
-                  </button>
-                ))}
-                {/* Inline separator */}
-                <span className="w-[1px] self-stretch bg-white/10 mx-1 hidden sm:block" />
-                {allTypes.map((type) => (
-                  <button
-                    key={type}
-                    onClick={() => { setTypeFilter(type); setExpandedId(null); }}
-                    className={`px-3 sm:px-4 py-1.5 rounded-full text-[0.6rem] sm:text-[0.65rem] uppercase tracking-widest font-semibold border transition-all duration-200 ${
-                      typeFilter === type
-                        ? 'bg-white/10 text-white border-white/30'
-                        : 'border-white/10 text-white/40 hover:border-white/25 hover:text-white/70'
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
+            ) : filteredOpenings.length === 0 ? (
+              <div className="flex flex-col items-center border border-line bg-surface px-6 py-14 text-center">
+                <p className="mb-4 text-body">No roles match your filters</p>
+                <button onClick={clearFilters} className="btn-secondary">Clear filters</button>
               </div>
-
-              {/* Clear filters */}
-              {(deptFilter !== 'All' || typeFilter !== 'All') && (
-                <button
-                  onClick={() => { setDeptFilter('All'); setTypeFilter('All'); setExpandedId(null); }}
-                  className="self-start text-[0.6rem] sm:text-[0.65rem] uppercase tracking-widest text-white/30 hover:text-neon transition-colors"
-                >
-                  Clear filters ×
-                </button>
-              )}
-            </div>
-
-            {/* ── Job list or no-match state ── */}
-            {filteredOpenings.length === 0 ? (
-              <motion.div
-                key="no-match"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex flex-col items-center justify-center py-14 border border-white/10 rounded-2xl text-center px-6"
-              >
-                <p className="text-white/40 text-sm uppercase tracking-widest mb-4">No roles match your filters</p>
-                <button
-                  onClick={() => { setDeptFilter('All'); setTypeFilter('All'); }}
-                  className="text-[0.65rem] uppercase tracking-widest text-neon hover:text-white transition-colors"
-                >
-                  Clear filters
-                </button>
-              </motion.div>
             ) : (
-            <div className="flex flex-col gap-3 md:gap-4">
-              {filteredOpenings.map((job, i) => (
-                <motion.div
-                  key={job.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.5 }}
-                  className={`border rounded-2xl overflow-hidden transition-all duration-300 ${
-                    expandedId === job.id
-                      ? 'border-neon/50 bg-gradient-to-br from-neon/5 via-black to-black'
-                      : 'border-white/10 bg-gradient-to-br from-black via-[#0a0a0a] to-neutral-900/60 hover:border-white/20'
-                  }`}
-                >
-                  {/* Row header */}
-                  <button
-                    className="w-full text-left px-4 sm:px-6 md:px-8 py-5 md:py-6 flex items-start sm:items-center gap-3 sm:gap-4"
-                    onClick={() => toggle(job.id)}
-                    aria-expanded={expandedId === job.id}
-                  >
-                    <div className="flex-1 min-w-0">
-                      <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
-                        <span className="text-[0.6rem] sm:text-[0.65rem] text-neon uppercase tracking-[0.25em] font-semibold">
-                          {job.department}
-                        </span>
-                        <span className="w-1 h-1 rounded-full bg-white/30" />
-                        <span className="flex items-center gap-1 text-[0.6rem] sm:text-[0.65rem] text-white/50 uppercase tracking-widest">
-                          <MapPin size={9} /> {job.location}
-                        </span>
-                        <span className="flex items-center gap-1 text-[0.6rem] sm:text-[0.65rem] text-white/50 uppercase tracking-widest">
-                          <Clock size={9} /> {job.type}
-                        </span>
-                      </div>
-                      <h3 className="text-white font-bold text-base sm:text-lg md:text-xl tracking-tight">{job.title}</h3>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-2 sm:mt-3">
-                        {job.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 sm:px-2.5 py-0.5 rounded-full text-[0.55rem] sm:text-[0.6rem] uppercase tracking-wider border border-white/10 text-white/50"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+              <div className="flex flex-col gap-3">
+                {filteredOpenings.map((job, i) => {
+                  const open = expandedId === job.id;
+                  return (
                     <motion.div
-                      animate={{ rotate: expandedId === job.id ? 180 : 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="text-neon flex-shrink-0 mt-0.5"
+                      key={job.id}
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.08, duration: 0.5 }}
+                      className={`border bg-surface transition-colors duration-300 ${open ? 'border-[#CCCCCC]' : 'border-line hover:border-[#CCCCCC]'}`}
                     >
-                      <ChevronDown size={20} />
-                    </motion.div>
-                  </button>
-
-                  {/* Expanded body */}
-                  <AnimatePresence initial={false}>
-                    {expandedId === job.id && (
-                      <motion.div
-                        key="body"
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.35, ease: 'easeInOut' }}
-                        className="overflow-hidden"
+                      <button
+                        className="flex w-full items-start gap-4 px-5 py-6 text-left md:px-6"
+                        onClick={() => toggle(job.id)}
+                        aria-expanded={open}
                       >
-                        <div className="px-4 sm:px-6 md:px-8 pb-6 md:pb-8 border-t border-white/10 pt-5 md:pt-6 grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                          <div>
-                            <p className="text-white/70 text-sm leading-relaxed mb-5 md:mb-6">{job.description}</p>
-                            <h4 className="text-neon text-[0.65rem] md:text-[0.7rem] uppercase tracking-[0.25em] font-semibold mb-3">
-                              Responsibilities
-                            </h4>
-                            <ul className="space-y-2">
-                              {job.responsibilities.map((r) => (
-                                <li key={r} className="flex items-start gap-2 text-white/70 text-sm">
-                                  <span className="mt-1.5 w-1 h-1 rounded-full bg-neon flex-shrink-0" />
-                                  {r}
-                                </li>
-                              ))}
-                            </ul>
+                        <div className="min-w-0 flex-1">
+                          <div className="mb-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-subtle">
+                            <span>{job.department}</span>
+                            <span className="flex items-center gap-1"><MapPin size={12} /> {job.location}</span>
+                            <span className="flex items-center gap-1"><Clock size={12} /> {job.type}</span>
                           </div>
-                          <div>
-                            <h4 className="text-neon text-[0.65rem] md:text-[0.7rem] uppercase tracking-[0.25em] font-semibold mb-3">
-                              Requirements
-                            </h4>
-                            <ul className="space-y-2 mb-6 md:mb-8">
-                              {job.requirements.map((r) => (
-                                <li key={r} className="flex items-start gap-2 text-white/70 text-sm">
-                                  <span className="mt-1.5 w-1 h-1 rounded-full bg-neon flex-shrink-0" />
-                                  {r}
-                                </li>
-                              ))}
-                            </ul>
-                            <a
-                              href={`mailto:commhawktechnologies@gmail.com?subject=Application: ${job.title}`}
-                              className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 bg-neon text-black font-bold uppercase tracking-widest text-[0.65rem] sm:text-[0.7rem] rounded-full hover:bg-white transition-colors duration-300"
-                            >
-                              Apply Now <ArrowRight size={13} />
-                            </a>
+                          <h3 className="font-display text-[1.3rem] font-medium tracking-[-0.02em] text-ink">{job.title}</h3>
+                          <div className="mt-3 flex flex-wrap gap-1.5">
+                            {job.tags.map((tag) => (
+                              <span key={tag} className="bg-line-soft px-2 py-0.5 text-xs text-body">{tag}</span>
+                            ))}
                           </div>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              ))}
-            </div>
+                        <span className="mt-1 text-ink">{open ? <Minus size={20} /> : <Plus size={20} />}</span>
+                      </button>
+
+                      <AnimatePresence initial={false}>
+                        {open && (
+                          <motion.div
+                            key="body"
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.35, ease: 'easeInOut' }}
+                            className="overflow-hidden"
+                          >
+                            <div className="grid grid-cols-1 gap-8 border-t border-line px-5 pb-8 pt-6 md:grid-cols-2 md:px-6">
+                              <div>
+                                <p className="mb-6 text-[0.95rem] leading-relaxed text-body">{job.description}</p>
+                                <h4 className="mb-3 text-sm font-medium text-ink">Responsibilities</h4>
+                                <ul className="space-y-2">
+                                  {job.responsibilities.map((r) => (
+                                    <li key={r} className="flex items-start gap-2.5 text-sm text-body">
+                                      <span className="mt-2 h-1 w-1 flex-shrink-0 bg-ink" />
+                                      {r}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                              <div>
+                                <h4 className="mb-3 text-sm font-medium text-ink">Requirements</h4>
+                                <ul className="mb-8 space-y-2">
+                                  {job.requirements.map((r) => (
+                                    <li key={r} className="flex items-start gap-2.5 text-sm text-body">
+                                      <span className="mt-2 h-1 w-1 flex-shrink-0 bg-ink" />
+                                      {r}
+                                    </li>
+                                  ))}
+                                </ul>
+                                <a href={`mailto:${CONTACT_EMAIL}?subject=Application: ${job.title}`} className="btn-primary">
+                                  Apply Now <ArrowRight size={13} />
+                                </a>
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+                  );
+                })}
+              </div>
             )}
-          </>
-          )}
+          </div>
         </div>
-      </section>
+      </Section>
 
       {/* ── Catch-all CTA ────────────────────────────────────────── */}
-      <section className="border-t border-white/10 py-16 md:py-24 px-5 sm:px-8 md:px-[60px] relative overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] md:w-[600px] h-[200px] md:h-[300px] bg-neon/10 blur-[100px] rounded-full" />
+      <Section innerClassName="overflow-hidden">
+        <div className="grid grid-cols-1 items-center md:grid-cols-2">
+          <div className="relative px-5 py-20 md:px-8 md:py-24">
+            <div className="bg-grid pointer-events-none absolute inset-x-0 top-0 h-20 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+            <Heading title="Don't see" muted="your role?" size="lg" className="relative" />
+            <p className="relative mt-6 max-w-[420px] text-[1.05rem] leading-relaxed text-body">
+              We are always on the lookout for exceptional talent. Send us a note
+              about what you want to build, we read every message.
+            </p>
+            <div className="relative mt-10 flex flex-col gap-3 sm:flex-row">
+              <Link href="/#connect" className="btn-primary">
+                Reach Out <ArrowRight size={14} />
+              </Link>
+              <a href={`mailto:${CONTACT_EMAIL}`} className="btn-secondary">
+                Email Your CV
+              </a>
+            </div>
+          </div>
+          <div className="hidden justify-center py-12 md:flex">
+            <GeometricShapes className="h-[300px] w-[300px]" />
+          </div>
         </div>
-        <div className="relative max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-[2.8rem] font-bold uppercase tracking-tight text-white mb-4 md:mb-5">
-            Don&apos;t See Your Role?
-          </h2>
-          <p className="text-white/60 text-sm md:text-base leading-relaxed mb-8 md:mb-10">
-            We are always on the lookout for exceptional talent. Send us a note
-            about what you want to build, we read every message.
-          </p>
-          <a
-            href="/#connect"
-            className="inline-flex items-center gap-2 px-8 sm:px-10 py-3.5 sm:py-4 border border-neon/40 text-neon font-bold uppercase tracking-widest text-[0.7rem] sm:text-[0.75rem] rounded-full hover:bg-neon hover:text-black transition-all duration-300"
-          >
-            Reach Out <ArrowRight size={14} />
-          </a>
-        </div>
-      </section>
+      </Section>
 
-      {/* ── Footer strip ─────────────────────────────────────────── */}
-      <footer className="border-t border-white/10 py-6 md:py-8 px-5 sm:px-8 md:px-[60px] flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4">
-        <Link href="/" className="text-xs sm:text-sm uppercase tracking-[0.2em] text-white/40 hover:text-neon transition-colors">
-          ← Back to Home
-        </Link>
-        <p className="text-[0.6rem] sm:text-[0.65rem] uppercase tracking-[0.3em] text-white/25">
-          © {new Date().getFullYear()} CommHawk. All rights reserved.
-        </p>
-      </footer>
+      <Footer />
       <ScrollToTop />
     </main>
   );

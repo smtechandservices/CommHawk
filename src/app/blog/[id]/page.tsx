@@ -1,87 +1,81 @@
 "use client";
 
 import React from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Navbar from '@/components/Navbar';
-import BackgroundEffects from '@/components/BackgroundEffects';
 import ScrollToTop from '@/components/ScrollToTop';
 import Contact from '@/components/Contact';
+import Footer from '@/components/Footer';
+import { Section } from '@/components/ui/Frame';
 import { BlogPost } from '@/lib/blogs';
 import blogsData from '@/data/blogs.json';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
+const FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800';
+
 export default function SingleBlogPage() {
   const { id } = useParams();
-  const router = useRouter();
 
   const blog = (blogsData as BlogPost[]).find((b) => b.id === id) ?? null;
 
   return (
-    <main className="min-h-screen relative text-white bg-black">
-      <BackgroundEffects />
+    <main className="min-h-screen">
       <Navbar />
-      
-      <div className="pt-32 pb-20 px-6 lg:px-[60px] max-w-4xl mx-auto relative z-10 min-h-[70vh]">
-        <Link 
-          href="/blog"
-          className="inline-flex items-center gap-2 text-white/50 hover:text-neon transition-colors mb-8 group uppercase tracking-widest text-xs font-bold"
-        >
-          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-          Back to Blogs
-        </Link>
 
-        {!blog ? (
-          <div className="text-center text-white/50 py-20 border border-white/5 rounded-2xl bg-white/5 backdrop-blur-sm">
-            <p className="mb-4">Blog post not found.</p>
-            <button 
-              onClick={() => router.push('/blog')}
-              className="px-6 py-2 border border-white/20 text-white text-xs uppercase tracking-widest rounded-full hover:border-neon hover:text-neon transition-colors"
-            >
-              Return Home
-            </button>
-          </div>
-        ) : (
-          <article className="bg-white/[0.02] backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden">
-            <div className="h-64 md:h-96 w-full relative border-b border-white/10">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={blog.imageLink}
-                alt={blog.title}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.src = 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800'; // Fallback image
-                }}
-              />
+      <Section innerClassName="px-5 pb-16 pt-12 md:px-8 md:pb-24 md:pt-16">
+        <div className="mx-auto max-w-[760px]">
+          <Link
+            href="/blog"
+            className="group mb-10 inline-flex items-center gap-2 text-sm text-body transition-colors hover:text-ink"
+          >
+            <ArrowLeft size={15} className="transition-transform group-hover:-translate-x-1" />
+            Back to blog
+          </Link>
+
+          {!blog ? (
+            <div className="border border-line bg-surface px-6 py-20 text-center">
+              <p className="mb-6 text-body">Blog post not found.</p>
+              <Link href="/blog" className="btn-secondary">
+                Browse all articles
+              </Link>
             </div>
-            
-            <div className="p-8 md:p-12">
-              <div className="flex items-center gap-4 mb-6">
-                <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] font-bold">
-                  {blog.date}
-                </span>
-                <span className="w-12 h-[1px] bg-white/20"></span>
-              </div>
-              
-              <h1 className="text-3xl md:text-5xl font-bold mb-10 text-white leading-tight">
-                {blog.title}
+          ) : (
+            <article>
+              <p className="mb-5 text-sm text-subtle">{blog.date}</p>
+              <h1 className="mb-10 font-display text-[2.2rem] font-medium capitalize leading-[1.1] tracking-[-0.03em] text-ink md:text-[3.2rem]">
+                {blog.title.toLowerCase()}
               </h1>
-              
-              <div className="prose prose-invert prose-lg max-w-none">
+
+              <div className="mb-12 border border-line bg-surface p-2">
+                <div className="relative h-64 w-full overflow-hidden md:h-[420px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={blog.imageLink}
+                    alt={blog.title}
+                    className="h-full w-full object-cover"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = FALLBACK_IMAGE;
+                    }}
+                  />
+                </div>
+              </div>
+
+              <div className="max-w-none">
                 {/* Splitting content by newlines to render paragraphs properly */}
                 {blog.content.split('\n').map((paragraph, index) => (
-                  <p key={index} className="text-white/70 leading-relaxed mb-6 font-light">
+                  <p key={index} className="mb-6 text-[1.075rem] leading-[1.8] text-body">
                     {paragraph}
                   </p>
                 ))}
               </div>
-            </div>
-          </article>
-        )}
-      </div>
-      
+            </article>
+          )}
+        </div>
+      </Section>
+
       <Contact />
+      <Footer />
       <ScrollToTop />
     </main>
   );

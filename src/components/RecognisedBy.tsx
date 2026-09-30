@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Section } from '@/components/ui/Frame';
 
 const recognition = [
     { name: 'Bihar', logo: '/bihar.webp' },
@@ -8,44 +9,28 @@ const recognition = [
 ];
 
 const RecognisedBy = () => {
-    const imageSizes = "(max-width: 768px) 256px, 288px";
-
     return (
-        <section className="bg-black py-12 border-b border-white/5 overflow-hidden">
-            <div className="max-w-7xl mx-auto px-4 mb-10 text-center">
-                <span className="text-neon text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Official Endorsements</span>
-                <h2 className="text-[2.5rem] md:text-[3rem] font-bold uppercase text-white tracking-tighter">Recognised <span className="text-neon">By</span></h2>
+        <Section>
+            <div className="border-b border-line px-5 py-10 text-center md:px-8">
+                <p className="text-[0.95rem] text-body">Officially recognised by</p>
             </div>
-            <div className="flex gap-8 items-center whitespace-nowrap animate-scroll-reverse w-max px-4">
-                {recognition.map((item, index) => (
-                    <div key={index} className="relative h-32 md:h-48 w-64 md:w-72 flex items-center justify-center transition-all duration-500 hover:scale-105 group">
-                        <div className="relative w-full h-full bg-white flex items-center justify-center">
+            <div className="grid grid-cols-2 gap-px bg-line lg:grid-cols-4">
+                {recognition.map((item) => (
+                    <div key={item.name} className="group flex flex-col items-center justify-center gap-4 bg-canvas px-6 py-10">
+                        <div className="relative h-20 w-full max-w-[200px] md:h-24">
                             <Image
                                 src={item.logo}
                                 alt={item.name}
                                 fill
-                                sizes={imageSizes}
-                                className="object-contain group-hover:brightness-110 transition-all duration-300"
+                                sizes="200px"
+                                className="object-contain grayscale transition duration-500 group-hover:grayscale-0"
                             />
                         </div>
-                    </div>
-                ))}
-                {/* Duplicate for infinite scroll */}
-                {recognition.map((item, index) => (
-                    <div key={`dup-${index}`} className="relative h-32 md:h-48 w-64 md:w-72 flex items-center justify-center transition-all duration-500 hover:scale-105 group">
-                        <div className="relative w-full h-full bg-white flex items-center justify-center">
-                            <Image
-                                src={item.logo}
-                                alt={item.name}
-                                fill
-                                sizes={imageSizes}
-                                className="object-contain group-hover:brightness-110 transition-all duration-300"
-                            />
-                        </div>
+                        <span className="text-sm text-subtle">{item.name}</span>
                     </div>
                 ))}
             </div>
-        </section>
+        </Section>
     );
 };
 

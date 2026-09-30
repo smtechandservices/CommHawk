@@ -11,7 +11,7 @@
       "CI/CD",
       "AWS"
     ],
-    "description": "Own and evolve the infrastructure that powers CommHawk's client deployments. From Kubernetes clusters to automated CI/CD pipelines, you will ensure reliability, security, and blazing performance at scale.",
+    "description": "Own and evolve the infrastructure that powers client deployments at CommHawk Technologies Pvt. Ltd. From Kubernetes clusters to automated CI/CD pipelines, you will ensure reliability, security, and blazing performance at scale.",
     "responsibilities": [
       "Design and manage cloud-native infrastructure on AWS / GCP",
       "Automate deployments with CI/CD pipelines (GitHub Actions, ArgoCD)",

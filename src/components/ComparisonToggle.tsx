@@ -1,227 +1,126 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { Section, Eyebrow, Heading } from '@/components/ui/Frame';
 
-const VERTICAL_NODES = [
-    { label: 'SYSTEM AUDIT', top: '5%', left: '50%' },
-    { label: 'INFRASTRUCTURE AS CODE', top: '15%', left: '50%' },
-    { label: 'DATA STREAM AGGREGATION', top: '25%', left: '50%' },
-    { label: 'AUTONOMOUS SCALING', top: '75%', left: '50%' },
-    { label: 'PREDICTIVE MAINTENANCE', top: '85%', left: '50%' },
-    { label: 'EDGE DEPLOYMENT', top: '95%', left: '50%' },
+const NODES = [
+    { label: 'System Audit', x: 150, y: 90 },
+    { label: 'Infrastructure as Code', x: 150, y: 260 },
+    { label: 'Data Stream Aggregation', x: 150, y: 430 },
+    { label: 'Autonomous Scaling', x: 850, y: 90 },
+    { label: 'Predictive Maintenance', x: 850, y: 260 },
+    { label: 'Edge Deployment', x: 850, y: 430 },
 ];
 
-const VERTICAL_PATHS = [
-    { d: "M 200 50 C 100 150 100 350 200 500", side: 'top' },
-    { d: "M 200 150 C 300 250 300 350 200 500", side: 'top' },
-    { d: "M 200 250 C 200 350 200 400 200 500", side: 'top' },
-    { d: "M 200 500 C 100 600 100 650 200 750", side: 'bottom' },
-    { d: "M 200 500 C 300 600 300 750 200 850", side: 'bottom' },
-    { d: "M 200 500 C 200 650 200 850 200 950", side: 'bottom' },
-];
+const CENTER = { x: 500, y: 260 };
+const VIEW = { w: 1000, h: 520 };
 
-const HORIZONTAL_NODES = [
-    { label: 'SYSTEM AUDIT', top: '20%', left: '10%' },
-    { label: 'INFRASTRUCTURE AS CODE', top: '45%', left: '5%' },
-    { label: 'DATA STREAM AGGREGATION', top: '75%', left: '10%' },
-    { label: 'AUTONOMOUS SCALING', top: '20%', right: '10%' },
-    { label: 'PREDICTIVE MAINTENANCE', top: '45%', right: '5%' },
-    { label: 'EDGE DEPLOYMENT', top: '75%', right: '10%' },
-];
-
-const HORIZONTAL_PATHS = [
-    { d: "M 150 110 C 350 110 400 275 500 275", side: 'left' },
-    { d: "M 100 248 C 300 248 400 275 500 275", side: 'left' },
-    { d: "M 150 412 C 350 412 400 275 500 275", side: 'left' },
-    { d: "M 500 275 C 600 275 650 110 850 110", side: 'right' },
-    { d: "M 500 275 C 600 275 700 248 900 248", side: 'right' },
-    { d: "M 500 275 C 600 275 650 412 850 412", side: 'right' },
-];
-
-const SynapseVisualization = ({ nodes, paths, viewBox, filterId, isVertical }: { 
-    nodes: any[], 
-    paths: any[], 
-    viewBox: string, 
-    filterId: string,
-    isVertical: boolean 
-}) => {
-    return (
-        <div className={`relative w-full ${isVertical ? 'h-[800px] sm:h-[900px] md:h-[1000px] max-w-[500px]' : 'h-[400px] sm:h-[500px] md:h-[550px] scale-[0.6] sm:scale-[0.8] md:scale-95 lg:scale-100'} transition-transform duration-500 mx-auto`}>
-            {/* Central Logo Box */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
-                <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ type: "spring", stiffness: 100, damping: 20 }}
-                    className="w-32 h-32 md:w-44 md:h-44 border border-neon/30 rounded-[2rem] md:rounded-[2.5rem] flex items-center justify-center bg-black/80 backdrop-blur-xl relative shadow-[0_0_100px_rgba(0,243,255,0.15)] group hover:border-neon/60 transition-colors duration-500"
-                >
-                    <div className="relative w-20 h-20 md:w-28 md:h-28 transform group-hover:scale-110 transition-transform duration-500">
-                        <Image
-                            src="/logo-trans.png"
-                            alt="CommHawk Logo"
-                            fill
-                            sizes="(min-width: 768px) 112px, 80px"
-                            className="object-contain brightness-150"
-                        />
-                    </div>
-
-                    {/* Inner pulse */}
-                    <motion.div
-                        className="absolute inset-0 rounded-[2.5rem] border border-neon/50"
-                        animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0, 0.5] }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                    />
-                    <div className="absolute inset-0 rounded-[2.5rem] bg-neon/5" />
-                </motion.div>
-            </div>
-
-            {/* SVGs */}
-            <svg viewBox={viewBox} className="absolute inset-0 w-full h-full pointer-events-none overflow-visible">
-                <defs>
-                    <filter id={filterId} x="-20%" y="-20%" width="140%" height="140%">
-                        <feGaussianBlur stdDeviation="3" result="blur" />
-                        <feFlood floodColor="var(--neon)" floodOpacity="0.5" result="color" />
-                        <feComposite in="color" in2="blur" operator="in" result="glow" />
-                        <feMerge>
-                            <feMergeNode in="glow" />
-                            <feMergeNode in="SourceGraphic" />
-                        </feMerge>
-                    </filter>
-                </defs>
-
-                <g filter={`url(#${filterId})`}>
-                    {paths.map((path, idx) => (
-                        <g key={idx}>
-                            <motion.path
-                                d={path.d}
-                                stroke="var(--neon)"
-                                strokeWidth="1.5"
-                                strokeOpacity={0.25}
-                                fill="none"
-                                initial={{ pathLength: 0, opacity: 0 }}
-                                whileInView={{ pathLength: 1, opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 1.5, delay: idx * 0.1, ease: "easeInOut" }}
-                            />
-                            {/* Junction Nodes */}
-                            <motion.circle
-                                cx={isVertical ? (idx % 2 === 0 ? 180 : 220) : (path.side === 'left' ? 350 : 650)}
-                                cy={isVertical ? (path.side === 'top' ? 420 : 580) : (idx % 2 === 0 ? 110 + (idx * 20) : 275)}
-                                r="2"
-                                fill="var(--neon)"
-                                initial={{ scale: 0, opacity: 0 }}
-                                whileInView={{ scale: 1, opacity: 0.6 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 1.2 + idx * 0.05 }}
-                            />
-                        </g>
-                    ))}
-                </g>
-
-                {/* Particle Stream */}
-                {paths.map((path, pIdx) => (
-                    [...Array(2)].map((_, i) => (
-                        <motion.circle
-                            key={`pip-${pIdx}-${i}`}
-                            r="1.5"
-                            className="fill-white shadow-[0_0_8px_#fff]"
-                            animate={{
-                                offsetDistance: ["0%", "100%"],
-                                opacity: [0, 1, 1, 0]
-                            }}
-                            transition={{
-                                duration: 3 + Math.random() * 2,
-                                repeat: Infinity,
-                                ease: "linear",
-                                delay: (pIdx * 0.5) + (i * 2)
-                            }}
-                            style={{
-                                offsetPath: `path("${path.d}")`,
-                            }}
-                        />
-                    ))
-                ))}
-            </svg>
-
-            {/* Node Labels */}
-            {nodes.map((node, idx) => (
-                <motion.div
-                    key={idx}
-                    style={{
-                        top: node.top,
-                        left: node.left,
-                        right: node.right,
-                        position: 'absolute',
-                    }}
-                    initial={{ opacity: 0, scale: 0.9, y: 10 }}
-                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 + idx * 0.1 }}
-                    className={`px-6 py-3 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-md z-30 hover:border-neon/50 hover:bg-black/60 transition-all duration-300 group ${isVertical ? '-translate-x-1/2 whitespace-nowrap' : ''}`}
-                >
-                    <div className="flex items-center gap-3">
-                        <div className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse shadow-[0_0_8px_var(--neon)]" />
-                        <span className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/90 group-hover:text-white transition-colors">
-                            {node.label}
-                        </span>
-                    </div>
-                </motion.div>
-            ))}
-        </div>
-    );
+// Elbow connector from a node's inner edge to the hub.
+const pathFor = (n: { x: number; y: number }) => {
+    const left = n.x < CENTER.x;
+    const startX = left ? n.x + 110 : n.x - 110;
+    const hubX = left ? CENTER.x - 90 : CENTER.x + 90;
+    const midX = left ? startX + 70 : startX - 70;
+    return `M ${startX} ${n.y} H ${midX} V ${CENTER.y} H ${hubX}`;
 };
+
+const HubTile = ({ size }: { size: string }) => (
+    <motion.div
+        initial={{ scale: 0.85, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ type: 'spring', stiffness: 120, damping: 18 }}
+        className={`relative flex items-center justify-center border border-ink bg-surface shadow-[0_8px_0_0_#1A1A1A] ${size}`}
+    >
+        <div className="relative h-[56%] w-[56%]">
+            <Image src="/logo-mark.png" alt="CommHawk Technologies Pvt. Ltd. logo" fill sizes="120px" className="object-contain" />
+        </div>
+    </motion.div>
+);
 
 const ComparisonToggle = () => {
     return (
-        <section className="px-6 md:px-[60px] bg-black relative overflow-hidden min-h-[600px] md:min-h-[800px] flex items-center justify-center py-20">
-            <div className="mx-auto relative z-10 w-full">
-                <div className="text-center mt-10 mb-10 md:mb-20">
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-neon text-[0.8rem] uppercase tracking-[0.4em] mb-4 font-medium"
-                    >
-                        The Engineering Evolution
-                    </motion.p>
-                    <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
-                        className="text-4xl md:text-5xl font-bold text-white tracking-tight"
-                    >
-                        CommHawk <span className="text-white/70 font-light italic">Synapse</span>
-                    </motion.h2>
-                </div>
-
-                {/* Vertical for Phone */}
-                <div className="md:hidden block">
-                    <SynapseVisualization 
-                        nodes={VERTICAL_NODES} 
-                        paths={VERTICAL_PATHS} 
-                        viewBox="0 0 400 1000" 
-                        filterId="synapseGlowMobile"
-                        isVertical={true}
-                    />
-                </div>
-
-                {/* Horizontal for Desktop */}
-                <div className="hidden md:block">
-                    <SynapseVisualization 
-                        nodes={HORIZONTAL_NODES} 
-                        paths={HORIZONTAL_PATHS} 
-                        viewBox="0 0 1000 550" 
-                        filterId="synapseGlowDesktop"
-                        isVertical={false}
-                    />
-                </div>
+        <Section innerClassName="px-5 py-20 md:px-8 md:py-28">
+            <div className="mb-14 text-center md:mb-16">
+                <Eyebrow className="mb-4">The Engineering Evolution</Eyebrow>
+                <Heading title="CommHawk Technologies Pvt. Ltd." muted="Synapse" align="center" />
             </div>
 
-            {/* Background Effects */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[1000px] max-h-[800px] blur-[150px] rounded-full bg-neon/10 pointer-events-none" />
-        </section>
+            {/* Desktop diagram */}
+            <div className="relative mx-auto hidden aspect-[1000/520] w-full max-w-[1000px] md:block">
+                <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_70%)]" />
+                <svg viewBox={`0 0 ${VIEW.w} ${VIEW.h}`} className="absolute inset-0 h-full w-full overflow-visible" aria-hidden>
+                    {NODES.map((n, i) => {
+                        const d = pathFor(n);
+                        return (
+                            <g key={n.label}>
+                                <motion.path
+                                    d={d}
+                                    fill="none"
+                                    stroke="#C4C4C4"
+                                    strokeWidth="1.2"
+                                    strokeDasharray="4 6"
+                                    className="animate-dash"
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.8, delay: 0.3 + i * 0.1 }}
+                                />
+                                <motion.circle
+                                    r="3.5"
+                                    fill="#1A1A1A"
+                                    style={{ offsetPath: `path("${d}")` }}
+                                    animate={{ offsetDistance: ['0%', '100%'], opacity: [0, 1, 1, 0] }}
+                                    transition={{ duration: 3.2, repeat: Infinity, ease: 'linear', delay: 1 + i * 0.45 }}
+                                />
+                            </g>
+                        );
+                    })}
+                </svg>
+
+                <div className="absolute" style={{ left: `${(CENTER.x / VIEW.w) * 100}%`, top: `${(CENTER.y / VIEW.h) * 100}%`, transform: 'translate(-50%, -50%)' }}>
+                    <HubTile size="h-[150px] w-[150px]" />
+                </div>
+
+                {NODES.map((n, i) => (
+                    <motion.div
+                        key={n.label}
+                        className="absolute w-[220px] -translate-x-1/2 -translate-y-1/2 border border-line bg-surface px-4 py-3 transition-colors duration-300 hover:border-ink"
+                        style={{ left: `${(n.x / VIEW.w) * 100}%`, top: `${(n.y / VIEW.h) * 100}%` }}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 + i * 0.08 }}
+                    >
+                        <span className="block font-mono text-[0.65rem] text-subtle">{String(i + 1).padStart(2, '0')}</span>
+                        <span className="font-display text-[0.95rem] font-medium tracking-[-0.01em] text-ink">{n.label}</span>
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Mobile diagram */}
+            <div className="relative mx-auto flex max-w-[360px] flex-col items-center md:hidden">
+                <HubTile size="h-[110px] w-[110px]" />
+                <div className="relative mt-10 w-full">
+                    <div className="absolute bottom-6 left-1/2 top-[-40px] w-px -translate-x-1/2 border-l border-dashed border-[#C4C4C4]" />
+                    <div className="relative flex flex-col gap-3">
+                        {NODES.map((n, i) => (
+                            <motion.div
+                                key={n.label}
+                                className="mx-auto w-full border border-line bg-surface px-4 py-3 text-center"
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.06 }}
+                            >
+                                <span className="mr-2 font-mono text-[0.65rem] text-subtle">{String(i + 1).padStart(2, '0')}</span>
+                                <span className="font-display text-[0.95rem] font-medium text-ink">{n.label}</span>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </Section>
     );
 };
 

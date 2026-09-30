@@ -1,6 +1,7 @@
 'use client';
-import { motion, useMotionValue, useSpring, useTransform, useAnimationFrame } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { Section, Eyebrow, Heading } from '@/components/ui/Frame';
 
 const serviceCategories = [
     {
@@ -147,130 +148,140 @@ const serviceCategories = [
     }
 ];
 
-const Services = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const x = useMotionValue(0);
-    const [itemWidth, setItemWidth] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
-    const [isDragging, setIsDragging] = useState(false);
+const CYCLE_MS = 6000;
 
-    // Duplicate items for the infinite feel
-    const extendedCategories = [...serviceCategories, ...serviceCategories, ...serviceCategories];
+const splitItem = (item: string) => {
+    const [title, ...rest] = item.split(' – ');
+    return { title, detail: rest.join(' – ') };
+};
+
+const ItemList = ({ items }: { items: string[] }) => (
+    <ul className="divide-y divide-line-soft">
+        {items.map((item, i) => {
+            const { title, detail } = splitItem(item);
+            return (
+                <motion.li
+                    key={item}
+                    className="flex gap-4 py-3.5"
+                    initial={{ opacity: 0, x: 8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04, duration: 0.35 }}
+                >
+                    <span className="mt-[3px] font-mono text-[0.7rem] text-subtle">{String(i + 1).padStart(2, '0')}</span>
+                    <span>
+                        <span className="block text-[0.95rem] text-ink">{title}</span>
+                        {detail && <span className="mt-0.5 block text-sm text-body">{detail}</span>}
+                    </span>
+                </motion.li>
+            );
+        })}
+    </ul>
+);
+
+const Services = () => {
+    const [active, setActive] = useState(0);
+    const [paused, setPaused] = useState(false);
 
     useEffect(() => {
-        if (containerRef.current) {
-            // Width of one full set of items (including gaps)
-            const gap = window.innerWidth < 768 ? 24 : 32;
-            const cardWidth = window.innerWidth < 768 ? 280 : 350;
-            const fullSetWidth = (cardWidth + gap) * serviceCategories.length;
-            setItemWidth(fullSetWidth);
+        // Auto-advance only on desktop; on mobile the list is an accordion and cycling would shift the page.
+        if (paused || !window.matchMedia('(min-width: 768px)').matches) return;
+        const t = setTimeout(() => setActive((a) => (a + 1) % serviceCategories.length), CYCLE_MS);
+        return () => clearTimeout(t);
+    }, [active, paused]);
 
-            // Start in the middle set
-            x.set(-fullSetWidth);
-        }
-    }, [x]);
-
-    const handleDrag = () => {
-        const currentX = x.get();
-        if (currentX <= -itemWidth * 2) {
-            x.set(currentX + itemWidth);
-        } else if (currentX >= 0) {
-            x.set(currentX - itemWidth);
-        }
-    };
-
-    // Auto-scroll logic
-    useAnimationFrame((time, delta) => {
-        if (!isHovered && !isDragging && itemWidth > 0) {
-            // Move slowly (e.g., 0.5px per frame)
-            const slowSpeed = 0.5; // (0.5 * 60 = 30px per second)
-            const currentX = x.get();
-            const nextX = currentX - slowSpeed;
-
-            // Handle wrap-around
-            if (nextX <= -itemWidth * 2) {
-                x.set(nextX + itemWidth);
-            } else {
-                x.set(nextX);
-            }
-        }
-    });
+    const current = serviceCategories[active];
 
     return (
-        <section className="pt-[10px] bg-black overflow-hidden" id="services">
-            <div className="px-6 md:px-[60px]">
-                <motion.div
-                    className="mb-12"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <span className="text-neon text-[0.6rem] md:text-[0.7rem] uppercase tracking-[0.3em] block mb-4">Capabilities</span>
-                    <h2 className="text-3xl md:text-[3.5rem] font-bold leading-tight uppercase text-white">
-                        Full-Stack <span className="text-neon">Solutions</span> <br className="hidden md:block" /> for Modern Enterprise
-                    </h2>
-                </motion.div>
+        <Section id="services">
+            <div className="px-5 pb-12 pt-20 md:px-8 md:pb-16 md:pt-28">
+                <Eyebrow className="mb-4">Capabilities</Eyebrow>
+                <Heading title="Full-stack solutions" muted="for modern enterprise" />
+                <p className="mt-6 max-w-[620px] text-[1.05rem] leading-relaxed text-body">
+                    From design and development to data, AI, cloud, and security, one team covering
+                    every layer your product needs to launch and scale.
+                </p>
             </div>
 
             <div
-                className="relative group"
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
+                className="grid grid-cols-1 border-t border-line md:grid-cols-[380px_1fr]"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
             >
-                {/* Visual context for dragging */}
-                <div className="absolute top-[-30px] md:top-[-40px] right-6 md:right-[60px] flex items-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span className="text-[0.5rem] md:text-[0.6rem] text-white/70 uppercase tracking-widest">[ DRAG TO EXPLORE ]</span>
+                {/* Category list */}
+                <div className="md:border-r md:border-line">
+                    {serviceCategories.map((category, index) => {
+                        const isActive = index === active;
+                        return (
+                            <div key={category.title} className="relative border-b border-line last:border-b-0 md:last:border-b">
+                                <button
+                                    onClick={() => { setActive(index); setPaused(true); }}
+                                    aria-expanded={isActive}
+                                    className={`flex w-full items-center gap-4 px-5 py-5 text-left transition-colors md:px-8 ${isActive ? 'bg-surface' : 'hover:bg-surface/60'}`}
+                                >
+                                    <span className="font-mono text-[0.7rem] text-subtle">{String(index + 1).padStart(2, '0')}</span>
+                                    <span className={`font-display text-[1.15rem] font-medium tracking-[-0.02em] transition-colors ${isActive ? 'text-ink' : 'text-subtle'}`}>
+                                        {category.title}
+                                    </span>
+                                </button>
+
+                                {isActive && (
+                                    <span className="absolute bottom-[-1px] left-0 h-px w-full bg-line">
+                                        <motion.span
+                                            key={`${index}-${paused}`}
+                                            className="block h-full bg-ink"
+                                            initial={{ width: paused ? '100%' : '0%' }}
+                                            animate={{ width: '100%' }}
+                                            transition={{ duration: paused ? 0 : CYCLE_MS / 1000, ease: 'linear' }}
+                                        />
+                                    </span>
+                                )}
+
+                                {/* Mobile: inline panel */}
+                                <AnimatePresence initial={false}>
+                                    {isActive && (
+                                        <motion.div
+                                            className="overflow-hidden bg-surface px-5 md:hidden"
+                                            initial={{ height: 0 }}
+                                            animate={{ height: 'auto' }}
+                                            exit={{ height: 0 }}
+                                            transition={{ duration: 0.3 }}
+                                        >
+                                            <div className="pb-4">
+                                                <ItemList items={category.items} />
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
+                        );
+                    })}
                 </div>
 
-                <motion.div
-                    ref={containerRef}
-                    drag="x"
-                    style={{ x, width: 'max-content' }}
-                    onDragStart={() => setIsDragging(true)}
-                    onDragEnd={() => setIsDragging(false)}
-                    onDrag={handleDrag}
-                    dragElastic={0.1}
-                    className="flex gap-6 md:gap-12 px-6 md:px-[60px] cursor-grab active:cursor-grabbing select-none"
-                >
-                    {extendedCategories.map((category, index) => (
-                        <motion.div
-                            key={`${category.title}-${index}`}
-                            className="flex flex-col shrink-0 w-[280px] md:w-[350px] p-6 md:p-8 rounded-2xl md:rounded-3xl border border-white/5 bg-[#080808] hover:border-neon/30 transition-all duration-500 group/card"
-                            whileHover={{ y: -5 }}
-                        >
-                            <div className="flex items-center gap-4 mb-8">
-                                <span className="text-[0.6rem] font-mono text-neon border border-neon/30 px-2 py-1 rounded">
-                                    {((index % serviceCategories.length) + 1).toString().padStart(2, '0')}
-                                </span>
-                                <h3 className="text-lg font-bold uppercase tracking-widest text-white group-hover/card:text-neon transition-colors">
-                                    {category.title}
-                                </h3>
-                            </div>
-                            <ul className="space-y-4">
-                                {category.items.map((item, itemIndex) => (
-                                    <li
-                                        key={itemIndex}
-                                        className="text-sm text-white/60 border-l border-white/10 pl-4 hover:border-neon hover:text-white transition-all cursor-default leading-relaxed"
-                                    >
-                                        {item}
-                                    </li>
-                                ))}
-                            </ul>
-
-                            {/* Decorative bottom element */}
-                            <div className="mt-auto pt-8 flex justify-end opacity-0 group-hover/card:opacity-100 transition-opacity">
-                                <div className="w-12 h-px bg-gradient-to-r from-transparent to-neon" />
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-                {/* Horizontal Fade Overlays */}
-                <div className="pointer-events-none absolute inset-y-0 left-0 w-[120px] bg-gradient-to-r from-black to-transparent z-10" />
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-[120px] bg-gradient-to-l from-black to-transparent z-10" />
+                {/* Desktop detail panel */}
+                <div className="relative hidden p-10 md:block lg:p-14">
+                    <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
+                    <div className="sticky top-28 border border-line bg-surface p-8 lg:p-10">
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={current.title}
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <div className="mb-6 flex items-baseline justify-between gap-4 border-b border-line pb-6">
+                                    <h3 className="font-display text-[1.9rem] font-medium tracking-[-0.03em] text-ink">{current.title}</h3>
+                                    <span className="font-mono text-xs text-subtle">
+                                        {String(active + 1).padStart(2, '0')} / {String(serviceCategories.length).padStart(2, '0')}
+                                    </span>
+                                </div>
+                                <ItemList items={current.items} />
+                            </motion.div>
+                        </AnimatePresence>
+                    </div>
+                </div>
             </div>
-        </section>
+        </Section>
     );
 };
 

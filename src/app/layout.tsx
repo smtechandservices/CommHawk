@@ -1,27 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Geist, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"] });
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#FAFAFA",
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
   title: {
-    default: "CommHawk",
-    template: "%s | CommHawk",
+    default: "CommHawk Technologies Pvt. Ltd.",
+    template: "%s | CommHawk Technologies Pvt. Ltd.",
   },
-  description: "Accelerate your business with CommHawk's premium engineering solutions. We specialize in building scalable, secure, and high-performance digital architectures.",
-  applicationName: "CommHawk",
-  authors: [{ name: "CommHawk Team" }],
+  description: "Accelerate your business with premium engineering solutions from CommHawk Technologies Pvt. Ltd. We specialize in building scalable, secure, and high-performance digital architectures.",
+  applicationName: "CommHawk Technologies Pvt. Ltd.",
+  authors: [{ name: "CommHawk Technologies Pvt. Ltd." }],
   keywords: ["Software Engineering", "Scalable Systems", "Cloud Native", "AI Integration", "Digital Transformation", "App Development", "Tech Consulting"],
-  creator: "CommHawk",
-  publisher: "CommHawk",
+  creator: "CommHawk Technologies Pvt. Ltd.",
+  publisher: "CommHawk Technologies Pvt. Ltd.",
   formatDetection: {
     email: false,
     address: false,
@@ -32,16 +33,16 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "CommHawk",
-    description: "Accelerate your business with CommHawk's premium engineering solutions. Scalable, secure, and high-performance digital architectures.",
+    title: "CommHawk Technologies Pvt. Ltd.",
+    description: "Accelerate your business with premium engineering solutions from CommHawk Technologies Pvt. Ltd. Scalable, secure, and high-performance digital architectures.",
     url: "https://commhawk.in",
-    siteName: "CommHawk",
+    siteName: "CommHawk Technologies Pvt. Ltd.",
     images: [
       {
         url: "/logo.jpeg",
         width: 1200,
         height: 630,
-        alt: "CommHawk Logo",
+        alt: "CommHawk Technologies Pvt. Ltd. logo",
       },
     ],
     locale: "en_US",
@@ -49,8 +50,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CommHawk",
-    description: "Accelerate your business with CommHawk's premium engineering solutions. Scalable, secure, and high-performance digital architectures.",
+    title: "CommHawk Technologies Pvt. Ltd.",
+    description: "Accelerate your business with premium engineering solutions from CommHawk Technologies Pvt. Ltd. Scalable, secure, and high-performance digital architectures.",
     creator: "@commhawk",
     images: ["/logo.jpeg"],
   },
@@ -78,10 +79,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.css" />
-      </head>
+    <html lang="en" className={`${geist.variable} ${spaceGrotesk.variable}`}>
       <body className="antialiased">
         {children}
         <Analytics />

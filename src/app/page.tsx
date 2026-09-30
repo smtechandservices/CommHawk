@@ -4,18 +4,17 @@ import Technologies from '@/components/Technologies';
 import Services from '@/components/Services';
 import Businesses from '@/components/Businesses';
 import Contact from '@/components/Contact';
-import BackgroundEffects from '@/components/BackgroundEffects';
 import ComparisonToggle from '@/components/ComparisonToggle';
 import AboutUs from '@/components/AboutUs';
 import GrowthCircles from '@/components/GrowthCircles';
 import RecognisedBy from '@/components/RecognisedBy';
 import ScrollToTop from '@/components/ScrollToTop';
+import Footer from '@/components/Footer';
 
 
 export default function Home() {
   return (
     <main>
-      <BackgroundEffects />
       <Navbar />
       <Hero />
       <Technologies />
@@ -26,6 +25,7 @@ export default function Home() {
       <GrowthCircles />
       <AboutUs />
       <Contact />
+      <Footer />
       <ScrollToTop />
     </main>
   );
