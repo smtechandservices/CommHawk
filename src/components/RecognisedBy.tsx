@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Section } from '@/components/ui/Frame';
+import { Section, Eyebrow } from '@/components/ui/Frame';
 
 const recognition = [
     { name: 'Bihar', logo: '/bihar.webp' },
@@ -10,14 +10,18 @@ const recognition = [
 
 const RecognisedBy = () => {
     return (
-        <Section>
-            <div className="border-b border-line px-5 py-10 text-center md:px-8">
-                <p className="text-[0.95rem] text-body">Officially recognised by</p>
+        <Section innerClassName="px-5 py-14 md:px-8 md:py-20">
+            <div className="mb-8 text-center">
+                <Eyebrow className="mb-3">Trusted & Recognised</Eyebrow>
+                <p className="font-display text-[1.6rem] font-medium tracking-[-0.02em] text-ink md:text-[2rem]">Officially recognised by</p>
             </div>
-            <div className="grid grid-cols-2 gap-px bg-line lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                 {recognition.map((item) => (
-                    <div key={item.name} className="group flex flex-col items-center justify-center gap-4 bg-canvas px-6 py-10">
-                        <div className="relative h-20 w-full max-w-[200px] md:h-24">
+                    <div
+                        key={item.name}
+                        className="group flex flex-col items-center justify-center gap-4 rounded-3xl border border-line bg-canvas px-6 py-7 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:bg-white hover:shadow-[0_24px_50px_-28px_rgba(255,46,147,0.5)]"
+                    >
+                        <div className="relative h-16 w-full max-w-[170px] md:h-20">
                             <Image
                                 src={item.logo}
                                 alt={item.name}
@@ -26,7 +30,7 @@ const RecognisedBy = () => {
                                 className="object-contain grayscale transition duration-500 group-hover:grayscale-0"
                             />
                         </div>
-                        <span className="text-sm text-subtle">{item.name}</span>
+                        <span className="text-sm font-medium text-body">{item.name}</span>
                     </div>
                 ))}
             </div>

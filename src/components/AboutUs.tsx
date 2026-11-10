@@ -21,30 +21,37 @@ const pillars = [
 
 export default function AboutUs() {
   return (
-    <Section id="about">
-      <div className="grid grid-cols-1 gap-6 px-5 pb-14 pt-20 md:grid-cols-2 md:items-end md:px-8 md:pb-16 md:pt-28">
+    <Section id="about" tone="dark" className="overflow-hidden">
+      <div className="bg-grid-dark pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_80%)]" />
+      <div className="pointer-events-none absolute -left-32 top-0 h-[420px] w-[420px] rounded-full bg-accent/20 blur-[140px]" />
+
+      <div className="relative grid grid-cols-1 gap-6 px-5 pb-10 pt-16 md:grid-cols-2 md:items-end md:px-8 md:pb-12 md:pt-24">
         <div>
           <Eyebrow className="mb-4">About Us</Eyebrow>
-          <Heading title="Our mission, vision" muted="& story" />
+          <Heading title="Our mission, vision" muted="& story" tone="dark" />
         </div>
-        <p className="max-w-[420px] text-[1.05rem] leading-relaxed text-body md:justify-self-end">
+        <p className="max-w-[420px] text-[1.05rem] leading-relaxed text-white/65 md:justify-self-end">
           A technology partner built on craft, transparency, and long-term thinking.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 border-t border-line md:grid-cols-3">
+      <div className="relative grid grid-cols-1 gap-4 px-5 pb-16 md:grid-cols-3 md:px-8 md:pb-24">
         {pillars.map((p, i) => (
           <FadeIn
             key={p.title}
             delay={i * 0.08}
-            className={`flex flex-col px-5 py-10 md:px-8 md:py-12 ${i < 2 ? 'border-b border-line md:border-b-0 md:border-r' : ''} ${p.featured ? 'bg-surface' : ''}`}
+            className={`flex flex-col rounded-3xl border p-7 backdrop-blur transition-colors duration-300 ${
+              p.featured
+                ? 'border-accent bg-accent shadow-[0_30px_70px_-30px_rgba(255,46,147,0.8)]'
+                : 'border-white/10 bg-white/[0.04] hover:border-accent/60'
+            }`}
           >
             <div className="mb-6 flex items-center justify-between">
-              <h3 className="font-display text-[1.35rem] font-medium tracking-[-0.02em] text-ink">{p.title}</h3>
-              <span className="font-mono text-[0.7rem] text-subtle">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="font-display text-[1.5rem] font-medium tracking-[-0.02em] text-white">{p.title}</h3>
+              <span className={`font-mono text-xs font-semibold ${p.featured ? 'text-white/80' : 'text-accent'}`}>{String(i + 1).padStart(2, '0')}</span>
             </div>
-            <p className="mb-4 text-[1.05rem] leading-relaxed text-ink">{p.lead}</p>
-            <p className="text-[0.95rem] leading-relaxed text-body">{p.body}</p>
+            <p className="mb-4 text-[1.05rem] leading-relaxed text-white">{p.lead}</p>
+            <p className={`text-[0.95rem] leading-relaxed ${p.featured ? 'text-white/85' : 'text-white/60'}`}>{p.body}</p>
           </FadeIn>
         ))}
       </div>

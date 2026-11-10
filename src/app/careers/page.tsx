@@ -69,7 +69,7 @@ export default function CareersPage() {
 
   const chip = (active: boolean) =>
     `px-3 py-1.5 text-[0.8rem] border transition-colors duration-200 ${
-      active ? 'bg-ink text-white border-ink' : 'bg-surface border-line text-body hover:border-[#CCCCCC] hover:text-ink'
+      active ? 'bg-accent text-white border-accent' : 'bg-surface border-line text-body hover:border-[#FF2E93] hover:text-ink'
     }`;
 
   return (
@@ -219,7 +219,7 @@ export default function CareersPage() {
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: i * 0.08, duration: 0.5 }}
-                      className={`border bg-surface transition-colors duration-300 ${open ? 'border-[#CCCCCC]' : 'border-line hover:border-[#CCCCCC]'}`}
+                      className={`border bg-surface transition-colors duration-300 ${open ? 'border-[#FF2E93]' : 'border-line hover:border-[#FF2E93]'}`}
                     >
                       <button
                         className="flex w-full items-start gap-4 px-5 py-6 text-left md:px-6"
@@ -259,7 +259,7 @@ export default function CareersPage() {
                                 <ul className="space-y-2">
                                   {job.responsibilities.map((r) => (
                                     <li key={r} className="flex items-start gap-2.5 text-sm text-body">
-                                      <span className="mt-2 h-1 w-1 flex-shrink-0 bg-ink" />
+                                      <span className="mt-2 h-1 w-1 flex-shrink-0 bg-accent" />
                                       {r}
                                     </li>
                                   ))}
@@ -270,7 +270,7 @@ export default function CareersPage() {
                                 <ul className="mb-8 space-y-2">
                                   {job.requirements.map((r) => (
                                     <li key={r} className="flex items-start gap-2.5 text-sm text-body">
-                                      <span className="mt-2 h-1 w-1 flex-shrink-0 bg-ink" />
+                                      <span className="mt-2 h-1 w-1 flex-shrink-0 bg-accent" />
                                       {r}
                                     </li>
                                   ))}

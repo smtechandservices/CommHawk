@@ -7,7 +7,7 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-grotesk" });
 
 export const viewport: Viewport = {
-  themeColor: "#FAFAFA",
+  themeColor: "#F7F9FC",
   width: "device-width",
   initialScale: 1,
 };

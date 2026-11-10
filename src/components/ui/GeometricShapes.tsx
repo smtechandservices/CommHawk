@@ -3,7 +3,7 @@ const GeometricShapes = ({ className = '' }: { className?: string }) => (
     <svg
         viewBox="0 0 332 332"
         fill="none"
-        stroke="#DDDDDD"
+        stroke="#D3DBE9"
         strokeWidth="1.2"
         aria-hidden
         className={className}

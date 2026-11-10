@@ -43,7 +43,7 @@ export default function BlogPage() {
               <FadeIn key={blog.id} delay={(i % 3) * 0.08}>
                 <Link
                   href={`/blog/${blog.id}`}
-                  className="group flex h-full flex-col border border-line bg-surface transition-colors duration-300 hover:border-[#CCCCCC]"
+                  className="group flex h-full flex-col border border-line bg-surface transition-colors duration-300 hover:border-[#FF2E93]"
                 >
                   <div className="relative m-2 h-52 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}

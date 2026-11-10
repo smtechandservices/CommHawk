@@ -25,8 +25,8 @@ declare global {
 }
 
 const inputClass =
-    "w-full border border-line bg-canvas px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors placeholder:text-subtle focus:border-ink focus:bg-surface";
-const labelClass = "mb-2 block text-sm text-body";
+    "w-full rounded-xl border border-line bg-canvas px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors placeholder:text-subtle focus:border-accent focus:bg-white focus:ring-4 focus:ring-accent/10";
+const labelClass = "mb-2 block text-sm font-medium text-ink";
 
 const Contact = () => {
     const [name, setName] = useState("");
@@ -43,8 +43,7 @@ const Contact = () => {
         <Section id="connect">
             <Script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" strategy="afterInteractive" />
             <div className="grid grid-cols-1 lg:grid-cols-2">
-                <div className="relative px-5 pb-12 pt-20 md:px-8 lg:border-r lg:border-line lg:py-28">
-                    <div className="bg-grid pointer-events-none absolute inset-x-0 top-0 h-24 [mask-image:linear-gradient(to_bottom,black,transparent)]" />
+                <div className="relative px-5 pb-10 pt-16 md:px-8 lg:py-24">
                     <div className="relative">
                         <Eyebrow className="mb-4">Connect</Eyebrow>
                         <Heading title="Let's build the future" muted="together" />
@@ -53,7 +52,7 @@ const Contact = () => {
                             with next steps, or book a call directly.
                         </p>
 
-                        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+                        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                             <a href={GOOGLE_CALENDAR_LINK} target="_blank" rel="noopener noreferrer" className="btn-primary">
                                 <Calendar size={15} />
                                 Schedule a Call
@@ -64,16 +63,16 @@ const Contact = () => {
                             </a>
                         </div>
 
-                        <div className="mt-12 space-y-3 border-t border-line pt-8 text-[0.95rem] text-body">
-                            <p className="flex items-center gap-3"><Mail size={16} className="text-subtle" /> commhawktechnologies@gmail.com</p>
-                            <p className="flex items-center gap-3"><MapPin size={16} className="text-subtle" /> Patna, Bihar 800020, India</p>
+                        <div className="mt-8 space-y-3 border-t border-line pt-8 text-[0.95rem] text-body">
+                            <p className="flex items-center gap-3"><Mail size={16} className="text-accent" /> commhawktechnologies@gmail.com</p>
+                            <p className="flex items-center gap-3"><MapPin size={16} className="text-accent" /> Patna, Bihar 800020, India</p>
                         </div>
                     </div>
                 </div>
 
-                <div className="border-t border-line px-5 py-12 md:px-8 lg:border-t-0 lg:py-28">
+                <div className="px-5 pb-16 md:px-8 lg:py-24">
                     <form
-                        className="border border-line bg-surface p-6 md:p-8"
+                        className="rounded-3xl border border-line bg-white p-6 shadow-[0_40px_80px_-40px_rgba(10,31,68,0.35)] md:p-8"
                         onSubmit={async (e) => {
                             e.preventDefault();
 

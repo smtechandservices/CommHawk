@@ -1,6 +1,7 @@
 'use client';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { Plus } from 'lucide-react';
 import { Section, Eyebrow, Heading } from '@/components/ui/Frame';
 
 const serviceCategories = [
@@ -148,138 +149,77 @@ const serviceCategories = [
     }
 ];
 
-const CYCLE_MS = 6000;
-
 const splitItem = (item: string) => {
     const [title, ...rest] = item.split(' – ');
     return { title, detail: rest.join(' – ') };
 };
 
-const ItemList = ({ items }: { items: string[] }) => (
-    <ul className="divide-y divide-line-soft">
-        {items.map((item, i) => {
-            const { title, detail } = splitItem(item);
-            return (
-                <motion.li
-                    key={item}
-                    className="flex gap-4 py-3.5"
-                    initial={{ opacity: 0, x: 8 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.04, duration: 0.35 }}
-                >
-                    <span className="mt-[3px] font-mono text-[0.7rem] text-subtle">{String(i + 1).padStart(2, '0')}</span>
-                    <span>
-                        <span className="block text-[0.95rem] text-ink">{title}</span>
-                        {detail && <span className="mt-0.5 block text-sm text-body">{detail}</span>}
-                    </span>
-                </motion.li>
-            );
-        })}
-    </ul>
-);
-
 const Services = () => {
-    const [active, setActive] = useState(0);
-    const [paused, setPaused] = useState(false);
-
-    useEffect(() => {
-        // Auto-advance only on desktop; on mobile the list is an accordion and cycling would shift the page.
-        if (paused || !window.matchMedia('(min-width: 768px)').matches) return;
-        const t = setTimeout(() => setActive((a) => (a + 1) % serviceCategories.length), CYCLE_MS);
-        return () => clearTimeout(t);
-    }, [active, paused]);
-
-    const current = serviceCategories[active];
+    const [open, setOpen] = useState(0);
 
     return (
-        <Section id="services">
-            <div className="px-5 pb-12 pt-20 md:px-8 md:pb-16 md:pt-28">
-                <Eyebrow className="mb-4">Capabilities</Eyebrow>
-                <Heading title="Full-stack solutions" muted="for modern enterprise" />
-                <p className="mt-6 max-w-[620px] text-[1.05rem] leading-relaxed text-body">
+        <Section id="services" innerClassName="px-5 py-16 md:px-8 md:py-24">
+            <div className="mb-10 grid grid-cols-1 items-end gap-5 md:mb-12 md:grid-cols-12">
+                <div className="md:col-span-8">
+                    <Eyebrow className="mb-4">Capabilities</Eyebrow>
+                    <Heading title="Full-stack solutions" muted="for modern enterprise" size="xl" />
+                </div>
+                <p className="text-[1.05rem] leading-relaxed text-body md:col-span-4">
                     From design and development to data, AI, cloud, and security, one team covering
                     every layer your product needs to launch and scale.
                 </p>
             </div>
 
-            <div
-                className="grid grid-cols-1 border-t border-line md:grid-cols-[380px_1fr]"
-                onMouseEnter={() => setPaused(true)}
-                onMouseLeave={() => setPaused(false)}
-            >
-                {/* Category list */}
-                <div className="md:border-r md:border-line">
-                    {serviceCategories.map((category, index) => {
-                        const isActive = index === active;
-                        return (
-                            <div key={category.title} className="relative border-b border-line last:border-b-0 md:last:border-b">
-                                <button
-                                    onClick={() => { setActive(index); setPaused(true); }}
-                                    aria-expanded={isActive}
-                                    className={`flex w-full items-center gap-4 px-5 py-5 text-left transition-colors md:px-8 ${isActive ? 'bg-surface' : 'hover:bg-surface/60'}`}
-                                >
-                                    <span className="font-mono text-[0.7rem] text-subtle">{String(index + 1).padStart(2, '0')}</span>
-                                    <span className={`font-display text-[1.15rem] font-medium tracking-[-0.02em] transition-colors ${isActive ? 'text-ink' : 'text-subtle'}`}>
-                                        {category.title}
-                                    </span>
-                                </button>
-
-                                {isActive && (
-                                    <span className="absolute bottom-[-1px] left-0 h-px w-full bg-line">
-                                        <motion.span
-                                            key={`${index}-${paused}`}
-                                            className="block h-full bg-ink"
-                                            initial={{ width: paused ? '100%' : '0%' }}
-                                            animate={{ width: '100%' }}
-                                            transition={{ duration: paused ? 0 : CYCLE_MS / 1000, ease: 'linear' }}
-                                        />
-                                    </span>
-                                )}
-
-                                {/* Mobile: inline panel */}
-                                <AnimatePresence initial={false}>
-                                    {isActive && (
-                                        <motion.div
-                                            className="overflow-hidden bg-surface px-5 md:hidden"
-                                            initial={{ height: 0 }}
-                                            animate={{ height: 'auto' }}
-                                            exit={{ height: 0 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <div className="pb-4">
-                                                <ItemList items={category.items} />
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-                        );
-                    })}
-                </div>
-
-                {/* Desktop detail panel */}
-                <div className="relative hidden p-10 md:block lg:p-14">
-                    <div className="bg-grid pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,black,transparent_70%)]" />
-                    <div className="sticky top-28 border border-line bg-surface p-8 lg:p-10">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={current.title}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ duration: 0.3 }}
+            <div className="border-t-2 border-navy">
+                {serviceCategories.map((category, index) => {
+                    const isOpen = index === open;
+                    return (
+                        <div key={category.title} className="border-b border-line">
+                            <button
+                                onClick={() => setOpen(isOpen ? -1 : index)}
+                                aria-expanded={isOpen}
+                                className="group flex w-full items-center gap-4 py-5 text-left md:gap-8 md:py-6"
                             >
-                                <div className="mb-6 flex items-baseline justify-between gap-4 border-b border-line pb-6">
-                                    <h3 className="font-display text-[1.9rem] font-medium tracking-[-0.03em] text-ink">{current.title}</h3>
-                                    <span className="font-mono text-xs text-subtle">
-                                        {String(active + 1).padStart(2, '0')} / {String(serviceCategories.length).padStart(2, '0')}
-                                    </span>
-                                </div>
-                                <ItemList items={current.items} />
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-                </div>
+                                <span className={`w-8 font-mono text-sm font-semibold transition-colors md:w-12 ${isOpen ? 'text-accent' : 'text-subtle'}`}>
+                                    {String(index + 1).padStart(2, '0')}
+                                </span>
+                                <span className={`flex-1 font-display text-[1.3rem] font-medium tracking-[-0.03em] transition-colors md:text-[1.9rem] ${isOpen ? 'text-accent' : 'text-ink group-hover:text-accent'}`}>
+                                    {category.title}
+                                </span>
+                                <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${isOpen ? 'rotate-45 border-accent bg-accent text-white' : 'border-line text-ink group-hover:border-accent group-hover:text-accent'}`}>
+                                    <Plus size={20} />
+                                </span>
+                            </button>
+
+                            <AnimatePresence initial={false}>
+                                {isOpen && (
+                                    <motion.div
+                                        className="overflow-hidden"
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                                    >
+                                        <ul className="grid grid-cols-1 gap-x-12 gap-y-6 pb-8 md:grid-cols-2 md:pl-20">
+                                            {category.items.map((item) => {
+                                                const { title, detail } = splitItem(item);
+                                                return (
+                                                    <li key={item} className="flex gap-3">
+                                                        <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                                                        <span>
+                                                            <span className="block text-[1rem] font-medium text-ink">{title}</span>
+                                                            {detail && <span className="mt-1 block text-sm leading-relaxed text-body">{detail}</span>}
+                                                        </span>
+                                                    </li>
+                                                );
+                                            })}
+                                        </ul>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                    );
+                })}
             </div>
         </Section>
     );

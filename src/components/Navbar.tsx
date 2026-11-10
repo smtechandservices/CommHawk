@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
-import { Crosshair } from '@/components/ui/Frame';
 
 const links = [
   { name: 'Services', href: '/#services' },
@@ -33,8 +32,8 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className={`sticky top-0 z-[1000] w-full border-b border-line backdrop-blur-md ${mobileMenuOpen ? 'bg-canvas' : 'bg-canvas/85'}`}>
-      <div className="relative mx-auto flex h-[72px] max-w-[1324px] items-center justify-between px-5 md:h-[80px] md:px-5">
+    <nav className={`sticky top-0 z-[1000] w-full border-b backdrop-blur-xl transition-all ${scrolled ? 'border-line shadow-[0_8px_30px_-20px_rgba(10,31,68,0.35)]' : 'border-transparent'} ${mobileMenuOpen ? 'bg-white' : 'bg-white/85'}`}>
+      <div className="relative mx-auto flex h-[72px] max-w-[1240px] items-center justify-between px-5 md:h-[80px] md:px-8">
         <Link href="/" aria-label="CommHawk Technologies Pvt. Ltd. home" className="flex items-center gap-2.5">
           <div className="relative h-8 w-8">
             <Image
@@ -54,7 +53,7 @@ const Navbar = () => {
         <ul className="hidden items-center gap-7 md:flex">
           {links.map((item) => (
             <li key={item.name}>
-              <Link href={item.href} className="text-[0.9rem] text-body transition-colors hover:text-ink">
+              <Link href={item.href} className="text-[0.9rem] font-medium text-body transition-colors hover:text-accent">
                 {item.name}
               </Link>
             </li>
@@ -74,12 +73,6 @@ const Navbar = () => {
           {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        {!scrolled && (
-          <>
-            <Crosshair className="-bottom-[7px] -left-[7px] hidden xl:block" />
-            <Crosshair className="-bottom-[7px] -right-[7px] hidden xl:block" />
-          </>
-        )}
       </div>
 
     </nav>

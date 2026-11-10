@@ -2,46 +2,42 @@
 import { motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 
-// Small "+" marker drawn where frame lines intersect.
-export const Crosshair = ({ className = '' }: { className?: string }) => (
-    <span aria-hidden className={`pointer-events-none absolute z-20 h-[13px] w-[13px] ${className}`}>
-        <span className="absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-ink" />
-        <span className="absolute top-1/2 left-0 h-px w-full -translate-y-1/2 bg-ink" />
-    </span>
-);
+type Tone = 'light' | 'tint' | 'dark' | 'clear';
 
-/**
- * Full-width section with a bottom divider, wrapped around a centred
- * 1324px column that carries the vertical frame lines and crosshairs.
- */
+const tones: Record<Tone, string> = {
+    light: 'bg-white',
+    tint: 'bg-canvas',
+    dark: 'bg-navy-deep text-white',
+    clear: '',
+};
+
+/** Full-bleed section with a centred 1240px column. `tone` sets the background band. */
 export const Section = ({
     id,
     children,
     className = '',
     innerClassName = '',
-    divider = true,
+    tone = 'light',
 }: {
     id?: string;
     children: ReactNode;
     className?: string;
     innerClassName?: string;
+    tone?: Tone;
     divider?: boolean;
 }) => (
-    <section id={id} className={`relative ${divider ? 'border-b border-line' : ''} ${className}`}>
-        <div className="relative mx-auto max-w-[1324px] border-x border-line">
+    <section id={id} className={`relative ${tones[tone]} ${className}`}>
+        <div className="relative mx-auto max-w-[1240px]">
             <div className={`relative ${innerClassName}`}>{children}</div>
-            {divider && (
-                <>
-                    <Crosshair className="-bottom-[7px] -left-[7px] hidden xl:block" />
-                    <Crosshair className="-bottom-[7px] -right-[7px] hidden xl:block" />
-                </>
-            )}
         </div>
     </section>
 );
 
 export const Eyebrow = ({ children, className = '' }: { children: ReactNode; className?: string }) => (
-    <span className={`block text-[0.95rem] text-body ${className}`}>{children}</span>
+    <span className={`inline-flex items-center gap-2 rounded-full bg-accent/10 px-3.5 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-accent ${className}`}>
+        <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+        {children}
+    </span>
 );
 
 const Words = ({ text, offset, className }: { text: string; offset: number; className: string }) => (
@@ -64,7 +60,7 @@ const Words = ({ text, offset, className }: { text: string; offset: number; clas
 );
 
 /**
- * Two-tone display heading: `title` in ink, `muted` on the next line in grey.
+ * Two-tone display heading: `title` in ink (or white on dark), `muted` on the next line in muted slate.
  * Words blur/fade in when scrolled into view.
  */
 export const Heading = ({
@@ -73,18 +69,21 @@ export const Heading = ({
     as = 'h2',
     align = 'left',
     size = 'lg',
+    tone = 'light',
     className = '',
 }: {
     title: string;
     muted?: string;
     as?: 'h1' | 'h2';
     align?: 'left' | 'center';
-    size?: 'xl' | 'lg' | 'md';
+    size?: '2xl' | 'xl' | 'lg' | 'md';
+    tone?: 'light' | 'dark';
     className?: string;
 }) => {
     const Tag = as === 'h1' ? motion.h1 : motion.h2;
     const sizes = {
-        xl: 'text-[2.6rem] sm:text-[3.6rem] lg:text-[4.4rem] leading-[1.05]',
+        '2xl': 'text-[2.8rem] sm:text-[4rem] lg:text-[4.9rem] leading-[1.02] tracking-[-0.045em]',
+        xl: 'text-[2.3rem] sm:text-[3.1rem] lg:text-[3.8rem] leading-[1.05]',
         lg: 'text-[2.2rem] sm:text-[3rem] lg:text-[3.6rem] leading-[1.08]',
         md: 'text-[1.9rem] sm:text-[2.4rem] lg:text-[2.8rem] leading-[1.1]',
     };
@@ -98,11 +97,11 @@ export const Heading = ({
             whileInView="show"
             viewport={{ once: true, margin: '-60px' }}
         >
-            <Words text={title} offset={0} className="text-ink" />
+            <Words text={title} offset={0} className={tone === 'dark' ? 'text-white' : 'text-ink'} />
             {muted && (
                 <>
                     <br />
-                    <Words text={muted} offset={titleCount} className="text-subtle" />
+                    <Words text={muted} offset={titleCount} className={tone === 'dark' ? 'text-white/45' : 'text-[#7B8AA8]'} />
                 </>
             )}
         </Tag>

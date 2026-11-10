@@ -1,22 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-  --color-canvas: #FAFAFA;
+  --color-canvas: #F4F7FC;
   --color-surface: #FFFFFF;
-  --color-ink: #1A1A1A;
-  --color-body: #666666;
-  --color-subtle: #999999;
-  --color-line: #E6E6E6;
-  --color-line-soft: #EFEFEF;
-  --color-brand: #1B4F80;
+  --color-ink: #0A1F44;
+  --color-navy: #0A1F44;
+  --color-navy-deep: #06142E;
+  --color-body: #4B5B78;
+  --color-subtle: #8190AB;
+  --color-line: #E2E8F2;
+  --color-line-soft: #EDF1F8;
+  --color-brand: #0A1F44;
+  --color-accent: #FF2E93;
+  --color-accent-soft: #FFE5F1;
 
   --font-display: var(--font-space-grotesk), 'Space Grotesk', sans-serif;
   --font-sans: var(--font-geist), 'Inter', sans-serif;
 }
 
 :root {
-  --background: #FAFAFA;
-  --foreground: #1A1A1A;
+  --background: #F7F9FC;
+  --foreground: #0A1F44;
 }
 
 html {
@@ -32,8 +36,8 @@ body {
 }
 
 ::selection {
-  background: #1A1A1A;
-  color: #FAFAFA;
+  background: #FF2E93;
+  color: #FFFFFF;
 }
 
 /* Buttons (in the components layer so Tailwind utilities like `hidden` or `w-full` can override them) */
@@ -44,23 +48,26 @@ body {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    height: 40px;
-    padding: 0 1.4rem;
+    height: 46px;
+    padding: 0 1.6rem;
     font-size: 0.875rem;
     line-height: 1;
-    border-radius: 2px;
+    border-radius: 9999px;
     white-space: nowrap;
     transition: background-color 0.25s, color 0.25s, border-color 0.25s;
   }
 
   .btn-primary {
-    background: #1A1A1A;
+    background: #FF2E93;
     color: #FFFFFF;
-    border: 1px solid #1A1A1A;
+    border: 1px solid #FF2E93;
+    font-weight: 500;
+    box-shadow: 0 8px 24px -10px rgba(255, 46, 147, 0.7);
   }
 
   .btn-primary:hover {
-    background: #333333;
+    background: #E01A7C;
+    border-color: #E01A7C;
   }
 
   .btn-primary:disabled {
@@ -70,28 +77,49 @@ body {
 
   .btn-secondary {
     background: #FFFFFF;
-    color: #666666;
-    border: 1px solid #E6E6E6;
+    color: #0A1F44;
+    border: 1px solid #E2E8F2;
   }
 
   .btn-secondary:hover {
-    color: #1A1A1A;
-    border-color: #CCCCCC;
+    color: #FF2E93;
+    border-color: #FF2E93;
+  }
+
+  .btn-ghost-light {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    height: 46px;
+    padding: 0 1.6rem;
+    font-size: 0.875rem;
+    line-height: 1;
+    border-radius: 9999px;
+    white-space: nowrap;
+    color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    transition: border-color 0.25s, color 0.25s, background-color 0.25s;
+  }
+
+  .btn-ghost-light:hover {
+    border-color: #FF2E93;
+    color: #FF2E93;
   }
 }
 
 /* Isometric-style dotted grid used behind visuals */
 .bg-grid {
   background-image:
-    linear-gradient(to right, rgba(26, 26, 26, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(26, 26, 26, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(10, 31, 68, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10, 31, 68, 0.06) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
 .bg-diamond {
   background-image:
-    repeating-linear-gradient(45deg, rgba(26, 26, 26, 0.045) 0 1px, transparent 1px 28px),
-    repeating-linear-gradient(-45deg, rgba(26, 26, 26, 0.045) 0 1px, transparent 1px 28px);
+    repeating-linear-gradient(45deg, rgba(10, 31, 68, 0.05) 0 1px, transparent 1px 28px),
+    repeating-linear-gradient(-45deg, rgba(10, 31, 68, 0.05) 0 1px, transparent 1px 28px);
 }
 
 .mask-fade-x {
@@ -140,11 +168,29 @@ body {
   animation: dash 1.2s linear infinite;
 }
 
+@keyframes float {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -10px; }
+}
+
+.animate-float { animation: float 6s ease-in-out infinite; }
+.animate-float-alt { animation: float 7s ease-in-out -2s infinite; }
+
 @media (prefers-reduced-motion: reduce) {
+
+  .animate-float,
+  .animate-float-alt,
 
   .animate-scroll,
   .animate-spin-slow,
   .animate-dash {
     animation: none;
   }
+}
+
+.bg-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
 }

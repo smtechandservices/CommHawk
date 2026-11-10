@@ -23,19 +23,20 @@ const LinkedInIcon = () => (
 const Footer = () => {
     return (
         <footer>
-            <Section innerClassName="px-5 pt-16 md:px-10 md:pt-20">
-                <div className="grid grid-cols-2 gap-10 md:grid-cols-12">
+            <Section tone="dark" className="overflow-hidden" innerClassName="px-5 pt-12 md:px-8 md:pt-14">
+                <div className="pointer-events-none absolute -right-32 -top-20 h-[360px] w-[360px] rounded-full bg-accent/20 blur-[130px]" />
+                <div className="relative grid grid-cols-2 gap-10 md:grid-cols-12">
                     <div className="col-span-2 md:col-span-5">
                         <Link href="/" className="flex items-center gap-2.5">
-                            <div className="relative h-9 w-9">
+                            <div className="relative h-10 w-10 rounded-xl bg-white p-1.5">
                                 <Image src="/logo-mark.png" alt="CommHawk Technologies Pvt. Ltd. logo" fill sizes="36px" className="object-contain" />
                             </div>
                             <span className="flex flex-col leading-none">
-                                <span className="font-display text-[1.6rem] font-semibold tracking-[-0.03em] text-ink">CommHawk</span>
-                                <span className="mt-1.5 text-[0.8rem] tracking-[0.02em] text-body">Technologies Pvt. Ltd.</span>
+                                <span className="font-display text-[1.6rem] font-semibold tracking-[-0.03em] text-white">CommHawk</span>
+                                <span className="mt-1.5 text-[0.8rem] tracking-[0.02em] text-white/65">Technologies Pvt. Ltd.</span>
                             </span>
                         </Link>
-                        <p className="mt-5 max-w-[340px] text-[0.95rem] leading-relaxed text-body">
+                        <p className="mt-5 max-w-[340px] text-[0.95rem] leading-relaxed text-white/65">
                             Leading the digital transformation with precision-engineered solutions.
                             Built for scale, designed for excellence.
                         </p>
@@ -44,40 +45,40 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="CommHawk Technologies Pvt. Ltd. on LinkedIn"
-                            className="mt-6 inline-flex h-9 w-9 items-center justify-center text-body transition-colors hover:text-ink"
+                            className="mt-6 inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/65 transition-colors hover:text-accent"
                         >
                             <LinkedInIcon />
                         </a>
                     </div>
 
                     <div className="md:col-span-2">
-                        <h4 className="mb-5 font-display text-[1.25rem] font-medium tracking-[-0.02em] text-ink">Company</h4>
+                        <h4 className="mb-5 font-display text-[1.25rem] font-medium tracking-[-0.02em] text-white">Company</h4>
                         <ul className="space-y-3">
                             {company.map((item) => (
                                 <li key={item.name}>
-                                    <Link href={item.href} className="text-sm text-body transition-colors hover:text-ink">{item.name}</Link>
+                                    <Link href={item.href} className="text-sm text-white/65 transition-colors hover:text-accent">{item.name}</Link>
                                 </li>
                             ))}
                         </ul>
                     </div>
 
                     <div className="md:col-span-2">
-                        <h4 className="mb-5 font-display text-[1.25rem] font-medium tracking-[-0.02em] text-ink">Expertise</h4>
+                        <h4 className="mb-5 font-display text-[1.25rem] font-medium tracking-[-0.02em] text-white">Expertise</h4>
                         <ul className="space-y-3">
                             {expertise.map((item) => (
-                                <li key={item} className="text-sm text-body">{item}</li>
+                                <li key={item} className="text-sm text-white/65">{item}</li>
                             ))}
                         </ul>
                     </div>
 
                     <div className="col-span-2 md:col-span-3">
-                        <h4 className="mb-5 font-display text-[1.25rem] font-medium tracking-[-0.02em] text-ink">Contact</h4>
-                        <p className="text-sm leading-relaxed text-body">
-                            <a href="mailto:commhawktechnologies@gmail.com" className="transition-colors hover:text-ink">
+                        <h4 className="mb-5 font-display text-[1.25rem] font-medium tracking-[-0.02em] text-white">Contact</h4>
+                        <p className="text-sm leading-relaxed text-white/65">
+                            <a href="mailto:commhawktechnologies@gmail.com" className="transition-colors hover:text-accent">
                                 commhawktechnologies@gmail.com
                             </a>
                         </p>
-                        <address className="mt-3 max-w-[280px] text-sm not-italic leading-relaxed text-body">
+                        <address className="mt-3 max-w-[280px] text-sm not-italic leading-relaxed text-white/65">
                             2nd Floor, Kanti Factory Rd, near Bank of Baroda, New Colony,
                             Mahatma Gandhi Nagar, Kankarbagh, Patna, Bihar 800020, India
                         </address>
@@ -87,15 +88,14 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-line py-8 md:flex-row">
-                    <p className="text-sm text-body">&copy; {new Date().getFullYear()} CommHawk Technologies Pvt. Ltd. All rights reserved.</p>
+                <div className="relative mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 py-6 md:flex-row">
+                    <p className="text-sm text-white/65">&copy; {new Date().getFullYear()} CommHawk Technologies Pvt. Ltd. All rights reserved.</p>
                     <div className="flex gap-8">
-                        <a href="#" className="text-sm text-body transition-colors hover:text-ink">Privacy Policy</a>
-                        <a href="#" className="text-sm text-body transition-colors hover:text-ink">Terms of Service</a>
+                        <a href="#" className="text-sm text-white/65 transition-colors hover:text-accent">Privacy Policy</a>
+                        <a href="#" className="text-sm text-white/65 transition-colors hover:text-accent">Terms of Service</a>
                     </div>
                 </div>
             </Section>
-            <div className="mx-auto h-16 max-w-[1324px] border-x border-line" />
         </footer>
     );
 };

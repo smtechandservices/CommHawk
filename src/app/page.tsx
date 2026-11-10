@@ -4,9 +4,8 @@ import Technologies from '@/components/Technologies';
 import Services from '@/components/Services';
 import Businesses from '@/components/Businesses';
 import Contact from '@/components/Contact';
-import ComparisonToggle from '@/components/ComparisonToggle';
+import Process from '@/components/Process';
 import AboutUs from '@/components/AboutUs';
-import GrowthCircles from '@/components/GrowthCircles';
 import RecognisedBy from '@/components/RecognisedBy';
 import ScrollToTop from '@/components/ScrollToTop';
 import Footer from '@/components/Footer';
@@ -18,11 +17,10 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Technologies />
-      <ComparisonToggle />
-      <Services />
       <Businesses />
+      <Services />
+      <Process />
       <RecognisedBy />
-      <GrowthCircles />
       <AboutUs />
       <Contact />
       <Footer />
