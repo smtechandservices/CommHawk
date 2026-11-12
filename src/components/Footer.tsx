@@ -10,6 +10,7 @@ const company = [
     { name: 'About', href: '/#about' },
     { name: 'Blog', href: '/blog' },
     { name: 'Careers', href: '/careers' },
+    { name: 'MOUs', href: '/mou' },
 ];
 
 const expertise = ['Web & Mobile', 'AI & Analytics', 'Cloud & DevOps'];

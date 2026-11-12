@@ -11,6 +11,7 @@ const links = [
   { name: 'About', href: '/#about' },
   { name: 'Blog', href: '/blog' },
   { name: 'Careers', href: '/careers' },
+  { name: 'MOUs', href: '/mou' },
 ];
 
 const Navbar = () => {

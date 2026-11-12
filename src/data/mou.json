@@ -1,0 +1,173 @@
+{
+  "partners": [
+    {
+      "name": "Bihar Engineering University (BEU)",
+      "type": "University",
+      "city": "Patna"
+    },
+    {
+      "name": "NCC Udaan",
+      "type": "Organisation",
+      "city": "Bihar"
+    },
+    {
+      "name": "Ganga Global Institute of Management Studies (GGIMS)",
+      "type": "Institute",
+      "city": "Bihar"
+    }
+  ],
+  "colleges": [
+    {
+      "name": "Rastrakavi Ramdhari Singh Dinkar College of Engineering, Begusarai",
+      "city": "Begusarai"
+    },
+    {
+      "name": "Darbhanga College of Engineering, Darbhanga",
+      "city": "Darbhanga"
+    },
+    {
+      "name": "Purnea College of Engineering, Purnea",
+      "city": "Purnea"
+    },
+    {
+      "name": "Katihar College of Engineering, Katihar",
+      "city": "Katihar"
+    },
+    {
+      "name": "Lok Nayak Jai Prakash Institute of Technology, Chhapra",
+      "city": "Chhapra"
+    },
+    {
+      "name": "Bhagalpur College of Engineering, Bhagalpur",
+      "city": "Bhagalpur"
+    },
+    {
+      "name": "Gaya College of Engineering, Gaya",
+      "city": "Gaya"
+    },
+    {
+      "name": "Sitamarhi Institute of Technology, Sitamarhi",
+      "city": "Sitamarhi"
+    },
+    {
+      "name": "Muzaffarpur Institute of Technology (MIT), Muzaffarpur",
+      "city": "Muzaffarpur"
+    },
+    {
+      "name": "Bakhtiyarpur College of Engineering, Bakhtiyarpur",
+      "city": "Bakhtiyarpur"
+    },
+    {
+      "name": "Nalanda College of Engineering, Chandi",
+      "city": "Chandi"
+    },
+    {
+      "name": "Saharsa College of Engineering, Saharsa",
+      "city": "Saharsa"
+    },
+    {
+      "name": "Motihari College of Engineering, Motihari",
+      "city": "Motihari"
+    },
+    {
+      "name": "B. P. Mandal College of Engineering, Madhepura",
+      "city": "Madhepura"
+    },
+    {
+      "name": "Supaul College of Engineering, Supaul",
+      "city": "Supaul"
+    },
+    {
+      "name": "Sher Shah College of Engineering, Sasaram",
+      "city": "Sasaram"
+    },
+    {
+      "name": "Government Engineering College, Vaishali",
+      "city": "Vaishali"
+    },
+    {
+      "name": "Government Engineering College, Jamui",
+      "city": "Jamui"
+    },
+    {
+      "name": "Government Engineering College, Banka",
+      "city": "Banka"
+    },
+    {
+      "name": "Government Engineering College, Nawada",
+      "city": "Nawada"
+    },
+    {
+      "name": "Government Engineering College, Kishanganj",
+      "city": "Kishanganj"
+    },
+    {
+      "name": "Shri Phanishwar Nath Renu College of Engineering, Araria",
+      "city": "Araria"
+    },
+    {
+      "name": "Government Engineering College, Munger",
+      "city": "Munger"
+    },
+    {
+      "name": "Government Engineering College, Sheohar",
+      "city": "Sheohar"
+    },
+    {
+      "name": "Government Engineering College, West Champaran",
+      "city": "West Champaran"
+    },
+    {
+      "name": "Government Engineering College, Aurangabad",
+      "city": "Aurangabad"
+    },
+    {
+      "name": "Government Engineering College, Kaimur",
+      "city": "Kaimur"
+    },
+    {
+      "name": "Government Engineering College, Gopalganj",
+      "city": "Gopalganj"
+    },
+    {
+      "name": "Government Engineering College, Madhubani",
+      "city": "Madhubani"
+    },
+    {
+      "name": "Government Engineering College, Siwan",
+      "city": "Siwan"
+    },
+    {
+      "name": "Government Engineering College, Jehanabad",
+      "city": "Jehanabad"
+    },
+    {
+      "name": "Government Engineering College, Arwal",
+      "city": "Arwal"
+    },
+    {
+      "name": "Government Engineering College, Khagaria",
+      "city": "Khagaria"
+    },
+    {
+      "name": "Government Engineering College, Buxar",
+      "city": "Buxar"
+    },
+    {
+      "name": "Government Engineering College, Bhojpur",
+      "city": "Bhojpur"
+    },
+    {
+      "name": "Government Engineering College, Sheikhpura",
+      "city": "Sheikhpura"
+    },
+    {
+      "name": "Government Engineering College, Lakhisarai",
+      "city": "Lakhisarai"
+    },
+    {
+      "name": "Government Engineering College, Samastipur",
+      "city": "Samastipur"
+    }
+  ]
+}

@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 import Script from 'next/script';
 import { Calendar, Mail, MapPin } from 'lucide-react';
 import { Section, Eyebrow, Heading } from '@/components/ui/Frame';
-import { GOOGLE_CALENDAR_LINK } from '@/lib/constants';
+import { GOOGLE_CALENDAR_LINK, CONTACT_EMAIL } from '@/lib/constants';
 
-const WEB3FORMS_ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || " ";
+const WEB3FORMS_ACCESS_KEY = (process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "").trim();
 
 type SwalType = {
     fire: (options: {
@@ -77,6 +77,17 @@ const Contact = () => {
                             e.preventDefault();
 
                             if (!isFormValid || isSubmitting) return;
+
+                            if (!WEB3FORMS_ACCESS_KEY) {
+                                console.error("NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY is not set");
+                                window.Swal?.fire({
+                                    icon: "error",
+                                    title: "Form unavailable",
+                                    text: `The contact form isn't configured right now. Please email us at ${CONTACT_EMAIL}.`,
+                                    confirmButtonText: "OK",
+                                });
+                                return;
+                            }
 
                             setIsSubmitting(true);
                             try {
