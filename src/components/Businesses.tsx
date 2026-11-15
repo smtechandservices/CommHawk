@@ -7,15 +7,6 @@ import { Section, Eyebrow, Heading } from '@/components/ui/Frame';
 
 const projects = [
     {
-        id: 'kaamlee',
-        title: 'Kaamlee',
-        subtitle: 'Digital Solution',
-        category: 'IT Projects',
-        description: 'Custom digital solution built for businesses looking to launch and scale.',
-        image: '/kaamlee.png',
-        link: 'https://kaamlee.in/',
-    },
-    {
         id: 'befin',
         title: 'BeFin',
         subtitle: 'Financial Literacy',
@@ -23,6 +14,15 @@ const projects = [
         description: 'Gamified platform helping every generation grow smarter with money and achieve financial independence.',
         image: '/befin.webp',
         link: 'https://thebefin.com/',
+    },
+    {
+        id: 'kaamlee',
+        title: 'Kaamlee',
+        subtitle: 'Digital Solution',
+        category: 'IT Projects',
+        description: 'Custom digital solution built for businesses looking to launch and scale.',
+        image: '/kaamlee.png',
+        link: 'https://kaamlee.in/',
     },
     {
         id: 'maytri-erp',
