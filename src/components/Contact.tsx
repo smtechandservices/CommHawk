@@ -5,9 +5,8 @@ import { motion } from 'framer-motion';
 import Script from 'next/script';
 import { Calendar, Mail, MapPin } from 'lucide-react';
 import { Section, Eyebrow, Heading } from '@/components/ui/Frame';
-import { GOOGLE_CALENDAR_LINK, CONTACT_EMAIL } from '@/lib/constants';
+import { GOOGLE_CALENDAR_LINK, CONTACT_EMAIL, WEB3FORMS_ACCESS_KEY } from '@/lib/constants';
 
-const WEB3FORMS_ACCESS_KEY = (process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "").trim();
 
 type SwalType = {
     fire: (options: {
@@ -79,7 +78,7 @@ const Contact = () => {
                             if (!isFormValid || isSubmitting) return;
 
                             if (!WEB3FORMS_ACCESS_KEY) {
-                                console.error("NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY is not set");
+                                console.error("WEB3FORMS_ACCESS_KEY is not set in src/lib/constants.ts");
                                 window.Swal?.fire({
                                     icon: "error",
                                     title: "Form unavailable",
