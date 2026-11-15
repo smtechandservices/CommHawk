@@ -27,7 +27,7 @@ const Hero = () => {
                 transition={{ duration: 0.6, ease }}
             >
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
-                Patna, Bihar · Startup India recognised
+                Startup India recognised
             </motion.span>
 
             <div className="relative flex flex-col gap-7">

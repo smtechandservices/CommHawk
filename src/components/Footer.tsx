@@ -79,10 +79,6 @@ const Footer = () => {
                                 commhawktechnologies@gmail.com
                             </a>
                         </p>
-                        <address className="mt-3 max-w-[280px] text-sm not-italic leading-relaxed text-white/65">
-                            2nd Floor, Kanti Factory Rd, near Bank of Baroda, New Colony,
-                            Mahatma Gandhi Nagar, Kankarbagh, Patna, Bihar 800020, India
-                        </address>
                         <a href={GOOGLE_CALENDAR_LINK} target="_blank" rel="noopener noreferrer" className="btn-primary mt-5">
                             Schedule a Call
                         </a>

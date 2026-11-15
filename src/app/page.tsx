@@ -7,6 +7,7 @@ import Contact from '@/components/Contact';
 import Process from '@/components/Process';
 import AboutUs from '@/components/AboutUs';
 import RecognisedBy from '@/components/RecognisedBy';
+import MouBanner from '@/components/MouBanner';
 import ScrollToTop from '@/components/ScrollToTop';
 import Footer from '@/components/Footer';
 
@@ -16,11 +17,12 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
-      <Technologies />
+      <MouBanner />
       <Businesses />
       <Services />
       <Process />
       <RecognisedBy />
+      <Technologies />
       <AboutUs />
       <Contact />
       <Footer />

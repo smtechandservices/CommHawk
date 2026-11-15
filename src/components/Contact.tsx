@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Script from 'next/script';
-import { Calendar, Mail, MapPin } from 'lucide-react';
+import { Calendar, Mail } from 'lucide-react';
 import { Section, Eyebrow, Heading } from '@/components/ui/Frame';
 import { GOOGLE_CALENDAR_LINK, CONTACT_EMAIL, WEB3FORMS_ACCESS_KEY } from '@/lib/constants';
 
@@ -64,7 +64,6 @@ const Contact = () => {
 
                         <div className="mt-8 space-y-3 border-t border-line pt-8 text-[0.95rem] text-body">
                             <p className="flex items-center gap-3"><Mail size={16} className="text-accent" /> commhawktechnologies@gmail.com</p>
-                            <p className="flex items-center gap-3"><MapPin size={16} className="text-accent" /> Patna, Bihar 800020, India</p>
                         </div>
                     </div>
                 </div>
